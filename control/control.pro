@@ -1,4 +1,4 @@
-update=Tue 03 Feb 2015 02:36:49 GMT
+update=Sat 14 Feb 2015 02:07:13 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -67,3 +67,4 @@ LibName35=er-oled015-2b
 LibName36=cga0402mlc-12g
 LibName37=esp8266
 LibName38=adp3335
+LibName39=er-oledm024-2
