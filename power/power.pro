@@ -1,4 +1,4 @@
-update=Wed 18 Feb 2015 21:56:23 GMT
+update=Fri 20 Feb 2015 22:59:25 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -62,3 +62,4 @@ LibName30=valves
 LibName31=acs710
 LibName32=ltc1966
 LibName33=ltc6910
+LibName34=relay_spst
