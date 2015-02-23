@@ -1,4 +1,4 @@
-update=Fri 20 Feb 2015 22:59:25 GMT
+update=Sun 22 Feb 2015 20:28:54 GMT
 version=1
 last_client=kicad
 [pcbnew]
@@ -63,3 +63,4 @@ LibName31=acs710
 LibName32=ltc1966
 LibName33=ltc6910
 LibName34=relay_spst
+LibName35=vtx214
