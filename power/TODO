@@ -1,0 +1,20 @@
+Schematic
+* Choose a new triac
+* Spec triac series resistor
+* Reconsider snubber and its values
+* Decide whether to scrap crossover sensing and use the builtin-crossover MOC
+    variant
+* General checking
+* Locate IEC inlet
+* Locate IEC outlet
+
+Footprints:
+* Magic AC-DC
+* MOC*
+* ACSthing
+* IEC inlet/outlet
+* Amphenol connector
+
+Layout:
+* Talk to Jon about power and HV stuff
+* Check with Adam on case-related things
