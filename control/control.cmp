@@ -1,0 +1,353 @@
+Cmp-Mod V01 Created by Cvpcb 0.201502122346+5414~21~ubuntu14.04.1-product   date = Fri 20 Feb 2015 02:19:37 GMT
+
+BeginCmp
+TimeStamp = /54D56B94;
+Reference = BT1;
+ValeurCmp = BATTERY;
+IdModule  = control:2032HOLDER_KS1060;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D2A0F2;
+Reference = C1;
+ValeurCmp = 100n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D1D963;
+Reference = C2;
+ValeurCmp = 10µ;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D055AB;
+Reference = C3;
+ValeurCmp = 10µ;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D0579F;
+Reference = C4;
+ValeurCmp = 1µ;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D1E2D0;
+Reference = C5;
+ValeurCmp = 100n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D057CF;
+Reference = C6;
+ValeurCmp = 100n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D05800;
+Reference = C7;
+ValeurCmp = 10n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D29F7C;
+Reference = C8;
+ValeurCmp = 100n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D064F7;
+Reference = C9;
+ValeurCmp = 100n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D06F5C;
+Reference = C10;
+ValeurCmp = 15p;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D06FE0;
+Reference = C11;
+ValeurCmp = 15p;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D57653;
+Reference = C12;
+ValeurCmp = 15p;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D575FE;
+Reference = C13;
+ValeurCmp = 15p;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D0178D;
+Reference = C14;
+ValeurCmp = 100n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D017E2;
+Reference = C15;
+ValeurCmp = 10µ;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D0169F;
+Reference = C16;
+ValeurCmp = 100n;
+IdModule  = control:C1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D01666;
+Reference = C17;
+ValeurCmp = 1µ;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D033E8;
+Reference = C18;
+ValeurCmp = 1µ;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54DF5EF1;
+Reference = C19;
+ValeurCmp = 100n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D016D3;
+Reference = C22;
+ValeurCmp = 100n;
+IdModule  = control:C1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D25C39;
+Reference = C23;
+ValeurCmp = 2µ2;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D25D98;
+Reference = C24;
+ValeurCmp = 1n;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D25FC3;
+Reference = C25;
+ValeurCmp = 2µ2;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D26038;
+Reference = C26;
+ValeurCmp = 10µ;
+IdModule  = control:C0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54CFFDE1;
+Reference = CON1;
+ValeurCmp = USB-MICRO-B;
+IdModule  = control:USB3065;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D01279;
+Reference = D1;
+ValeurCmp = CGA0402MLC-12G;
+IdModule  = control:R0402;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D013F6;
+Reference = D2;
+ValeurCmp = CGA0402MLC-12G;
+IdModule  = control:R0402;
+EndCmp
+
+BeginCmp
+TimeStamp = /54CFFCF5;
+Reference = IC1;
+ValeurCmp = STM32F072CBT6;
+IdModule  = control:LQFP48;
+EndCmp
+
+BeginCmp
+TimeStamp = /54CFFF5A;
+Reference = IC2;
+ValeurCmp = AD8495;
+IdModule  = control:MSOP8;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D25BCE;
+Reference = IC3;
+ValeurCmp = ADP3335;
+IdModule  = control:MSOP8;
+EndCmp
+
+BeginCmp
+TimeStamp = /54CFFE52;
+Reference = P1;
+ValeurCmp = SWD;
+IdModule  = control:FTSH-105-01-F-D-K;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D06BFB;
+Reference = P2;
+ValeurCmp = CONN_02X04;
+IdModule  = control:2x4_100;
+EndCmp
+
+BeginCmp
+TimeStamp = /54CFFEEF;
+Reference = P3;
+ValeurCmp = CONN_01X02;
+IdModule  = control:TC_K_PM;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D14719;
+Reference = Q1;
+ValeurCmp = NPN;
+IdModule  = control:SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D298B1;
+Reference = R1;
+ValeurCmp = 10k;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D147CC;
+Reference = R2;
+ValeurCmp = 100;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D29E22;
+Reference = R3;
+ValeurCmp = 10k;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D0713C;
+Reference = R4;
+ValeurCmp = 100;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D015F8;
+Reference = R5;
+ValeurCmp = 1k;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D032F8;
+Reference = R6;
+ValeurCmp = 10k;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D01636;
+Reference = R7;
+ValeurCmp = 1k;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D0171F;
+Reference = R9;
+ValeurCmp = 1M;
+IdModule  = control:R0603;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D000AD;
+Reference = SP1;
+ValeurCmp = SPEAKER;
+IdModule  = control:ABT-402-RC;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D00B8D;
+Reference = U1;
+ValeurCmp = ROTENC;
+IdModule  = control:SF_ROTENC;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D0DDC7;
+Reference = U2;
+ValeurCmp = ESP8266;
+IdModule  = control:ESP8266;
+EndCmp
+
+BeginCmp
+TimeStamp = /54DF23ED;
+Reference = U3;
+ValeurCmp = ER-OLEDM024-2;
+IdModule  = control:ER-OLEDM024-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E703CE;
+Reference = U4;
+ValeurCmp = IDC SKT;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D06E14;
+Reference = X1;
+ValeurCmp = 8MHz;
+IdModule  = control:XTAL50x32;
+EndCmp
+
+BeginCmp
+TimeStamp = /54D57457;
+Reference = X2;
+ValeurCmp = 32k768;
+IdModule  = control:SMD_XTAL_8038;
+EndCmp
+
+EndListe
