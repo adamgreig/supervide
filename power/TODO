@@ -3,15 +3,9 @@ Schematic
 * Spec triac series resistor
 * Reconsider snubber and its values
 * General checking
-* Locate IEC inlet
-* Locate IEC outlet
 
-Footprints:
-* Magic AC-DC
-* MOC*
-* ACSthing
-* IEC inlet/outlet
-* Amphenol connector
+* Footprints for triac and heatsink
+* Work out how to fit fuses on the back panel...
 
 Layout:
 * Talk to Jon about power and HV stuff

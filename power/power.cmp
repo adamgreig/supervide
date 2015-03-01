@@ -1,0 +1,185 @@
+Cmp-Mod V01 Created by Cvpcb 0.201502201246+5434~21~ubuntu14.04.1-product   date = Sun 01 Mar 2015 01:35:09 GMT
+
+BeginCmp
+TimeStamp = /54E6E944;
+Reference = C1;
+ValeurCmp = 1nF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E6D133;
+Reference = C2;
+ValeurCmp = 100nF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E6A771;
+Reference = C3;
+ValeurCmp = 100nF;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E536C9;
+Reference = C4;
+ValeurCmp = 22nF;
+IdModule  = Capacitors_SMD:C_1210;
+EndCmp
+
+BeginCmp
+TimeStamp = /54F252EE;
+Reference = F1;
+ValeurCmp = 100mA;
+IdModule  = power:fuseholder;
+EndCmp
+
+BeginCmp
+TimeStamp = /54F25289;
+Reference = F2;
+ValeurCmp = 13A;
+IdModule  = power:fuseholder;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E82543;
+Reference = K1;
+ValeurCmp = RELAY_SPST;
+IdModule  = power:RZ03-1A4;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E825B3;
+Reference = K2;
+ValeurCmp = RELAY_SPST;
+IdModule  = power:RZ03-1A4;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E81150;
+Reference = K3;
+ValeurCmp = RELAY_SPST;
+IdModule  = power:RZ03-1A4;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E909DD;
+Reference = P1;
+ValeurCmp = CONTROL;
+IdModule  = power:TS821X08XXS100;
+EndCmp
+
+BeginCmp
+TimeStamp = /54F26236;
+Reference = P2;
+ValeurCmp = MAINS_INLET;
+IdModule  = power:GSP1_9103;
+EndCmp
+
+BeginCmp
+TimeStamp = /54F262A6;
+Reference = P3;
+ValeurCmp = LOAD_OUTLET;
+IdModule  = power:5001;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E81E97;
+Reference = Q1;
+ValeurCmp = BC817-40;
+IdModule  = power:SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /54EA7842;
+Reference = Q2;
+ValeurCmp = BC817-40;
+IdModule  = power:SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /54EA7C9D;
+Reference = Q3;
+ValeurCmp = BC817-40;
+IdModule  = power:SOT23;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E81E83;
+Reference = R1;
+ValeurCmp = 390R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E5F195;
+Reference = R2;
+ValeurCmp = 390R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E9E5AF;
+Reference = R3;
+ValeurCmp = 390R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E52E94;
+Reference = R4;
+ValeurCmp = 390R;
+IdModule  = Resistors_SMD:R_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E5366C;
+Reference = R5;
+ValeurCmp = 47R;
+IdModule  = Capacitors_SMD:C_1206;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E53E1C;
+Reference = R6;
+ValeurCmp = 220R;
+IdModule  = Capacitors_SMD:C_0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /54EA4561;
+Reference = U1;
+ValeurCmp = VTX214;
+IdModule  = power:VTX214;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E71955;
+Reference = U2;
+ValeurCmp = ACS710;
+IdModule  = power:SOIC16W-chunky;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E528C7;
+Reference = U3;
+ValeurCmp = MOC3163-M;
+IdModule  = Sockets_DIP:DIP-6__300_ELL;
+EndCmp
+
+BeginCmp
+TimeStamp = /54E5283F;
+Reference = U4;
+ValeurCmp = TIC206M;
+IdModule  = ;
+EndCmp
+
+BeginCmp
+TimeStamp = /54F27DA1;
+Reference = U5;
+ValeurCmp = DS18B20;
+IdModule  = power:to92-straight;
+EndCmp
+
+EndListe
