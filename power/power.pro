@@ -1,6 +1,6 @@
-update=Sat 28 Feb 2015 18:59:01 GMT
+update=Mon 02 Mar 2015 02:41:18 GMT
 version=1
-last_client=kicad
+last_client=pcbnew
 [cvpcb]
 version=1
 NetIExt=net
@@ -49,8 +49,8 @@ LibName36=ds18b20
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=
-UseCmpFile=1
+LastNetListRead=power.net
+UseCmpFile=0
 PadDrill=0.6
 PadDrillOvalY=0.6
 PadSizeH=1.5
