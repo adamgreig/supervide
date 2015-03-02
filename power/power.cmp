@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by Cvpcb 0.201502201246+5434~21~ubuntu14.04.1-product   date = Sun 01 Mar 2015 01:35:09 GMT
+Cmp-Mod V01 Created by Cvpcb 0.201502201246+5434~21~ubuntu14.04.1-product   date = Sun 01 Mar 2015 22:25:05 GMT
 
 BeginCmp
 TimeStamp = /54E6E944;
@@ -32,14 +32,14 @@ BeginCmp
 TimeStamp = /54F252EE;
 Reference = F1;
 ValeurCmp = 100mA;
-IdModule  = power:fuseholder;
+IdModule  = power:5x20_clip;
 EndCmp
 
 BeginCmp
 TimeStamp = /54F25289;
 Reference = F2;
 ValeurCmp = 13A;
-IdModule  = power:fuseholder;
+IdModule  = power:BS1362_clip;
 EndCmp
 
 BeginCmp
@@ -172,7 +172,7 @@ BeginCmp
 TimeStamp = /54E5283F;
 Reference = U4;
 ValeurCmp = TIC206M;
-IdModule  = ;
+IdModule  = Transistors_TO-220:TO-220_Neutral123_Vertical_LargePads;
 EndCmp
 
 BeginCmp
