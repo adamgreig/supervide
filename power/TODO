@@ -1,12 +1,13 @@
 Schematic
-* Choose a new triac
-* Spec triac series resistor
-* Reconsider snubber and its values
 * General checking
 
+Footprints
 * Footprints for triac and heatsink
-* Work out how to fit fuses on the back panel...
+* General checking
 
-Layout:
-* Talk to Jon about power and HV stuff
+PCB
+* Update connector to control board footprint/pinout
+* Check whether to use ACS712/ACS710
+* Route LV side
 * Check with Adam on case-related things
+* Standard checking
