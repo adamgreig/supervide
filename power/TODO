@@ -6,8 +6,6 @@ Footprints
 * General checking
 
 PCB
-* Update connector to control board footprint/pinout
-* Check whether to use ACS712/ACS710
 * Route LV side
 * Check with Adam on case-related things
 * Standard checking

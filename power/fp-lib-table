@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name power)(type KiCad)(uri ${KIPRJMOD}/power.pretty)(options "")(descr ""))
+  (lib (name control)(type KiCad)(uri ${KIPRJMOD}/../control/control.pretty)(options "")(descr ""))
 )
