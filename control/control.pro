@@ -1,4 +1,4 @@
-update=Mon 02 Mar 2015 23:39:56 GMT
+update=Thu 05 Mar 2015 22:43:32 GMT
 version=1
 last_client=kicad
 [cvpcb]
@@ -71,3 +71,5 @@ LibName38=adp3335
 LibName39=part
 LibName40=er-oledm023-1
 LibName41=ad8542
+LibName42=esp8266-esp07
+LibName43=esp8266-esp01
