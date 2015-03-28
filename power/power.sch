@@ -990,4 +990,6 @@ NoConn ~ 1700 6200
 Wire Wire Line
 	1600 6000 1700 6000
 NoConn ~ 1700 6100
+Text Notes 9650 5500 0    60   ~ 0
+Heatsink:\n1703170
 $EndSCHEMATC
