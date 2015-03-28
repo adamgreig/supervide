@@ -1,11 +1,26 @@
 Schematic
 * General checking
+* Values: LED resistors, coil resistors, I_sense stuff, TRIAC stuff.
+* I_sense stuff.
+* Check TRIAC section is sane.
 
-Footprints
-* Footprints for triac and heatsink
-* General checking
+Footprints/pinouts
+* h/s
+* ac/dc
+* Order of pins on inlet/outlet
+* I sense
+* relays
+* opto triac driver
+* 2x4 conncetor +pinout!
+* passives
+* mounting holes
 
 PCB
-* Route LV side
-* Check with Adam on case-related things
+* Check case-related things
+* Unmask traces that need bulking.
+* Clean up some traces-pad interfaces (i.e. I sense)
+* Confirm via sizes, trace widths, clearances meet house standard.
+* Remove IEC inlet protrusions outside board edge
+* Clean/pretty up silk
 * Standard checking
+* Check whether earth track gets in the way of IEC inlet mounting.
