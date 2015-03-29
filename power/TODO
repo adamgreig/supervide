@@ -1,27 +1,5 @@
-Schematic
-* Consider TRIAC series gate resistor
-* Consider TRIAC snubber.
-
-Footprints
-* h/s
-* ac/dc
-* Inlet and outlet: remove protrusions
-* I sense
-* relays
-* opto triac driver
-* 2x4 conncetor
-* passives
-* mounting holes
-
-Pinouts
-* ac/dc
-* inlet/outlet
-* I_sense
-* relays
-* opto triac diver
-* 2x4 connector
-
 PCB
+* TEST POINTS!
 * Check case-related things
 * Check whether earth track gets in the way of IEC inlet mounting.
 * Clean up some traces-pad interfaces (i.e. I sense)
@@ -30,8 +8,7 @@ PCB
 * Clean/pretty up silk
 * Standard checking
 
-ISSUES
-* Triac gate wants a fuse.
+* ISSUES: Route live away from inlet plastic.
 
 FIXES
 * NPN BJTs, not PNPs, for relay driving.
@@ -39,3 +16,9 @@ FIXES
 * Need 300R part number.
 * Removed V_offset line.
 * Changed MOC emitter resistor to 300R to reduce drive I a bit.
+
+* Removed protrusions on inlet/outlet footprint silks
+* Bulked up pad size on outlet (it has slightly thicker pins/holes...).
+* Fixed pin labelling on ACS710
+* Increased isolation on MOC part by changing pad shapes.
+* Changed lots of footprints.
