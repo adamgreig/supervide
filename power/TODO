@@ -1,26 +1,41 @@
 Schematic
-* General checking
-* Values: LED resistors, coil resistors, I_sense stuff, TRIAC stuff.
-* I_sense stuff.
-* Check TRIAC section is sane.
+* Consider TRIAC series gate resistor
+* Consider TRIAC snubber.
 
-Footprints/pinouts
+Footprints
 * h/s
 * ac/dc
-* Order of pins on inlet/outlet
+* Inlet and outlet: remove protrusions
 * I sense
 * relays
 * opto triac driver
-* 2x4 conncetor +pinout!
+* 2x4 conncetor
 * passives
 * mounting holes
 
+Pinouts
+* ac/dc
+* inlet/outlet
+* I_sense
+* relays
+* opto triac diver
+* 2x4 connector
+
 PCB
 * Check case-related things
-* Unmask traces that need bulking.
+* Check whether earth track gets in the way of IEC inlet mounting.
 * Clean up some traces-pad interfaces (i.e. I sense)
 * Confirm via sizes, trace widths, clearances meet house standard.
-* Remove IEC inlet protrusions outside board edge
+* Unmask traces that need bulking.
 * Clean/pretty up silk
 * Standard checking
-* Check whether earth track gets in the way of IEC inlet mounting.
+
+ISSUES
+* Triac gate wants a fuse.
+
+FIXES
+* NPN BJTs, not PNPs, for relay driving.
+* Orange LED resistor should be 300R, not 75R.
+* Need 300R part number.
+* Removed V_offset line.
+* Changed MOC emitter resistor to 300R to reduce drive I a bit.

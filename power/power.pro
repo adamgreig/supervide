@@ -1,11 +1,9 @@
-update=Tue 03 Mar 2015 00:23:23 GMT
+update=Sat 28 Mar 2015 19:27:22 GMT
 version=1
 last_client=kicad
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -66,3 +64,5 @@ LibName33=ltc6910
 LibName34=relay_spst
 LibName35=vtx214
 LibName36=thermal_switch
+[general]
+version=1
