@@ -1,8 +1,8 @@
 PCB
-* TEST POINTS!
 * Check case-related things
 * Check whether earth track gets in the way of IEC inlet mounting.
 * Clean up some traces-pad interfaces (i.e. I sense)
+* Good up ground planes.
 * Confirm via sizes, trace widths, clearances meet house standard.
 * Unmask traces that need bulking.
 * Clean/pretty up silk
