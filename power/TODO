@@ -1,14 +1,5 @@
 PCB
-* Check case-related things
-* Check whether earth track gets in the way of IEC inlet mounting.
-* Clean up some traces-pad interfaces (i.e. I sense)
-* Good up ground planes.
-* Confirm via sizes, trace widths, clearances meet house standard.
-* Unmask traces that need bulking.
-* Clean/pretty up silk
-* Standard checking
 
-* ISSUES: Route live away from inlet plastic.
 
 FIXES
 * NPN BJTs, not PNPs, for relay driving.
@@ -22,3 +13,5 @@ FIXES
 * Fixed pin labelling on ACS710
 * Increased isolation on MOC part by changing pad shapes.
 * Changed lots of footprints.
+* Test points
+* Rerouted relay drivers.
