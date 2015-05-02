@@ -218,6 +218,23 @@ ULIBS =
 RULESPATH = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC
 include rules.mk
 
+
+# Fetch and build libcore.rlib based on the current rustc version
+libcore.rlib:
+	@echo
+	@echo Building libcore.rlib, this may take a minute...
+	$(eval RUSTVER := $(shell rustc --version | cut -f 3 -d " " | cut -c 2-))
+	@echo Downloading Rust version $(RUSTVER)
+	wget "https://github.com/rust-lang/rust/archive/$(RUSTVER).zip" -O $(BUILDDIR)/rust-$(RUSTVER).zip
+	@echo Extracting Rust
+	unzip -q $(BUILDDIR)/rust-$(RUSTVER).zip -d $(BUILDDIR)
+	@echo Building libcore.rlib...
+	cp thumbv6m-none-eabi.json $(BUILDDIR)/rust-$(RUSTVER)*/
+	$(RUSTC) -C opt-level=2 -Z no-landing-pads --target thumbv6m-none-eabi -g $(BUILDDIR)/rust-$(RUSTVER)*/src/libcore/lib.rs --out-dir .
+	@echo Done
+	@echo
+
+
 ##############################################################################
 # Black Magic Probe flashing via GDB
 #

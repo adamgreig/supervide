@@ -233,9 +233,6 @@ else
 	@$(RUSTC) $(RUSTFLAGS) -o $@ $<
 endif
 
-libcore.rlib:
-	$(error You must build libcore.rlib, see README.md)
-
 %.elf: $(OBJS) $(LDSCRIPT)
 ifeq ($(USE_VERBOSE_COMPILE),yes)
 	@echo

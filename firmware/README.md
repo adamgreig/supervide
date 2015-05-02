@@ -13,7 +13,7 @@ Remove any old toolchains, if applicable:
     
     sudo apt-get remove binutils-arm-none-eabi gcc-arm-none-eabi
 
-Add the PPA for latest gcc-arm-embedded:
+Add the PPA for latest `gcc-arm-embedded`:
 
     sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded
     sudo apt-get update
@@ -24,11 +24,13 @@ Add the PPA for latest gcc-arm-embedded:
 First install the latest Rust nightly. We use nightlies because the special compilation magic to make this work is an "unstable" feature only allowed in nightlies for now.
 
     curl -s https://static.rust-lang.org/rustup.sh | sudo sh -s -- --channel=nightly
-    HASH=$(rustc --version | cut -f 3 -d " " | cut -c 2-)
 
-Now fetch the latest Rust source and use it to compile the core library for STM32F0. Replace `~/Projects/supervide/` as appropriate.
+Now you can either just run `make` and it will build `libcore.rlib` for you, or 
+you can do it manually as follows, replacing `~/Projects/supervide` as 
+appropriate:
 
     cd /tmp
+    HASH=$(rustc --version | cut -f 3 -d " " | cut -c 2-)
     wget https://github.com/rust-lang/rust/archive/$HASH.zip
     unzip rust-$HASH*.zip
     cd rust-$HASH*
