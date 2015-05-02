@@ -75,15 +75,15 @@ endif
 PROJECT = supervide
 
 # Imported source files and paths
-CHIBIOS = ChibiOS
+CHIBIOS = chibi/ChibiOS
 # Startup files.
 include $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC/mk/startup_stm32f0xx.mk
 # HAL-OSAL files (optional).
 include $(CHIBIOS)/os/hal/hal.mk
 include $(CHIBIOS)/os/hal/ports/STM32/STM32F0xx/platform.mk
 include $(CHIBIOS)/os/hal/osal/rt/osal.mk
-BOARDSRC = board.c
-BOARDINC =
+BOARDSRC = chibi/board.c
+BOARDINC = chibi/
 # RTOS files (optional).
 include $(CHIBIOS)/os/rt/rt.mk
 include $(CHIBIOS)/os/rt/ports/ARMCMx/compilers/GCC/mk/port_v6m.mk
@@ -109,7 +109,7 @@ CSRC = $(STARTUPSRC) \
 	   $(CHIBIOS)/os/various/shell.c \
 	   $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
 	   $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
-       usbcfg.c main.c chibisupport.c
+       chibi/usbcfg.c chibi/main.c chibisupport.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
@@ -216,7 +216,7 @@ ULIBS =
 # We modify rules.mk for building Rust so include our own version here
 # (Note that RULESPATH is used by LDFLAGS inside rules.mk so leave this)
 RULESPATH = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC
-include rules.mk
+include chibi/rules.mk
 
 
 # Fetch and build libcore.rlib based on the current rustc version
