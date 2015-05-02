@@ -224,7 +224,10 @@ else
 	@$(CC) -c $(ASXFLAGS) $(TOPT) -I. $(IINCDIR) $< -o $@
 endif
 
-$(RUSTOBJS): $(OBJDIR)/%.o: %.rs Makefile libcore.rlib
+# Note that typically we just build one top level Rust file and
+# it sort of includes all the others, so have it depend on every
+# Rust file present.
+$(RUSTOBJS): $(OBJDIR)/%.o: %.rs *.rs Makefile libcore.rlib
 ifeq ($(USE_VERBOSE_COMPILE),yes)
 	@echo
 	$(RUSTC) $(RUSTFLAGS) -o $@ $<
