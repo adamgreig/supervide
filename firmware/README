@@ -1,0 +1,34 @@
+**************** To checkout ChibiOS *******************************
+
+git submodule update --init --recursive
+
+********** Dependencies for building firmware: ********************
+
+First check you don't have any leftover lingering toolchains:
+
+sudo apt-get remove binutils-arm-none-eabi gcc-arm-none-eabi
+
+Now add the PPA for the latest toolchain:
+
+sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded
+sudo apt-get update
+
+For newer versions of Ubuntu (>13 or so) you'll want to check you get the right
+version of the toolchain.  Run:
+
+apt-cache show gcc-arm-none-eabi
+
+Find the entry with a Maintainer of "Terry Guo" and copy its Version,
+i.e. 4.9.3.2015q1-0trusty13, then run
+
+sudo apt-get install gcc-arm-none-eabi=4.9.3.2015q1-0trusty13
+
+replacing the bit after '=' with Terry's version number at the time of reading.
+
+**************** To build and flash ***************************
+
+make flash
+
+*********** To toggle debugger board powering *****************
+
+make power / make unpower
