@@ -3,6 +3,22 @@
 This firmware is mostly written in Rust. As Rust is currently in development, 
 the toolchain is a little more complicated to build than it might otherwise be.
 
+## Checkout ChibiOS
+
+    git submodule update --init --recursive
+
+## Firmware Toolchain
+
+Remove any old toolchains, if applicable:
+    
+    sudo apt-get remove binutils-arm-none-eabi gcc-arm-none-eabi
+
+Add the PPA for latest gcc-arm-embedded:
+
+    sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded
+    sudo apt-get update
+    sudo apt-get install gcc-arm-none-eabi
+
 ## Rust Setup
 
 First install the latest Rust nightly. We use nightlies because the special compilation magic to make this work is an "unstable" feature only allowed in nightlies for now.
@@ -20,3 +36,16 @@ Now fetch the latest Rust source and use it to compile the core library for STM3
     cp ~/Projects/supervide/firmware/thumbv6m-none-eabi.json .
     rustc -C opt-level=2 -Z no-landing-pads --target thumbv6m-none-eabi -g src/libcore/lib.rs --out-dir libcore-thumbv6m-none-eabi
     cp libcore-thumbv6m-none-eabi/libcore.rlib ~/Projects/supervide/firmware/
+
+## Build
+
+    make
+
+## Program
+
+    make flash
+
+## Toggle Power from Programmer
+
+    make power
+    make unpower
