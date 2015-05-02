@@ -93,6 +93,9 @@ include $(CHIBIOS)/test/rt/test.mk
 # Define linker script file here
 LDSCRIPT= $(STARTUPLD)/STM32F072xB.ld
 
+# Rust sources
+RUSTSRC = libsv.rs
+
 # C sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
 CSRC = $(STARTUPSRC) \
@@ -153,6 +156,7 @@ MCU  = cortex-m0
 TRGT = arm-none-eabi-
 CC   = $(TRGT)gcc
 CPPC = $(TRGT)g++
+RUSTC = rustc
 # Enable loading with g++ only if you need C++ runtime support.
 # NOTE: You can use C++ even without C++ support if you are careful. C++
 #       runtime support makes code size explode.
@@ -177,6 +181,10 @@ CWARN = -Wall -Wextra -Wstrict-prototypes
 
 # Define C++ warning options here
 CPPWARN = -Wall -Wextra
+
+# Rust compiler flags here
+RUSTFLAGS = -C opt-level=2 -Z no-landing-pads --target thumbv6m-none-eabi
+RUSTFLAGS += -g --emit obj -L .
 
 #
 # Compiler settings
@@ -205,8 +213,10 @@ ULIBS =
 # End of user defines
 ##############################################################################
 
+# We modify rules.mk for building Rust so include our own version here
+# (Note that RULESPATH is used by LDFLAGS inside rules.mk so leave this)
 RULESPATH = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC
-include $(RULESPATH)/rules.mk
+include rules.mk
 
 ##############################################################################
 # Black Magic Probe flashing via GDB
