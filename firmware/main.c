@@ -84,6 +84,17 @@ static void cmd_test(BaseSequentialStream *chp, int argc, char *argv[]) {
   chThdWait(tp);
 }
 
+uint32_t rust_add(uint32_t, uint32_t);
+static void cmd_rust(BaseSequentialStream *chp, int argc, char *argv[]) {
+    (void)argc;
+    (void)argv;
+
+    uint32_t a = 5;
+    uint32_t b = 6;
+    uint32_t c = rust_add(a, b);
+    chprintf(chp, "%d + %d = %d according to rust\n", a, b, c);
+}
+
 static void cmd_write(BaseSequentialStream *chp, int argc, char *argv[]) {
   static uint8_t buf[] =
       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
@@ -120,6 +131,7 @@ static const ShellCommand commands[] = {
   {"threads", cmd_threads},
   {"test", cmd_test},
   {"write", cmd_write},
+  {"rust", cmd_rust},
   {NULL, NULL}
 };
 
