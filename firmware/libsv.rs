@@ -7,8 +7,15 @@
 extern crate core;
 
 mod runtime;
+pub mod powerboard;
+pub mod chibisupport;
+
+use powerboard::*;
 
 #[no_mangle]
-pub fn rust_add(a: u32, b: u32) -> u32 {
-    a + b
+pub fn rust_main() -> () {
+    power_master_enable();
+    power_preheat_enable();
+    loop {
+    }
 }

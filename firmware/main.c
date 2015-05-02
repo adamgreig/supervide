@@ -84,17 +84,6 @@ static void cmd_test(BaseSequentialStream *chp, int argc, char *argv[]) {
   chThdWait(tp);
 }
 
-uint32_t rust_add(uint32_t, uint32_t);
-static void cmd_rust(BaseSequentialStream *chp, int argc, char *argv[]) {
-    (void)argc;
-    (void)argv;
-
-    uint32_t a = 5;
-    uint32_t b = 6;
-    uint32_t c = rust_add(a, b);
-    chprintf(chp, "%d + %d = %d according to rust\n", a, b, c);
-}
-
 static void cmd_write(BaseSequentialStream *chp, int argc, char *argv[]) {
   static uint8_t buf[] =
       "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
@@ -131,7 +120,6 @@ static const ShellCommand commands[] = {
   {"threads", cmd_threads},
   {"test", cmd_test},
   {"write", cmd_write},
-  {"rust", cmd_rust},
   {NULL, NULL}
 };
 
@@ -161,6 +149,7 @@ static THD_FUNCTION(Thread1, arg) {
 /*
  * Application entry point.
  */
+extern void rust_main(void);
 int main(void) {
   thread_t *shelltp = NULL;
 
@@ -189,19 +178,22 @@ int main(void) {
    */
   chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
+  // Move into Rust main:
+  rust_main();
+
   /*
    * Normal main() thread activity, in this demo it does nothing except
    * sleeping in a loop and check the button state, when the button is
    * pressed the test procedure is launched with output on the serial
    * driver 1.
    */
-  while (true) {
-    if (!shelltp && (SDU1.config->usbp->state == USB_ACTIVE))
-      shelltp = shellCreate(&shell_cfg1, SHELL_WA_SIZE, NORMALPRIO);
-    else if (chThdTerminatedX(shelltp)) {
-      chThdRelease(shelltp);    /* Recovers memory of the previous shell.   */
-      shelltp = NULL;           /* Triggers spawning of a new shell.        */
-    }
-    chThdSleepMilliseconds(500);
-  }
+  //while (true) {
+  //  if (!shelltp && (SDU1.config->usbp->state == USB_ACTIVE))
+  //    shelltp = shellCreate(&shell_cfg1, SHELL_WA_SIZE, NORMALPRIO);
+  //  else if (chThdTerminatedX(shelltp)) {
+  //    chThdRelease(shelltp);    /* Recovers memory of the previous shell.   */
+  //    shelltp = NULL;           /* Triggers spawning of a new shell.        */
+  //  }
+  //  chThdSleepMilliseconds(500);
+  //}
 }

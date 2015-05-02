@@ -1,5 +1,3 @@
-#![no_std]
-
 extern crate core;
 
 #[lang="stack_exhausted"]
