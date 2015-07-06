@@ -151,8 +151,6 @@ static THD_FUNCTION(Thread1, arg) {
  */
 extern void rust_main(void);
 int main(void) {
-  thread_t *shelltp = NULL;
-
   /*
    * System initializations.
    * - HAL initialization, this also initializes the configured device drivers
@@ -179,21 +177,6 @@ int main(void) {
   chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
   // Move into Rust main:
-  rust_main();
-
-  /*
-   * Normal main() thread activity, in this demo it does nothing except
-   * sleeping in a loop and check the button state, when the button is
-   * pressed the test procedure is launched with output on the serial
-   * driver 1.
-   */
-  //while (true) {
-  //  if (!shelltp && (SDU1.config->usbp->state == USB_ACTIVE))
-  //    shelltp = shellCreate(&shell_cfg1, SHELL_WA_SIZE, NORMALPRIO);
-  //  else if (chThdTerminatedX(shelltp)) {
-  //    chThdRelease(shelltp);    /* Recovers memory of the previous shell.   */
-  //    shelltp = NULL;           /* Triggers spawning of a new shell.        */
-  //  }
-  //  chThdSleepMilliseconds(500);
-  //}
+  while(true)
+    rust_main();
 }
