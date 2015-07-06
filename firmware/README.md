@@ -1,15 +1,39 @@
 # Supervide Firmware
 
 This firmware is mostly written in Rust. As Rust is currently in development, 
-the toolchain is a little more complicated to build than it might otherwise be.
+the tool-chain is a little more complicated to build than it might otherwise be.
+Furthermore, the interfacing between ChibiOS, an embedded RTOS written in C,
+and the drivers and "business logic" written in Rust leads to some sharp edges.
+This is exacerbated by ChibiOS exposing many core "functions" as macros which
+cannot be called directly from Rust without further wrappers.
 
-## Checkout ChibiOS
+## Files
+
+* `libsv.rs`: This contains the high level control of Supervide.  It contains
+  `rust_main()`, the entry point to all Rust code, called promptly from the
+  "actual" C main function in `chibi/main.c`.
+* `chibisupport.c`: Wrappers around various ChibiOS functions we need.  Mostly
+  these are wrapped because they are C macros rather than functions, so we
+  cannot call them directly.  These wrappers effectively compile the macros so
+  they can be conveniently called from Rust.  We also ensure the functions have
+  convenient types to call from Rust.
+* `chibisupport.rs`: Rust function definitions for the wrappers in
+  `chibisupport.c`.
+* `powerboard.rs`: Drivers for the functionality of the power board, including
+  switching relays, controlling the TRIAC value, and reading the current
+  sensor.
+* `runtime.rs`, `thumbv6m-none-eabi.json`: These are required for building Rust
+  for the STM32 sans-runtime.
+
+## Setup and Building
+
+### Checkout ChibiOS
 
     git submodule update --init --recursive
 
-## Firmware Toolchain
+### Firmware Toolchain
 
-Remove any old toolchains, if applicable:
+Remove any old tool-chains, if applicable:
     
     sudo apt-get remove binutils-arm-none-eabi gcc-arm-none-eabi
 
@@ -19,7 +43,7 @@ Add the PPA for latest `gcc-arm-embedded`:
     sudo apt-get update
     sudo apt-get install gcc-arm-none-eabi
 
-## Rust Setup
+### Rust Setup
 
 First install the latest Rust nightly. We use nightlies because the special compilation magic to make this work is an "unstable" feature only allowed in nightlies for now.
 
@@ -39,15 +63,15 @@ appropriate:
     rustc -C opt-level=2 -Z no-landing-pads --target thumbv6m-none-eabi -g src/libcore/lib.rs --out-dir libcore-thumbv6m-none-eabi
     cp libcore-thumbv6m-none-eabi/libcore.rlib ~/Projects/supervide/firmware/
 
-## Build
+### Build
 
     make
 
-## Program
+### Program
 
     make flash
 
-## Toggle Power from Programmer
+### Toggle Power from Programmer
 
     make power
     make unpower
