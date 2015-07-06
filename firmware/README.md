@@ -9,21 +9,22 @@ cannot be called directly from Rust without further wrappers.
 
 ## Files
 
-* `libsv.rs`: This contains the high level control of Supervide.  It contains
-  `rust_main()`, the entry point to all Rust code, called promptly from the
-  "actual" C main function in `chibi/main.c`.
-* `chibisupport.c`: Wrappers around various ChibiOS functions we need.  Mostly
-  these are wrapped because they are C macros rather than functions, so we
-  cannot call them directly.  These wrappers effectively compile the macros so
-  they can be conveniently called from Rust.  We also ensure the functions have
-  convenient types to call from Rust.
-* `chibisupport.rs`: Rust function definitions for the wrappers in
-  `chibisupport.c`.
-* `powerboard.rs`: Drivers for the functionality of the power board, including
-  switching relays, controlling the TRIAC value, and reading the current
-  sensor.
-* `runtime.rs`, `thumbv6m-none-eabi.json`: These are required for building Rust
-  for the STM32 sans-runtime.
+* [`libsv.rs`](libsv.rs): This contains the high level control of Supervide.
+  It contains `rust_main()`, the entry point to all Rust code, called promptly
+  from the "actual" C main function in [`chibi/main.c`](chibi/main.c).
+* [`chibisupport.c`](chibisupport.c): Wrappers around various ChibiOS functions
+  we need.  Mostly these are wrapped because they are C macros rather than
+  functions, so we cannot call them directly.  These wrappers effectively
+  compile the macros so they can be conveniently called from Rust.  We also
+  ensure the functions have convenient types to call from Rust.
+* [`chibisupport.rs`](chibisupport.rs): Rust function definitions for the
+  wrappers in [`chibisupport.c`](chibisupport.c).
+* [`powerboard.rs`](powerboard.rs): Drivers for the functionality of the power
+  board, including switching relays, controlling the TRIAC value, and reading
+  the current sensor.
+* [`runtime.rs`](runtime.rs),
+  [`thumbv6m-none-eabi.json`](thumbv6m-none-eabi.json): These are required for
+  building Rust for the STM32 sans-runtime and require little attention.
 
 ## Setup and Building
 
