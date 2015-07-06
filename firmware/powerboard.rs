@@ -4,6 +4,15 @@ extern crate core;
 
 use chibisupport::*;
 
+pub fn power_init() -> () {
+    // Frequency = 100Hz in order to switch whole half-cycles with 50Hz mains
+    // period = 255 ticks for a 2.55s period, giving us 256 possible states
+    // Use CH0
+    unsafe {
+        ch_pwmInit(100, 255, true, false, false, false);
+    }
+}
+
 // Enable or disable master relay
 pub fn power_master_enable() -> () {
     unsafe {
@@ -30,18 +39,11 @@ pub fn power_preheat_disable() -> () {
     }
 }
 
-// Set TRIAC activation level from 0 (fully off) to 255 (fully on)
-// Controls the number of live half-cycles over a 2.55s period
+/// Set TRIAC activation level
+/// level varies from from 0 (fully off) to 255 (fully on)
+/// This controls the number of live half-cycles over a 2.55s period
 pub fn power_set_triac(level: u8) -> () {
-    if level == 255 {
-        unsafe {
-            ch_palSetPad(ch_GPIOB, ch_GPIOB_TRIAC);
-        }
-    }
-    if level == 0 {
-        unsafe {
-            ch_palClearPad(ch_GPIOB, ch_GPIOB_TRIAC);
-        }
+    unsafe {
+        ch_pwmSet(0, level as u32);
     }
 }
-
