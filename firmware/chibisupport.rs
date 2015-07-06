@@ -22,4 +22,15 @@ extern {
 
     /// Set PWM width on given channel (as number of clock pulses)
     pub fn ch_pwmSet(channel: u8, width: u32) -> ();
+
+    // ADC procedures
+
+    /// Initialise ChibiOS ADC driver and start ADC ready for conversion
+    /// Note: You'll want to modify this in low power applications as this
+    /// leaves the ADC in "Ready" mode all the time, consuming lots of power.
+    pub fn ch_adcInit() -> ();
+
+    /// Do an ADC conversion and block til it finishes (or fails)
+    pub fn ch_adcConvSync() -> u16;
+
 }

@@ -10,6 +10,7 @@ pub fn power_init() -> () {
     // Use CH0
     unsafe {
         ch_pwmInit(100, 255, true, false, false, false);
+        ch_adcInit();
     }
 }
 
@@ -46,4 +47,19 @@ pub fn power_set_triac(level: u8) -> () {
     unsafe {
         ch_pwmSet(0, level as u32);
     }
+}
+
+/// Get current sense
+/// Returns the current current through the current sensor in A
+pub fn power_get_current() -> f32 {
+    let raw: u16 = unsafe {
+        ch_adcConvSync()
+    };
+
+    // TODO: assuming data is right-aligned
+    // Full scale is 3v3, empty scale is 0V, right-aligned 12 bits
+    // First blank off the most significant 4 bits:
+    let masked: u16 = raw & 0b0000_1111_1111_1111;
+    let voltage: f32 = (masked as f32) * 3.3 / (4096.0);
+    voltage / 0.056  // Sensor is 56mV/A, so I=V/0.056
 }
