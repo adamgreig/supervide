@@ -174,9 +174,17 @@ int main(void) {
   /*
    * Creates the blinker threads.
    */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+//  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
   // Move into Rust main:
-  while(true)
-    rust_main();
+//  while(true)
+//    rust_main();
+
+  while (true) {
+    systime_t time = serusbcfg.usbp->state == USB_ACTIVE ? 250 : 500;
+    palClearPad(GPIOB, GPIOB_ENC_GRN);
+    chThdSleepMilliseconds(time);
+    palSetPad(GPIOB, GPIOB_ENC_GRN);
+    chThdSleepMilliseconds(time);
+  }
 }
