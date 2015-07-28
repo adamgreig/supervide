@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:power-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -10,7 +11,6 @@ LIBS:cmos4000
 LIBS:adc-dac
 LIBS:memory
 LIBS:xilinx
-LIBS:special
 LIBS:microcontrollers
 LIBS:dsp
 LIBS:microchip
@@ -63,7 +63,7 @@ F 4 "1057281" H 10200 5050 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L OPTO-TRIAC U4
+L OPTO-TRIAC-RESCUE-power U4
 U 1 1 54E528C7
 P 7850 4800
 F 0 "U4" H 8050 5100 60  0000 C CNN
@@ -75,7 +75,7 @@ F 4 "1467853" H 7850 4800 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R6
+L R-RESCUE-power R6
 U 1 1 54E52E94
 P 8750 4600
 F 0 "R6" V 8830 4600 50  0000 C CNN
@@ -89,7 +89,7 @@ $EndComp
 Text GLabel 8750 1100 0    60   Input ~ 0
 MAINS_LIVE
 $Comp
-L R R8
+L R-RESCUE-power R8
 U 1 1 54E5366C
 P 10800 5100
 F 0 "R8" V 10880 5100 50  0000 C CNN
@@ -101,7 +101,7 @@ F 4 "1887414" H 10800 5100 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C4
+L C-RESCUE-power C4
 U 1 1 54E536C9
 P 10800 4600
 F 0 "C4" H 10850 4700 50  0000 L CNN
@@ -117,7 +117,7 @@ LOAD_LIVE
 Text GLabel 6550 4600 0    60   Input ~ 0
 TRIAC_TRIG
 $Comp
-L R R9
+L R-RESCUE-power R9
 U 1 1 54E53E1C
 P 7100 5150
 F 0 "R9" V 7200 5150 50  0000 C CNN
@@ -185,7 +185,7 @@ F 3 "" H 4750 3100 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C3
+L C-RESCUE-power C3
 U 1 1 54E6A771
 P 4750 3800
 F 0 "C3" H 4800 3900 50  0000 L CNN
@@ -221,7 +221,7 @@ $EndComp
 Text GLabel 4250 3300 2    60   Input ~ 0
 I_SENSE
 $Comp
-L C C2
+L C-RESCUE-power C2
 U 1 1 54E6D133
 P 4500 3800
 F 0 "C2" H 4550 3900 50  0000 L CNN
@@ -244,7 +244,7 @@ F 3 "" H 4500 4050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C1
+L C-RESCUE-power C1
 U 1 1 54E6E944
 P 3800 3800
 F 0 "C1" H 3850 3900 50  0000 L CNN
@@ -345,7 +345,7 @@ F 3 "" H 7250 3050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R4
+L R-RESCUE-power R4
 U 1 1 54E9E5AF
 P 8350 3400
 F 0 "R4" V 8430 3400 50  0000 C CNN
@@ -392,7 +392,7 @@ F 3 "" H 8800 1350 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R1
+L R-RESCUE-power R1
 U 1 1 54E81E83
 P 8300 1750
 F 0 "R1" V 8380 1750 50  0000 C CNN
@@ -775,7 +775,7 @@ Wire Wire Line
 	9050 4600 9000 4600
 Connection ~ 10200 4250
 $Comp
-L LED D1
+L LED-RESCUE-power D1
 U 1 1 54F7858E
 P 5300 1100
 F 0 "D1" H 5300 1200 50  0000 C CNN
@@ -787,7 +787,7 @@ F 4 "2099239" H 5300 1100 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R3
+L R-RESCUE-power R3
 U 1 1 54F785C7
 P 5300 1600
 F 0 "R3" V 5380 1600 50  0000 C CNN
@@ -811,7 +811,7 @@ Wire Wire Line
 	4900 1950 5300 1950
 Connection ~ 5300 1950
 $Comp
-L R R2
+L R-RESCUE-power R2
 U 1 1 54F78EB6
 P 8100 1450
 F 0 "R2" V 8180 1450 50  0000 C CNN
@@ -823,7 +823,7 @@ F 4 "2138881" H 8100 1450 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L LED D2
+L LED-RESCUE-power D2
 U 1 1 54F78F0F
 P 7600 1450
 F 0 "D2" H 7600 1550 50  0000 C CNN
@@ -835,7 +835,7 @@ F 4 "2099243" H 7600 1450 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R5
+L R-RESCUE-power R5
 U 1 1 54F794DF
 P 8100 3100
 F 0 "R5" V 8180 3100 50  0000 C CNN
@@ -847,7 +847,7 @@ F 4 "2138881" H 8100 3100 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L LED D3
+L LED-RESCUE-power D3
 U 1 1 54F7952C
 P 7600 3100
 F 0 "D3" H 7600 3200 50  0000 C CNN
@@ -861,7 +861,7 @@ $EndComp
 Wire Wire Line
 	10200 5600 10400 5600
 $Comp
-L R R7
+L R-RESCUE-power R7
 U 1 1 54F7A4A8
 P 6600 4950
 F 0 "R7" V 6680 4950 50  0000 C CNN
@@ -873,7 +873,7 @@ F 4 "2138881" H 6600 4950 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L LED D4
+L LED-RESCUE-power D4
 U 1 1 54F7A4E7
 P 6600 5450
 F 0 "D4" H 6600 5550 50  0000 C CNN
@@ -931,7 +931,7 @@ Wire Wire Line
 Wire Wire Line
 	8950 1100 8950 1150
 Wire Wire Line
-	8800 1350 8950 1350
+	8700 1350 8950 1350
 $Comp
 L +5V #PWR3
 U 1 1 55175639
@@ -977,7 +977,7 @@ F 3 "" H 8950 3000 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9100 3000 8950 3000
+	8900 3000 9100 3000
 Wire Wire Line
 	8900 2750 9100 2750
 Wire Wire Line
@@ -1007,7 +1007,7 @@ U 1 1 551891FA
 P 4650 1150
 F 0 "P4" H 4650 1450 50  0000 C BNN
 F 1 "+5V" H 4650 1400 50  0000 C CNN
-F 2 "Connect:1pin" H 4650 1150 60  0000 C CNN
+F 2 "Connect:1pin" H 4650 1150 60  0001 C CNN
 F 3 "" H 4650 1150 60  0000 C CNN
 	1    4650 1150
 	1    0    0    -1  
@@ -1018,7 +1018,7 @@ U 1 1 55189243
 P 4650 1350
 F 0 "P5" H 4650 1650 50  0000 C BNN
 F 1 "GND" H 4650 1600 50  0000 C CNN
-F 2 "Connect:1pin" H 4650 1350 60  0000 C CNN
+F 2 "Connect:1pin" H 4650 1350 60  0001 C CNN
 F 3 "" H 4650 1350 60  0000 C CNN
 	1    4650 1350
 	-1   0    0    1   
@@ -1035,7 +1035,7 @@ U 1 1 551895A8
 P 4100 3100
 F 0 "P6" H 4100 3400 50  0000 C BNN
 F 1 "I_SENSE" H 4100 3350 50  0000 C CNN
-F 2 "Connect:1pin" H 4100 3100 60  0000 C CNN
+F 2 "Connect:1pin" H 4100 3100 60  0001 C CNN
 F 3 "" H 4100 3100 60  0000 C CNN
 	1    4100 3100
 	1    0    0    -1  
@@ -1043,4 +1043,40 @@ $EndComp
 Wire Wire Line
 	4100 3100 4100 3300
 Connection ~ 4100 3300
+$Comp
+L D_Schottky_Small D5
+U 1 1 55B7E4C8
+P 8625 1350
+F 0 "D5" H 8575 1250 50  0000 L CNN
+F 1 "MBR2H200SFT1G" H 8345 1270 50  0001 L CNN
+F 2 "power:SOD-123FL" V 8625 1350 60  0001 C CNN
+F 3 "" V 8625 1350 60  0000 C CNN
+F 4 "2452032" H 8625 1350 60  0001 C CNN "Farnell"
+	1    8625 1350
+	0    1    1    0   
+$EndComp
+Connection ~ 8625 1450
+Wire Wire Line
+	8625 1250 8700 1250
+Wire Wire Line
+	8700 1250 8700 1350
+Connection ~ 8800 1350
+$Comp
+L D_Schottky_Small D6
+U 1 1 55B7F5FB
+P 8825 3000
+F 0 "D6" H 8775 2900 50  0000 L CNN
+F 1 "MBR2H200SFT1G" H 8545 2920 50  0001 L CNN
+F 2 "power:SOD-123FL" V 8825 3000 60  0001 C CNN
+F 3 "" V 8825 3000 60  0000 C CNN
+F 4 "2452032" H 8825 3000 60  0001 C CNN "Farnell"
+	1    8825 3000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8825 2900 8900 2900
+Wire Wire Line
+	8900 2900 8900 3000
+Connection ~ 8950 3000
+Connection ~ 8825 3100
 $EndSCHEMATC
