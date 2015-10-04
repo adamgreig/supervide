@@ -37,7 +37,7 @@
   )
 
   (setup
-    (last_trace_width 1)
+    (last_trace_width 0.254)
     (user_trace_width 0.508)
     (user_trace_width 1)
     (user_trace_width 1.5)
@@ -164,6 +164,21 @@
     (add_net PREHEAT_RELAY)
     (add_net TRIAC_MAINS)
     (add_net TRIAC_TRIG)
+  )
+
+  (module Wire_Connections_Bridges:WireConnection_1mmDrill (layer F.Cu) (tedit 561150AA) (tstamp 5518AC8F)
+    (at 118.237 85.725)
+    (path /54F50713)
+    (fp_text reference U3 (at -0.2286 0.2032) (layer F.SilkS) hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (fp_text value 70°C (at 4.826 7.493) (layer F.SilkS)
+      (effects (font (size 1.5 1.5) (thickness 0.3)))
+    )
+    (pad 1 thru_hole circle (at -3 0) (size 2.49936 2.49936) (drill 1.5) (layers *.Cu *.Mask F.SilkS)
+      (net 21 "Net-(R6-Pad1)"))
+    (pad 2 thru_hole circle (at 2 0) (size 2.49936 2.49936) (drill 1.5) (layers *.Cu *.Mask F.SilkS)
+      (net 4 TRIAC_MAINS))
   )
 
   (module Transistors_TO-220:TO-220_Neutral123_Vertical_LargePads (layer F.Cu) (tedit 55ECEC29) (tstamp 54F3A89C)
@@ -971,21 +986,6 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
-  )
-
-  (module Wire_Connections_Bridges:WireConnection_1mmDrill (layer F.Cu) (tedit 5518AB36) (tstamp 5518AC8F)
-    (at 118.237 85.725)
-    (path /54F50713)
-    (fp_text reference U3 (at -0.2286 0.2032) (layer F.SilkS) hide
-      (effects (font (size 1 1) (thickness 0.15)))
-    )
-    (fp_text value 70°C (at 4.826 7.493) (layer F.SilkS)
-      (effects (font (size 1.5 1.5) (thickness 0.3)))
-    )
-    (pad 1 thru_hole circle (at -3 0) (size 2.49936 2.49936) (drill 1.00076) (layers *.Cu *.Mask F.SilkS)
-      (net 21 "Net-(R6-Pad1)"))
-    (pad 2 thru_hole circle (at 2 0) (size 2.49936 2.49936) (drill 1.00076) (layers *.Cu *.Mask F.SilkS)
-      (net 4 TRIAC_MAINS))
   )
 
   (module power:5001_no_protrude (layer F.Cu) (tedit 5518AA1C) (tstamp 551826F5)
