@@ -149,7 +149,6 @@ static THD_FUNCTION(Thread1, arg) {
 /*
  * Application entry point.
  */
-extern void rust_main(void);
 int main(void) {
   /*
    * System initializations.
@@ -176,9 +175,6 @@ int main(void) {
    */
 //  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
-  // Move into Rust main:
-//  while(true)
-//    rust_main();
 
   while (true) {
     systime_t time = serusbcfg.usbp->state == USB_ACTIVE ? 250 : 500;
