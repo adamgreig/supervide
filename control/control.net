@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/adam/Projects/supervide/control/control.sch)
-    (date "Sun 04 Oct 2015 18:12:32 BST")
+    (date "Sun 04 Oct 2015 18:31:25 BST")
     (tool "Eeschema 0.201508100901+6080~28~ubuntu14.04.1-product")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -343,9 +343,9 @@
       (tstamp 54D56B94))
     (comp (ref X1)
       (value 32k768)
-      (footprint control:SMD_XTAL_8038)
+      (footprint control:R0805)
       (fields
-        (field (name Farnell) 2308714))
+        (field (name Farnell) 2467860))
       (libsource (lib control-cache) (part CRYSTAL))
       (sheetpath (names /) (tstamps /))
       (tstamp 54D57457))
@@ -505,6 +505,19 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 5611B8A7)))
   (libparts
+    (libpart (lib control-rescue) (part R-RESCUE-control)
+      (footprints
+        (fp R?)
+        (fp SM0603)
+        (fp SM0805)
+        (fp R?-*)
+        (fp SM1206))
+      (fields
+        (field (name Reference) R)
+        (field (name Value) R-RESCUE-control))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
     (libpart (lib control-rescue) (part C-RESCUE-control)
       (footprints
         (fp SM*)
@@ -647,13 +660,6 @@
         (pin (num A) (name A) (type passive))
         (pin (num B) (name B) (type passive))
         (pin (num C) (name C) (type passive))))
-    (libpart (lib cga0402mlc-12g) (part CGA0402MLC-12G)
-      (fields
-        (field (name Reference) D)
-        (field (name Value) CGA0402MLC-12G))
-      (pins
-        (pin (num 1) (name 1) (type passive))
-        (pin (num 2) (name 2) (type passive))))
     (libpart (lib adp3335) (part ADP3335)
       (fields
         (field (name Reference) IC)
@@ -667,19 +673,13 @@
         (pin (num 6) (name SD) (type input))
         (pin (num 7) (name IN) (type power_in))
         (pin (num 8) (name IN) (type power_in))))
-    (libpart (lib ad8542) (part AD8542)
+    (libpart (lib cga0402mlc-12g) (part CGA0402MLC-12G)
       (fields
-        (field (name Reference) IC)
-        (field (name Value) AD8542))
+        (field (name Reference) D)
+        (field (name Value) CGA0402MLC-12G))
       (pins
-        (pin (num 1) (name OUTA) (type output))
-        (pin (num 2) (name -A) (type input))
-        (pin (num 3) (name +A) (type input))
-        (pin (num 4) (name V-) (type power_in))
-        (pin (num 5) (name +B) (type input))
-        (pin (num 6) (name -B) (type input))
-        (pin (num 7) (name OUTB) (type output))
-        (pin (num 8) (name V+) (type power_in))))
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))))
     (libpart (lib part) (part PART)
       (fields
         (field (name Reference) U)
@@ -709,6 +709,19 @@
         (pin (num 18) (name NC) (type NotConnected))
         (pin (num 19) (name NC) (type NotConnected))
         (pin (num 20) (name GND) (type power_in))))
+    (libpart (lib ad8542) (part AD8542)
+      (fields
+        (field (name Reference) IC)
+        (field (name Value) AD8542))
+      (pins
+        (pin (num 1) (name OUTA) (type output))
+        (pin (num 2) (name -A) (type input))
+        (pin (num 3) (name +A) (type input))
+        (pin (num 4) (name V-) (type power_in))
+        (pin (num 5) (name +B) (type input))
+        (pin (num 6) (name -B) (type input))
+        (pin (num 7) (name OUTB) (type output))
+        (pin (num 8) (name V+) (type power_in))))
     (libpart (lib esp8266-esp01) (part ESP8266-ESP01)
       (fields
         (field (name Reference) U)
@@ -722,6 +735,14 @@
         (pin (num 6) (name CH_PD) (type input))
         (pin (num 7) (name RESET) (type input))
         (pin (num 8) (name VCC) (type power_in))))
+    (libpart (lib ncp1117) (part NCP1117)
+      (fields
+        (field (name Reference) IC)
+        (field (name Value) NCP1117))
+      (pins
+        (pin (num 1) (name GND) (type power_in))
+        (pin (num 2) (name VOUT) (type power_out))
+        (pin (num 3) (name VIN) (type power_in))))
     (libpart (lib control-cache) (part BATTERY)
       (fields
         (field (name Reference) BT)
@@ -753,41 +774,22 @@
         (pin (num 6) (name SHELL1) (type passive))
         (pin (num 7) (name SHELL2) (type passive))
         (pin (num 8) (name SHELL3) (type passive))
-        (pin (num 9) (name SHELL4) (type passive))))
-    (libpart (lib control-rescue) (part R-RESCUE-control)
-      (footprints
-        (fp R?)
-        (fp SM0603)
-        (fp SM0805)
-        (fp R?-*)
-        (fp SM1206))
-      (fields
-        (field (name Reference) R)
-        (field (name Value) R-RESCUE-control))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib ncp1117) (part NCP1117)
-      (fields
-        (field (name Reference) IC)
-        (field (name Value) NCP1117))
-      (pins
-        (pin (num 1) (name GND) (type power_in))
-        (pin (num 2) (name VOUT) (type power_out))
-        (pin (num 3) (name VIN) (type power_in)))))
+        (pin (num 9) (name SHELL4) (type passive)))))
   (libraries
     (library (logical device)
       (uri /usr/share/kicad/library/device.lib))
+    (library (logical control-rescue)
+      (uri /home/adam/Projects/supervide/control/control-rescue.lib))
     (library (logical conn)
       (uri /usr/share/kicad/library/conn.lib))
-    (library (logical stm32f072cbt6)
-      (uri /home/adam/Projects/supervide/control/stm32f072cbt6.lib))
-    (library (logical ad8495)
-      (uri /home/adam/Projects/supervide/control/ad8495.lib))
-    (library (logical rotenc)
-      (uri /home/adam/Projects/supervide/control/rotenc.lib))
     (library (logical swd)
       (uri /home/adam/Projects/supervide/control/swd.lib))
+    (library (logical stm32f072cbt6)
+      (uri /home/adam/Projects/supervide/control/stm32f072cbt6.lib))
+    (library (logical rotenc)
+      (uri /home/adam/Projects/supervide/control/rotenc.lib))
+    (library (logical ad8495)
+      (uri /home/adam/Projects/supervide/control/ad8495.lib))
     (library (logical cga0402mlc-12g)
       (uri /home/adam/Projects/supervide/control/cga0402mlc-12g.lib))
     (library (logical adp3335)
@@ -803,9 +805,7 @@
     (library (logical esp8266-esp01)
       (uri /home/adam/Projects/supervide/control/esp8266-esp01.lib))
     (library (logical control-cache)
-      (uri /home/adam/Projects/supervide/control/control-cache.lib))
-    (library (logical control-rescue)
-      (uri /home/adam/Projects/supervide/control/control-rescue.lib)))
+      (uri /home/adam/Projects/supervide/control/control-cache.lib)))
   (nets
     (net (code 1) (name "Net-(C15-Pad1)")
       (node (ref R7) (pin 1))
