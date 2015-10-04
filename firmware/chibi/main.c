@@ -146,6 +146,88 @@ static THD_FUNCTION(Thread1, arg) {
   }
 }
 
+#define DAC_BUFFER_SIZE 256
+
+/*
+ * DAC test buffer
+ */
+
+static const dacsample_t dac_buffer[DAC_BUFFER_SIZE] = {
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
+    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
+};
+
+/*
+ * DAC streaming callback.
+ */
+size_t nx = 0, ny = 0, nz = 0;
+static void end_cb1(DACDriver *dacp, const dacsample_t *buffer, size_t n) {
+
+  (void)dacp;
+
+  nz++;
+  if (dac_buffer == buffer) {
+    nx += n;
+  }
+  else {
+    ny += n;
+  }
+
+  if ((nz % 1000) == 0) {
+    palTogglePad(GPIOB, GPIOB_ENC_BLU);
+  }
+}
+
+/*
+ * DAC error callback.
+ */
+static void error_cb1(DACDriver *dacp, dacerror_t err) {
+
+  (void)dacp;
+  (void)err;
+
+  chSysHalt("DAC failure");
+}
+
+static const DACConversionGroup dacgrpcfg1 = {
+  num_channels: 2U,
+  end_cb:       end_cb1,
+  error_cb:     error_cb1,
+  trigger:      DAC_TRG(1)
+};
+
+/*
+ * GPT3 configuration.
+ */
+static const GPTConfig gpt3cfg1 = {
+  frequency:    100000U,
+  callback:     NULL,
+  cr2:          TIM_CR2_MMS_1,  /* MMS = 010 = TRGO on Update Event.        */
+  dier:         0U
+};
+
+static const DACConfig dac1cfg1 = {
+  init:         2047U,
+  datamode:     DAC_DHRM_12BIT_RIGHT_DUAL
+};
+
 /*
  * Application entry point.
  */
@@ -161,6 +243,22 @@ int main(void) {
    */
   halInit();
   chSysInit();
+
+  dacStart(&DACD1, &dac1cfg1);
+
+  /*
+   * Starting GPT3 driver, it is used for triggering the DAC.
+   */
+  gptStart(&GPTD3, &gpt3cfg1);
+
+  /*
+   * Starting a continuous conversion.
+   * Note, the buffer size is divided by two because two elements are fetched
+   * for each transfer.
+   */
+  dacStartConversion(&DACD1, &dacgrpcfg1, dac_buffer, DAC_BUFFER_SIZE / 2U);
+  gptStartContinuous(&GPTD3, 2U);
+
 
   sduObjectInit(&SDU1);
   sduStart(&SDU1, &serusbcfg);

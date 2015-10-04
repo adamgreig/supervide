@@ -180,8 +180,8 @@
                                      PIN_MODE_INPUT(GPIOA_NC1) |            \
                                      PIN_MODE_INPUT(GPIOA_NC2) |            \
                                      PIN_MODE_ANALOG(GPIOA_CURRENT) |       \
-                                     PIN_MODE_OUTPUT(GPIOA_PIEZO_A) |       \
-                                     PIN_MODE_OUTPUT(GPIOA_PIEZO_B) |       \
+                                     PIN_MODE_ANALOG(GPIOA_PIEZO_A) |       \
+                                     PIN_MODE_ANALOG(GPIOA_PIEZO_B) |       \
                                      PIN_MODE_ALTERNATE(GPIOA_ENC_A) |      \
                                      PIN_MODE_ALTERNATE(GPIOA_ENC_B) |      \
                                      PIN_MODE_OUTPUT(GPIOA_WIFI_GP0) |      \
@@ -291,7 +291,7 @@
                                      PIN_MODE_INPUT(GPIOB_ENC_SW) |         \
                                      PIN_MODE_ALTERNATE(GPIOB_ENC_RED) |    \
                                      PIN_MODE_OUTPUT(GPIOB_ENC_GRN) |    \
-                                     PIN_MODE_ALTERNATE(GPIOB_ENC_BLU))
+                                     PIN_MODE_OUTPUT(GPIOB_ENC_BLU))
 #define VAL_GPIOB_OTYPER            (PIN_OTYPE_PUSHPULL(GPIOB_RELAY_M) |    \
                                      PIN_OTYPE_PUSHPULL(GPIOB_RELAY_PH) |   \
                                      PIN_OTYPE_PUSHPULL(GPIOB_TRIAC) |      \
