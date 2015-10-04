@@ -150,6 +150,8 @@ static THD_FUNCTION(Thread1, arg) {
  * Application entry point.
  */
 int main(void) {
+  thread_t *shelltp = NULL;
+
   /*
    * System initializations.
    * - HAL initialization, this also initializes the configured device drivers
@@ -164,23 +166,26 @@ int main(void) {
   sduStart(&SDU1, &serusbcfg);
 
   usbDisconnectBus(serusbcfg.usbp);
-  chThdSleepMilliseconds(1500);
+  chThdSleepMilliseconds(500);
   usbStart(serusbcfg.usbp, &usbcfg);
   usbConnectBus(serusbcfg.usbp);
 
+  
   shellInit();
 
   /*
    * Creates the blinker threads.
    */
-//  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
+  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
 
 
   while (true) {
-    systime_t time = serusbcfg.usbp->state == USB_ACTIVE ? 250 : 500;
-    palClearPad(GPIOB, GPIOB_ENC_GRN);
-    chThdSleepMilliseconds(time);
-    palSetPad(GPIOB, GPIOB_ENC_GRN);
-    chThdSleepMilliseconds(time);
+      if(!shelltp && (SDU1.config->usbp->state == USB_ACTIVE))
+          shelltp = shellCreate(&shell_cfg1, SHELL_WA_SIZE, NORMALPRIO);
+      else if(chThdTerminatedX(shelltp)) {
+          chThdRelease(shelltp);
+          shelltp = NULL;
+      }
+      chThdSleepMilliseconds(1000);
   }
 }
