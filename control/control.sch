@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:control-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -10,7 +11,6 @@ LIBS:cmos4000
 LIBS:adc-dac
 LIBS:memory
 LIBS:xilinx
-LIBS:special
 LIBS:microcontrollers
 LIBS:dsp
 LIBS:microchip
@@ -165,7 +165,7 @@ F 4 "2368169" H 900 6600 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R8
+L R-RESCUE-control R8
 U 1 1 54D015F8
 P 1200 6350
 F 0 "R8" V 1280 6350 50  0000 C CNN
@@ -177,7 +177,7 @@ F 4 "2116678" H 1200 6350 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R10
+L R-RESCUE-control R10
 U 1 1 54D01636
 P 1200 6550
 F 0 "R10" V 1280 6550 50  0000 C CNN
@@ -189,7 +189,7 @@ F 4 "2116678" H 1200 6550 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L C C23
+L C-RESCUE-control C23
 U 1 1 54D01666
 P 1700 6450
 F 0 "C23" H 1750 6550 50  0000 L CNN
@@ -201,7 +201,7 @@ F 4 "2346895" H 1700 6450 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C22
+L C-RESCUE-control C22
 U 1 1 54D0169F
 P 1700 5950
 F 0 "C22" H 1750 6050 50  0000 L CNN
@@ -213,7 +213,7 @@ F 4 "2211074" H 1700 5950 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C25
+L C-RESCUE-control C25
 U 1 1 54D016D3
 P 1700 6950
 F 0 "C25" H 1750 7050 50  0000 L CNN
@@ -225,7 +225,7 @@ F 4 "2211074" H 1700 6950 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R11
+L R-RESCUE-control R11
 U 1 1 54D0171F
 P 2050 7000
 F 0 "R11" V 2130 7000 50  0000 C CNN
@@ -237,7 +237,7 @@ F 4 "2321755" H 2050 7000 60  0001 C CNN "Farnell"
 	-1   0    0    1   
 $EndComp
 $Comp
-L C C16
+L C-RESCUE-control C16
 U 1 1 54D0178D
 P 2850 5750
 F 0 "C16" H 2900 5850 50  0000 L CNN
@@ -249,7 +249,7 @@ F 4 "1759122" H 2850 5750 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C17
+L C-RESCUE-control C17
 U 1 1 54D017E2
 P 3150 5750
 F 0 "C17" H 3200 5850 50  0000 L CNN
@@ -261,7 +261,7 @@ F 4 "2211164" H 3150 5750 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R9
+L R-RESCUE-control R9
 U 1 1 54D032F8
 P 3700 6450
 F 0 "R9" V 3780 6450 50  0000 C CNN
@@ -273,7 +273,7 @@ F 4 "2332016" H 3700 6450 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L C C24
+L C-RESCUE-control C24
 U 1 1 54D033E8
 P 4050 6700
 F 0 "C24" H 4100 6800 50  0000 L CNN
@@ -384,7 +384,7 @@ F 3 "" H 4050 6950 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C4
+L C-RESCUE-control C4
 U 1 1 54D055AB
 P 1200 1600
 F 0 "C4" H 1250 1700 50  0000 L CNN
@@ -396,7 +396,7 @@ F 4 "2211164" H 1200 1600 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C5
+L C-RESCUE-control C5
 U 1 1 54D0579F
 P 1400 1600
 F 0 "C5" H 1450 1700 50  0000 L CNN
@@ -408,7 +408,7 @@ F 4 "2346895" H 1400 1600 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C8
+L C-RESCUE-control C8
 U 1 1 54D057CF
 P 2000 1600
 F 0 "C8" H 2050 1700 50  0000 L CNN
@@ -420,7 +420,7 @@ F 4 "1759122" H 2000 1600 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C9
+L C-RESCUE-control C9
 U 1 1 54D05800
 P 2200 1600
 F 0 "C9" H 2250 1700 50  0000 L CNN
@@ -465,7 +465,7 @@ F 3 "" H 2400 2450 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C10
+L C-RESCUE-control C10
 U 1 1 54D064F7
 P 1950 2350
 F 0 "C10" H 2000 2450 50  0000 L CNN
@@ -514,7 +514,7 @@ F 4 "2101329" H 1500 3850 60  0001 C CNN "Farnell"
 	-1   0    0    1   
 $EndComp
 $Comp
-L C C14
+L C-RESCUE-control C14
 U 1 1 54D06F5C
 P 1150 4250
 F 0 "C14" H 1200 4350 50  0000 L CNN
@@ -526,7 +526,7 @@ F 4 "1759055" H 1150 4250 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C15
+L C-RESCUE-control C15
 U 1 1 54D06FE0
 P 1850 4250
 F 0 "C15" H 1900 4350 50  0000 L CNN
@@ -538,7 +538,7 @@ F 4 "1759055" H 1850 4250 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R7
+L R-RESCUE-control R7
 U 1 1 54D0713C
 P 1850 3450
 F 0 "R7" V 1930 3450 50  0000 C CNN
@@ -761,7 +761,7 @@ F 3 "" H 10050 1150 60  0000 C CNN
 	1    10050 1150
 	1    0    0    -1  
 $EndComp
-Text Label 6850 1150 2    60   ~ 0
+Text Label 6950 800  2    60   ~ 0
 ENC_RED
 Text Label 6850 1250 2    60   ~ 0
 ENC_GRN
@@ -793,7 +793,7 @@ NoConn ~ 8100 2950
 Text Notes 6900 4700 0    60   ~ 0
 +5V from USB here so can\nbe shorted to VCC for development,\nleave NC on power board
 $Comp
-L C C3
+L C-RESCUE-control C3
 U 1 1 54D1D963
 P 1000 1600
 F 0 "C3" H 1050 1700 50  0000 L CNN
@@ -805,7 +805,7 @@ F 4 "2211164" H 1000 1600 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C7
+L C-RESCUE-control C7
 U 1 1 54D1E2D0
 P 1800 1600
 F 0 "C7" H 1850 1700 50  0000 L CNN
@@ -847,7 +847,7 @@ F 4 "2067775" H 6350 5650 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C18
+L C-RESCUE-control C18
 U 1 1 54D25C39
 P 5700 5800
 F 0 "C18" H 5750 5900 50  0000 L CNN
@@ -859,7 +859,7 @@ F 4 "2320817" H 5700 5800 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C19
+L C-RESCUE-control C19
 U 1 1 54D25D98
 P 6950 5800
 F 0 "C19" H 7000 5900 50  0000 L CNN
@@ -871,7 +871,7 @@ F 4 "1414605" H 6950 5800 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C20
+L C-RESCUE-control C20
 U 1 1 54D25FC3
 P 7200 5800
 F 0 "C20" H 7250 5900 50  0000 L CNN
@@ -883,7 +883,7 @@ F 4 "2320817" H 7200 5800 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L C C21
+L C-RESCUE-control C21
 U 1 1 54D26038
 P 7450 5800
 F 0 "C21" H 7500 5900 50  0000 L CNN
@@ -963,7 +963,7 @@ $EndComp
 Text Notes 4650 6400 0    100  ~ 0
 VOLTAGE REGULATION
 $Comp
-L R R2
+L R-RESCUE-control R2
 U 1 1 54D298B1
 P 7850 850
 F 0 "R2" V 7930 850 50  0000 C CNN
@@ -975,7 +975,7 @@ F 4 "2332016" H 7850 850 60  0001 C CNN "Farnell"
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R4
+L R-RESCUE-control R4
 U 1 1 54D29E22
 P 7850 1650
 F 0 "R4" V 7930 1650 50  0000 C CNN
@@ -987,7 +987,7 @@ F 4 "2332016" H 7850 1650 60  0001 C CNN "Farnell"
 	-1   0    0    1   
 $EndComp
 $Comp
-L C C2
+L C-RESCUE-control C2
 U 1 1 54D29F7C
 P 8200 1450
 F 0 "C2" H 8250 1550 50  0000 L CNN
@@ -999,7 +999,7 @@ F 4 "1759122" H 8200 1450 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L C C1
+L C-RESCUE-control C1
 U 1 1 54D2A0F2
 P 8200 1000
 F 0 "C1" H 8250 1100 50  0000 L CNN
@@ -1057,7 +1057,7 @@ F 4 "2308714" H 1400 2800 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L C C12
+L C-RESCUE-control C12
 U 1 1 54D575FE
 P 1000 3150
 F 0 "C12" H 1050 3250 50  0000 L CNN
@@ -1069,7 +1069,7 @@ F 4 "1759055" H 1000 3150 60  0001 C CNN "Farnell"
 	0    -1   -1   0   
 $EndComp
 $Comp
-L C C11
+L C-RESCUE-control C11
 U 1 1 54D57653
 P 1000 2450
 F 0 "C11" H 1050 2550 50  0000 L CNN
@@ -1166,7 +1166,7 @@ Text Label 10100 5300 2    60   ~ 0
 Text Label 3900 2950 0    60   ~ 0
 ~OLED_RST
 $Comp
-L C C13
+L C-RESCUE-control C13
 U 1 1 54DF5EF1
 P 9650 4100
 F 0 "C13" H 9700 4200 50  0000 L CNN
@@ -1354,7 +1354,7 @@ NoConn ~ 3800 3150
 NoConn ~ 3800 3250
 NoConn ~ 3800 3350
 $Comp
-L C C6
+L C-RESCUE-control C6
 U 1 1 54E8BB79
 P 1600 1600
 F 0 "C6" H 1650 1700 50  0000 L CNN
@@ -1412,7 +1412,7 @@ F 3 "" H 9700 2600 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L R R3
+L R-RESCUE-control R3
 U 1 1 54F54B30
 P 9400 1300
 F 0 "R3" V 9480 1300 50  0000 C CNN
@@ -1424,7 +1424,7 @@ F 4 "2332016" H 9400 1300 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R6
+L R-RESCUE-control R6
 U 1 1 54F54B8D
 P 9400 2350
 F 0 "R6" V 9480 2350 50  0000 C CNN
@@ -1436,7 +1436,7 @@ F 4 "2332016" H 9400 2350 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R1
+L R-RESCUE-control R1
 U 1 1 54F54D54
 P 9950 800
 F 0 "R1" V 10030 800 50  0000 C CNN
@@ -1448,7 +1448,7 @@ F 4 "2332018" H 9950 800 60  0001 C CNN "Farnell"
 	0    1    1    0   
 $EndComp
 $Comp
-L R R5
+L R-RESCUE-control R5
 U 1 1 54F56093
 P 9950 2050
 F 0 "R5" V 10030 2050 50  0000 C CNN
@@ -1471,7 +1471,7 @@ NoConn ~ 2500 3350
 NoConn ~ 7400 4000
 NoConn ~ 2500 3450
 $Comp
-L C C26
+L C-RESCUE-control C26
 U 1 1 54F78010
 P 10650 1000
 F 0 "C26" H 10700 1100 50  0000 L CNN
@@ -1934,7 +1934,7 @@ Wire Wire Line
 Wire Wire Line
 	6850 1250 6950 1250
 Wire Wire Line
-	6850 1150 6950 1150
+	6500 1150 6950 1150
 Wire Wire Line
 	6850 1550 6950 1550
 Wire Wire Line
@@ -2164,4 +2164,22 @@ Wire Wire Line
 	10000 4100 10000 4250
 Wire Wire Line
 	10150 4100 10000 4100
+$Comp
+L R-RESCUE-control R?
+U 1 1 56116BC9
+P 6750 950
+F 0 "R?" V 6830 950 50  0000 C CNN
+F 1 "50R" V 6757 951 50  0000 C CNN
+F 2 "control:R0603" V 6680 950 30  0001 C CNN
+F 3 "" H 6750 950 30  0000 C CNN
+F 4 "2331983" H 6750 950 60  0001 C CNN "Farnell"
+	1    6750 950 
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6950 800  7000 800 
+Wire Wire Line
+	7000 800  7000 950 
+Wire Wire Line
+	6500 1150 6500 950 
 $EndSCHEMATC
