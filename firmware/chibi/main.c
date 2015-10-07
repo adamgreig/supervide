@@ -210,13 +210,13 @@ static const DACConversionGroup dacgrpcfg1 = {
   num_channels: 2U,
   end_cb:       end_cb1,
   error_cb:     error_cb1,
-  trigger:      DAC_TRG(1)
+  trigger:      DAC_TRG(4)
 };
 
 /*
- * GPT3 configuration.
+ * GPT2 configuration.
  */
-static const GPTConfig gpt3cfg1 = {
+static const GPTConfig gpt2cfg1 = {
   frequency:    100000U,
   callback:     NULL,
   cr2:          TIM_CR2_MMS_1,  /* MMS = 010 = TRGO on Update Event.        */
@@ -247,9 +247,9 @@ int main(void) {
   dacStart(&DACD1, &dac1cfg1);
 
   /*
-   * Starting GPT3 driver, it is used for triggering the DAC.
+   * Starting GPT2 driver, it is used for triggering the DAC.
    */
-  gptStart(&GPTD3, &gpt3cfg1);
+  gptStart(&GPTD2, &gpt2cfg1);
 
   /*
    * Starting a continuous conversion.
@@ -257,7 +257,7 @@ int main(void) {
    * for each transfer.
    */
   dacStartConversion(&DACD1, &dacgrpcfg1, dac_buffer, DAC_BUFFER_SIZE / 2U);
-  gptStartContinuous(&GPTD3, 2U);
+  gptStartContinuous(&GPTD2, 2U);
 
 
   sduObjectInit(&SDU1);
