@@ -139,9 +139,9 @@ static THD_FUNCTION(Thread1, arg) {
   chRegSetThreadName("blinker1");
   while (true) {
     systime_t time = serusbcfg.usbp->state == USB_ACTIVE ? 250 : 500;
-    palClearPad(GPIOB, GPIOB_ENC_GRN);
+    /*palClearPad(GPIOB, GPIOB_ENC_GRN);*/
     chThdSleepMilliseconds(time);
-    palSetPad(GPIOB, GPIOB_ENC_GRN);
+    /*palSetPad(GPIOB, GPIOB_ENC_GRN);*/
     chThdSleepMilliseconds(time);
   }
 }
@@ -191,7 +191,7 @@ static void end_cb1(DACDriver *dacp, const dacsample_t *buffer, size_t n) {
   }
 
   if ((nz % 1000) == 0) {
-    palTogglePad(GPIOB, GPIOB_ENC_BLU);
+    /*palTogglePad(GPIOB, GPIOB_ENC_BLU);*/
   }
 }
 
@@ -229,6 +229,27 @@ static const DACConfig dac1cfg1 = {
 };
 
 /*
+ * Encoder stuff.
+ */
+static void encoder_cb(GPTDriver *gptp)
+{
+    if(gptp->tim->CR1 & STM32_TIM_CR1_DIR) {
+        palSetPad(GPIOB, GPIOB_ENC_BLU);
+        palClearPad(GPIOB, GPIOB_ENC_GRN);
+    } else {
+        palClearPad(GPIOB, GPIOB_ENC_BLU);
+        palSetPad(GPIOB, GPIOB_ENC_GRN);
+    }
+}
+
+static const GPTConfig gpt3cfg1 = {
+    frequency: 1000U,
+    callback:  encoder_cb,
+    cr2:       0U,
+    dier:      0U
+};
+
+/*
  * Application entry point.
  */
 int main(void) {
@@ -244,6 +265,13 @@ int main(void) {
   halInit();
   chSysInit();
 
+  gptStart(&GPTD3, &gpt3cfg1);
+  GPTD3.tim->SMCR  ^= STM32_TIM_SMCR_SMS(3);
+  GPTD3.tim->CCMR1 ^= STM32_TIM_CCMR1_CC1S(1) | STM32_TIM_CCMR1_CC2S(1);
+  GPTD3.tim->PSC = 2;
+  gptStartContinuous(&GPTD3, 2);
+
+#if 0
   dacStart(&DACD1, &dac1cfg1);
 
   /*
@@ -258,7 +286,7 @@ int main(void) {
    */
   dacStartConversion(&DACD1, &dacgrpcfg1, dac_buffer, DAC_BUFFER_SIZE / 2U);
   gptStartContinuous(&GPTD2, 2U);
-
+#endif
 
   sduObjectInit(&SDU1);
   sduStart(&SDU1, &serusbcfg);
@@ -268,7 +296,7 @@ int main(void) {
   usbStart(serusbcfg.usbp, &usbcfg);
   usbConnectBus(serusbcfg.usbp);
 
-  
+#if 0
   shellInit();
 
   /*
@@ -285,5 +313,14 @@ int main(void) {
           shelltp = NULL;
       }
       chThdSleepMilliseconds(1000);
+  }
+#endif
+
+  while(true) {
+    char buf[64];
+    int n;
+    n = chsnprintf(buf, 64, "%04lu\r", GPTD3.tim->CNT);
+    streamWrite((BaseSequentialStream*)&SDU1, (uint8_t*)buf, n);
+    chThdSleepMilliseconds(50);
   }
 }
