@@ -206,10 +206,8 @@ ULIBS =
 # End of user defines
 ##############################################################################
 
-# We modify rules.mk for building Rust so include our own version here
-# (Note that RULESPATH is used by LDFLAGS inside rules.mk so leave this)
 RULESPATH = $(CHIBIOS)/os/common/ports/ARMCMx/compilers/GCC
-include chibi/rules.mk
+include $(RULESPATH)/rules.mk
 
 ##############################################################################
 # Black Magic Probe flashing via GDB
