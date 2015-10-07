@@ -233,6 +233,7 @@ static const DACConfig dac1cfg1 = {
  */
 static void encoder_cb(GPTDriver *gptp)
 {
+#if 0
     if(gptp->tim->CR1 & STM32_TIM_CR1_DIR) {
         palSetPad(GPIOB, GPIOB_ENC_BLU);
         palClearPad(GPIOB, GPIOB_ENC_GRN);
@@ -240,6 +241,8 @@ static void encoder_cb(GPTDriver *gptp)
         palClearPad(GPIOB, GPIOB_ENC_BLU);
         palSetPad(GPIOB, GPIOB_ENC_GRN);
     }
+#endif
+    palTogglePad(GPIOB, GPIOB_ENC_GRN);
 }
 
 static const GPTConfig gpt3cfg1 = {
@@ -288,6 +291,7 @@ int main(void) {
   gptStartContinuous(&GPTD2, 2U);
 #endif
 
+#if 0
   sduObjectInit(&SDU1);
   sduStart(&SDU1, &serusbcfg);
 
@@ -295,6 +299,7 @@ int main(void) {
   chThdSleepMilliseconds(500);
   usbStart(serusbcfg.usbp, &usbcfg);
   usbConnectBus(serusbcfg.usbp);
+#endif
 
 #if 0
   shellInit();
@@ -317,10 +322,18 @@ int main(void) {
 #endif
 
   while(true) {
+#if 0
     char buf[64];
     int n;
     n = chsnprintf(buf, 64, "%04lu\r", GPTD3.tim->CNT);
     streamWrite((BaseSequentialStream*)&SDU1, (uint8_t*)buf, n);
+#endif
+
+    if(palReadPad(GPIOB, GPIOB_ENC_SW) == PAL_LOW)
+        palSetPad(GPIOB, GPIOB_ENC_BLU);
+    else
+        palClearPad(GPIOB, GPIOB_ENC_BLU);
+
     chThdSleepMilliseconds(50);
   }
 }

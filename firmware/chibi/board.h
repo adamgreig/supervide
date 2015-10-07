@@ -336,7 +336,7 @@
                                      PIN_PUPDR_PULLUP(GPIOB_NC9) |          \
                                      PIN_PUPDR_PULLUP(GPIOB_NC10) |         \
                                      PIN_PUPDR_PULLUP(GPIOB_WIFI_RST) |     \
-                                     PIN_PUPDR_PULLUP(GPIOB_ENC_SW) |       \
+                                     PIN_PUPDR_PULLDOWN(GPIOB_ENC_SW) |     \
                                      PIN_PUPDR_PULLUP(GPIOB_ENC_RED) |      \
                                      PIN_PUPDR_PULLUP(GPIOB_ENC_GRN) |      \
                                      PIN_PUPDR_PULLUP(GPIOB_ENC_BLU))
