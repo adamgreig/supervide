@@ -1,66 +1,98 @@
-Farnell quickpaste format:
+Bill Of Materials
+=================
 
+Source file: control.xml
+Date: 2015-10-19T19:27:03.204076
+
+Parts Missing Footprints
+------------------------
+U3     IDC SKT        
+
+Parts Missing Order Codes
+-------------------------
+U1     ROTENC          control:SF_ROTENC
+U4     ER-OLEDM023-1   control:ER-OLEDM023-1
+U5     M3_HOLE         control:M3_MOUNT
+U6     M3_HOLE         control:M3_MOUNT
+U7     M3_HOLE         control:M3_MOUNT
+U8     M3_HOLE         control:M3_MOUNT
+U2     ESP8266-ESP01   control:ESP8266-ESP01
+P4     CONN_02X03      control:TC2030-NL
+
+Inconsistent Order Codes
+------------------------
+
+
+Vendor Specific BOMs
+--------------------
+  Farnell
+  ~~~~~~~
+2443111,1,1x USB-MICRO-B USB3065
+2347134,1,1x CONN_01X02 TC_K_PM
+2215231,1,1x IDC SKT None
+1652366,1,1x NCP1117 SOT223
+1704232,1,1x BATTERY 2032HOLDER_KS1060
+2331989,1,1x 100 R0603
+2332016,5,5x 10k R0603
+2211074,2,2x 100n C1206
+2101329,1,1x 8MHz XTAL50x32
+2467860,1,1x 32k768 R0805
+1667759,1,1x SWD FTSH-105-01-F-D-K
+2320817,2,2x 2µ2 C0603
 1414605,1,1x 1n C0603
 2067775,1,1x ADP3335 MSOP8
-2332018,2,2x 15k R0603
-2067807,1,1x AD8495 MSOP8
-2305609,1,1x AD8542 MSOP8
-2112704,1,1x 10n C0603
-2321755,1,1x 1M R0603
-1667759,1,1x SWD FTSH-105-01-F-D-K
-2331989,1,1x 100 R0603
-1759055,4,4x 15p C0603
-2346895,3,3x 1µ C0603
-2347134,1,1x CONN_01X02 TC_K_PM
-2368169,2,2x CGA0402MLC-12G R0402
-1022401,1,1x SPEAKER ABT-402-RC
-2215303,1,1x CONN_02X04 2x4_100
-2320817,2,2x 2µ2 C0603
-2116678,2,2x 1k R0603
-2211074,2,2x 100n C1206
-2211164,4,4x 10µ C0603
-1704232,1,1x BATTERY 2032HOLDER_KS1060
-2332016,5,5x 10k R0603
+2290328,1,1x GRN LED0603
 1759122,9,9x 100n C0603
-2215231,1,1x IDC SKT None
-2443111,1,1x USB-MICRO-B USB3065
-2308714,1,1x 32k768 SMD_XTAL_8038
-2101329,1,1x 8MHz XTAL50x32
+1022401,1,1x SPEAKER ABT-402-RC
+2116678,2,2x 1k R0603
+2332003,2,2x 1k R0603
+1759055,4,4x 15p C0603
+2215303,1,1x CONN_02X04 2x4_100
+2368169,3,3x CGA0402MLC-12G R0402
+2321755,1,1x 1M R0603
+2112704,1,1x 10n C0603
 2432094,1,1x STM32F072CBT6 LQFP48
+2217972,1,1x BLU LED0603
+2067807,1,1x AD8495 MSOP8
+2332011,2,2x 4k7 R0603
+2305609,1,1x AD8542 MSOP8
+2331983,3,3x 50R R0603
+2211164,6,6x 10µ C0603
+2346895,3,3x 1µ C0603
 
 
+Assembly BOM
+------------
+2443111              1   USB-MICRO-B     USB3065         CON1
+2347134              1   CONN_01X02      TC_K_PM         P3
+2215231              1   IDC SKT         None            U3
+	1652366             1   NCP1117         SOT223          IC5
+1704232              1   BATTERY         2032HOLDER_KS1060 BT1
+2331989              1   100             R0603           R7
+2332016              5   10k             R0603           R2 R3 R4 R6 R9
+2211074              2   100n            C1206           C22 C25
+2101329              1   8MHz            XTAL50x32       X2
+2467860              1   32k768          R0805           X1
+1667759              1   SWD             FTSH-105-01-F-D-K P1
+2320817              2   2µ2             C0603           C18 C20
+1414605              1   1n              C0603           C19
+2067775              1   ADP3335         MSOP8           IC3
+2290328              1   GRN             LED0603         D3
+1759122              9   100n            C0603           C1 C10 C13 C16 C2 C26 C6 C7 C8
+1022401              1   SPEAKER         ABT-402-RC      SP1
+2116678              2   1k              R0603           R10 R8
+2332003              2   1k              R0603           R13 R14
+1759055              4   15p             C0603           C11 C12 C14 C15
+2215303              1   CONN_02X04      2x4_100         P2
+2368169              3   CGA0402MLC-12G  R0402           D1 D2 D5
+2321755              1   1M              R0603           R11
+2112704              1   10n             C0603           C9
+2432094              1   STM32F072CBT6   LQFP48          IC2
+2217972              1   BLU             LED0603         D4
+2067807              1   AD8495          MSOP8           IC4
+2332011              2   4k7             R0603           R1 R5
+2305609              1   AD8542          MSOP8           IC1
+2331983              3   50R             R0603           R12 R15 R16
+2211164              6   10µ             C0603           C17 C21 C27 C28 C3 C4
+2346895              3   1µ              C0603           C23 C24 C5
 
-With component refs:
-
-1414605, 1, 1n C0603  C19
-2067775, 1, ADP3335 MSOP8  IC3
-2332018, 2, 15k R0603  R1 R5
-2067807, 1, AD8495 MSOP8  IC4
-2305609, 1, AD8542 MSOP8  IC1
-2112704, 1, 10n C0603  C9
-2321755, 1, 1M R0603  R11
-1667759, 1, SWD FTSH-105-01-F-D-K  P1
-2331989, 1, 100 R0603  R7
-1759055, 4, 15p C0603  C14 C15 C12 C11
-2346895, 3, 1µ C0603  C23 C24 C5
-2347134, 1, CONN_01X02 TC_K_PM  P3
-2368169, 2, CGA0402MLC-12G R0402  D1 D2
-1022401, 1, SPEAKER ABT-402-RC  SP1
-2215303, 1, CONN_02X04 2x4_100  P2
-2320817, 2, 2µ2 C0603  C18 C20
-2116678, 2, 1k R0603  R8 R10
-2211074, 2, 100n C1206  C22 C25
-2211164, 4, 10µ C0603  C17 C4 C3 C21
-1704232, 1, BATTERY 2032HOLDER_KS1060  BT1
-2332016, 5, 10k R0603  R9 R2 R4 R3 R6
-1759122, 9, 100n C0603  C16 C8 C10 C7 C2 C1 C13 C6 C26
-2215231, 1, IDC SKT None  U3
-2443111, 1, USB-MICRO-B USB3065  CON1
-2308714, 1, 32k768 SMD_XTAL_8038  X1
-2101329, 1, 8MHz XTAL50x32  X2
-2432094, 1, STM32F072CBT6 LQFP48  IC2
-
-
-
-No Farnell codes:
-U1, U4, U5, U6, U7, U8, U2
