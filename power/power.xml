@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/dwt27/git/supervide/power/power.sch</source>
+    <date>Tue 20 Oct 2015 18:47:36 BST</date>
+    <tool>Eeschema 0.201507280910+6003~25~ubuntu14.04.1-product</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Supervide Power Board</title>
+        <company/>
+        <rev/>
+        <date/>
+        <source>power.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U5">
+      <value>BTA16-800BRG</value>
+      <footprint>Transistors_TO-220:TO-220_Neutral123_Vertical_LargePads</footprint>
+      <fields>
+        <field name="Farnell">1057281</field>
+      </fields>
+      <libsource lib="device" part="TRIAC"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E5283F</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>MOC3163-M</value>
+      <footprint>Sockets_DIP:DIP-6__300_ELL</footprint>
+      <fields>
+        <field name="Farnell">1467853</field>
+      </fields>
+      <libsource lib="power-rescue" part="OPTO-TRIAC-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E528C7</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>390R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Farnell">2331790</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E52E94</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>47R</value>
+      <footprint>Capacitors_SMD:C_1206</footprint>
+      <fields>
+        <field name="Farnell">1887414</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E5366C</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>22nF</value>
+      <footprint>Capacitors_SMD:C_1210</footprint>
+      <fields>
+        <field name="Farnell">2057310</field>
+      </fields>
+      <libsource lib="power-rescue" part="C-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E536C9</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>300R</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Farnell">2331787</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E53E1C</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Farnell">1759166</field>
+      </fields>
+      <libsource lib="power-rescue" part="C-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E6A771</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>100nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Farnell">1759166</field>
+      </fields>
+      <libsource lib="power-rescue" part="C-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E6D133</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>1nF</value>
+      <footprint>Capacitors_SMD:C_0805</footprint>
+      <fields>
+        <field name="Farnell">1759226</field>
+      </fields>
+      <libsource lib="power-rescue" part="C-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E6E944</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>ACS710</value>
+      <footprint>power:SOIC16W-chunky</footprint>
+      <fields>
+        <field name="Farnell">1791411</field>
+      </fields>
+      <libsource lib="acs710" part="ACS710"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E71955</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>390R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Farnell">2331790</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E9E5AF</tstamp>
+    </comp>
+    <comp ref="Q2">
+      <value>BC817-40</value>
+      <footprint>power:SOT23</footprint>
+      <fields>
+        <field name="Farnell">1081223</field>
+      </fields>
+      <libsource lib="transistors" part="BC817-40"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54EA7C9D</tstamp>
+    </comp>
+    <comp ref="K2">
+      <value>PREHEAT</value>
+      <footprint>power:RZ03-1A4</footprint>
+      <fields>
+        <field name="Farnell">2325624</field>
+      </fields>
+      <libsource lib="relay_spst" part="RELAY_SPST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E81150</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>390R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Farnell">2331790</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E81E83</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>BC817-40</value>
+      <footprint>power:SOT23</footprint>
+      <fields>
+        <field name="Farnell">1081223</field>
+      </fields>
+      <libsource lib="transistors" part="BC817-40"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E81E97</tstamp>
+    </comp>
+    <comp ref="K1">
+      <value>MASTER_LIVE</value>
+      <footprint>power:RZ03-1A4</footprint>
+      <fields>
+        <field name="Farnell">2325624</field>
+      </fields>
+      <libsource lib="relay_spst" part="RELAY_SPST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E82543</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>CONTROL</value>
+      <footprint>control:2x4_100</footprint>
+      <fields>
+        <field name="Farnell">2215303</field>
+      </fields>
+      <libsource lib="conn" part="CONN_02X04"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54E909DD</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>VTX214</value>
+      <footprint>power:VTX214</footprint>
+      <fields>
+        <field name="Farnell">2401030</field>
+      </fields>
+      <libsource lib="vtx214" part="VTX214"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54EA4561</tstamp>
+    </comp>
+    <comp ref="F2">
+      <value>13A</value>
+      <footprint>power:BS1362_clip</footprint>
+      <fields>
+        <field name="Farnell">1603990</field>
+      </fields>
+      <libsource lib="device" part="FUSE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F25289</tstamp>
+    </comp>
+    <comp ref="F1">
+      <value>100mA</value>
+      <footprint>power:5x20_clip</footprint>
+      <fields>
+        <field name="Farnell">1162740</field>
+      </fields>
+      <libsource lib="device" part="FUSE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F252EE</tstamp>
+    </comp>
+    <comp ref="P2">
+      <value>MAINS_INLET</value>
+      <footprint>power:GSP1_9103_no_protrude</footprint>
+      <fields>
+        <field name="Farnell">2080426</field>
+      </fields>
+      <libsource lib="conn" part="CONN_01X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F26236</tstamp>
+    </comp>
+    <comp ref="P3">
+      <value>LOAD_OUTLET</value>
+      <footprint>power:5001_no_protrude</footprint>
+      <fields>
+        <field name="Farnell">2080465</field>
+      </fields>
+      <libsource lib="conn" part="CONN_01X03"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F262A6</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>70°C</value>
+      <footprint>Wire_Connections_Bridges:WireConnection_1mmDrill</footprint>
+      <fields>
+        <field name="Farnell">SN36219</field>
+      </fields>
+      <libsource lib="thermal_switch" part="thermal_switch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F50713</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>POWER</value>
+      <footprint>power:LED-0805</footprint>
+      <fields>
+        <field name="Farnell">2099239</field>
+      </fields>
+      <libsource lib="power-rescue" part="LED-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F7858E</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>300R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Farnell">2138881</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F785C7</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>300R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Farnell">2138881</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F78EB6</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>MASTER</value>
+      <footprint>power:LED-0805</footprint>
+      <fields>
+        <field name="Farnell">2099243</field>
+      </fields>
+      <libsource lib="power-rescue" part="LED-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F78F0F</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>300R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Farnell">2138881</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F794DF</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>PREHEAT</value>
+      <footprint>power:LED-0805</footprint>
+      <fields>
+        <field name="Farnell">2099236</field>
+      </fields>
+      <libsource lib="power-rescue" part="LED-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F7952C</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>300R</value>
+      <footprint>Resistors_SMD:R_0805</footprint>
+      <fields>
+        <field name="Farnell">2138881</field>
+      </fields>
+      <libsource lib="power-rescue" part="R-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F7A4A8</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>TRIAC</value>
+      <footprint>power:LED-0805</footprint>
+      <fields>
+        <field name="Farnell">1685055</field>
+      </fields>
+      <libsource lib="power-rescue" part="LED-RESCUE-power"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>54F7A4E7</tstamp>
+    </comp>
+    <comp ref="P4">
+      <value>+5V</value>
+      <footprint>Connect:1pin</footprint>
+      <libsource lib="device" part="TST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>551891FA</tstamp>
+    </comp>
+    <comp ref="P5">
+      <value>GND</value>
+      <footprint>Connect:1pin</footprint>
+      <libsource lib="device" part="TST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55189243</tstamp>
+    </comp>
+    <comp ref="P6">
+      <value>I_SENSE</value>
+      <footprint>Connect:1pin</footprint>
+      <libsource lib="device" part="TST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>551895A8</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>MBR2H200SFT1G</value>
+      <footprint>power:SOD-123FL</footprint>
+      <fields>
+        <field name="Farnell">2452032</field>
+      </fields>
+      <libsource lib="device" part="D_Schottky_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55B7E4C8</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>MBR2H200SFT1G</value>
+      <footprint>power:SOD-123FL</footprint>
+      <fields>
+        <field name="Farnell">2452032</field>
+      </fields>
+      <libsource lib="device" part="D_Schottky_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>55B7F5FB</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="acs710" part="ACS710">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ACS710</field>
+      </fields>
+      <pins>
+        <pin num="1" name="IP+" type="passive"/>
+        <pin num="2" name="IP+" type="passive"/>
+        <pin num="3" name="IP+" type="passive"/>
+        <pin num="4" name="IP+" type="passive"/>
+        <pin num="5" name="IP-" type="passive"/>
+        <pin num="6" name="IP-" type="passive"/>
+        <pin num="7" name="IP-" type="passive"/>
+        <pin num="8" name="IP-" type="passive"/>
+        <pin num="9" name="GND" type="power_in"/>
+        <pin num="10" name="VZCR" type="output"/>
+        <pin num="11" name="FILTER" type="output"/>
+        <pin num="12" name="VIOUT" type="output"/>
+        <pin num="13" name="!FAULT" type="output"/>
+        <pin num="14" name="VCC" type="power_in"/>
+        <pin num="15" name="VOC" type="input"/>
+        <pin num="16" name="FAULT_EN" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="relay_spst" part="RELAY_SPST">
+      <fields>
+        <field name="Reference">K</field>
+        <field name="Value">RELAY_SPST</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="input"/>
+        <pin num="2" name="2" type="input"/>
+        <pin num="3" name="C1" type="passive"/>
+        <pin num="4" name="T1" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="vtx214" part="VTX214">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">VTX214</field>
+      </fields>
+      <pins>
+        <pin num="1" name="IN1" type="input"/>
+        <pin num="2" name="IN2" type="input"/>
+        <pin num="3" name="V+" type="power_out"/>
+        <pin num="4" name="GND" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="thermal_switch" part="thermal_switch">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">thermal_switch</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_01X03">
+      <footprints>
+        <fp>Pin_Header_Straight_1X03</fp>
+        <fp>Pin_Header_Angled_1X03</fp>
+        <fp>Socket_Strip_Straight_1X03</fp>
+        <fp>Socket_Strip_Angled_1X03</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X03</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_02X04">
+      <footprints>
+        <fp>Pin_Header_Straight_2X04</fp>
+        <fp>Pin_Header_Angled_2X04</fp>
+        <fp>Socket_Strip_Straight_2X04</fp>
+        <fp>Socket_Strip_Angled_2X04</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_02X04</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="transistors" part="BC817-40">
+      <aliases>
+        <alias>BC818-40</alias>
+      </aliases>
+      <description>BC817-40, 45V Vce, 0.8A Ic, NPN, SOT-23</description>
+      <docs>http://www.fairchildsemi.com/ds/BC/BC817.pdf</docs>
+      <footprints>
+        <fp>SOT-23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">BC817-40</field>
+        <field name="Footprint">SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="B" type="input"/>
+        <pin num="2" name="E" type="passive"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="power-rescue" part="LED-RESCUE-power">
+      <footprints>
+        <fp>LED-3MM</fp>
+        <fp>LED-5MM</fp>
+        <fp>LED-10MM</fp>
+        <fp>LED-0603</fp>
+        <fp>LED-0805</fp>
+        <fp>LED-1206</fp>
+        <fp>LEDV</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED-RESCUE-power</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="power-rescue" part="R-RESCUE-power">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+        <fp>R?-*</fp>
+        <fp>SM1206</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R-RESCUE-power</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="power-rescue" part="C-RESCUE-power">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C-RESCUE-power</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="TRIAC">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TRIAC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="FUSE">
+      <fields>
+        <field name="Reference">F</field>
+        <field name="Value">FUSE</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="input"/>
+        <pin num="2" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="power-rescue" part="OPTO-TRIAC-RESCUE-power">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">OPTO-TRIAC-RESCUE-power</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="input"/>
+        <pin num="2" name="K" type="input"/>
+        <pin num="3" name="NC" type="NotConnected"/>
+        <pin num="4" name="S2" type="output"/>
+        <pin num="5" name="NC" type="NotConnected"/>
+        <pin num="6" name="S1" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="D_Schottky_Small">
+      <description>Diode Schottky</description>
+      <footprints>
+        <fp>Diode_*</fp>
+        <fp>D-Pak_TO252AA</fp>
+        <fp>*SingleDiode</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>*_Diode_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D_Schottky_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="TST">
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">TST</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="transistors">
+      <uri>/usr/share/kicad/library/transistors.lib</uri>
+    </library>
+    <library logical="acs710">
+      <uri>/home/dwt27/git/supervide/power/acs710.lib</uri>
+    </library>
+    <library logical="vtx214">
+      <uri>/home/dwt27/git/supervide/power/vtx214.lib</uri>
+    </library>
+    <library logical="thermal_switch">
+      <uri>/home/dwt27/git/supervide/power/thermal_switch.lib</uri>
+    </library>
+    <library logical="relay_spst">
+      <uri>/home/dwt27/git/supervide/power/relay_spst.lib</uri>
+    </library>
+    <library logical="power-rescue">
+      <uri>/home/dwt27/git/supervide/power/power-rescue.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>/usr/share/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="MAINS_NEUTRAL">
+      <node ref="U1" pin="2"/>
+      <node ref="P2" pin="2"/>
+      <node ref="U2" pin="8"/>
+      <node ref="U2" pin="7"/>
+      <node ref="U2" pin="6"/>
+      <node ref="U2" pin="5"/>
+    </net>
+    <net code="2" name="Net-(F2-Pad1)">
+      <node ref="P2" pin="3"/>
+      <node ref="F2" pin="1"/>
+    </net>
+    <net code="3" name="MAINS_LIVE">
+      <node ref="F2" pin="2"/>
+      <node ref="K1" pin="3"/>
+      <node ref="F1" pin="1"/>
+    </net>
+    <net code="4" name="/EARTH">
+      <node ref="P3" pin="1"/>
+      <node ref="P2" pin="1"/>
+    </net>
+    <net code="5" name="LOAD_LIVE">
+      <node ref="K2" pin="4"/>
+      <node ref="P3" pin="3"/>
+      <node ref="R8" pin="2"/>
+      <node ref="U5" pin="1"/>
+    </net>
+    <net code="6" name="LOAD_NEUTRAL">
+      <node ref="U2" pin="3"/>
+      <node ref="U2" pin="4"/>
+      <node ref="P3" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="U2" pin="1"/>
+    </net>
+    <net code="7" name="Net-(D1-Pad2)">
+      <node ref="R3" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="8" name="Net-(R6-Pad1)">
+      <node ref="R6" pin="1"/>
+      <node ref="U3" pin="1"/>
+    </net>
+    <net code="9" name="PREHEAT_RELAY">
+      <node ref="R4" pin="2"/>
+      <node ref="P1" pin="4"/>
+    </net>
+    <net code="10" name="Net-(Q1-Pad1)">
+      <node ref="R1" pin="1"/>
+      <node ref="Q1" pin="1"/>
+    </net>
+    <net code="11" name="Net-(C2-Pad1)">
+      <node ref="C2" pin="1"/>
+      <node ref="U2" pin="11"/>
+    </net>
+    <net code="12" name="Net-(F1-Pad2)">
+      <node ref="U1" pin="1"/>
+      <node ref="F1" pin="2"/>
+    </net>
+    <net code="13" name="MASTER_RELAY">
+      <node ref="P1" pin="2"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="14" name="+5V">
+      <node ref="C3" pin="1"/>
+      <node ref="U2" pin="14"/>
+      <node ref="K2" pin="2"/>
+      <node ref="K1" pin="2"/>
+      <node ref="D2" pin="1"/>
+      <node ref="P4" pin="1"/>
+      <node ref="D1" pin="1"/>
+      <node ref="D3" pin="1"/>
+      <node ref="P1" pin="8"/>
+      <node ref="U1" pin="3"/>
+      <node ref="D5" pin="1"/>
+      <node ref="D6" pin="1"/>
+    </net>
+    <net code="15" name="Net-(C1-Pad1)">
+      <node ref="C1" pin="1"/>
+      <node ref="U2" pin="10"/>
+    </net>
+    <net code="16" name="GND">
+      <node ref="P1" pin="1"/>
+      <node ref="U1" pin="4"/>
+      <node ref="R9" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="U2" pin="9"/>
+      <node ref="C1" pin="2"/>
+      <node ref="U2" pin="16"/>
+      <node ref="R3" pin="2"/>
+      <node ref="P5" pin="1"/>
+      <node ref="D4" pin="2"/>
+      <node ref="C2" pin="2"/>
+    </net>
+    <net code="17" name="TRIAC_MAINS">
+      <node ref="K1" pin="4"/>
+      <node ref="K2" pin="3"/>
+      <node ref="C4" pin="1"/>
+      <node ref="U3" pin="2"/>
+      <node ref="U5" pin="2"/>
+    </net>
+    <net code="18" name="Net-(D3-Pad2)">
+      <node ref="R5" pin="2"/>
+      <node ref="D3" pin="2"/>
+    </net>
+    <net code="19" name="Net-(Q2-Pad1)">
+      <node ref="Q2" pin="1"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="20" name="Net-(D6-Pad2)">
+      <node ref="K2" pin="1"/>
+      <node ref="Q2" pin="3"/>
+      <node ref="R5" pin="1"/>
+      <node ref="D6" pin="2"/>
+    </net>
+    <net code="21" name="Net-(D4-Pad1)">
+      <node ref="D4" pin="1"/>
+      <node ref="R7" pin="2"/>
+    </net>
+    <net code="22" name="Net-(D2-Pad2)">
+      <node ref="D2" pin="2"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="23" name="Net-(D5-Pad2)">
+      <node ref="Q1" pin="3"/>
+      <node ref="K1" pin="1"/>
+      <node ref="D5" pin="2"/>
+      <node ref="R2" pin="1"/>
+    </net>
+    <net code="24" name="Net-(P1-Pad5)">
+      <node ref="P1" pin="5"/>
+    </net>
+    <net code="25" name="Net-(P1-Pad7)">
+      <node ref="P1" pin="7"/>
+    </net>
+    <net code="26" name="I_SENSE">
+      <node ref="P1" pin="3"/>
+      <node ref="U2" pin="12"/>
+      <node ref="P6" pin="1"/>
+    </net>
+    <net code="27" name="Net-(U2-Pad15)">
+      <node ref="U2" pin="15"/>
+    </net>
+    <net code="28" name="Net-(U2-Pad13)">
+      <node ref="U2" pin="13"/>
+    </net>
+    <net code="29" name="Net-(C4-Pad2)">
+      <node ref="C4" pin="2"/>
+      <node ref="R8" pin="1"/>
+    </net>
+    <net code="30" name="Net-(R6-Pad2)">
+      <node ref="R6" pin="2"/>
+      <node ref="U4" pin="6"/>
+    </net>
+    <net code="31" name="Net-(U4-Pad5)">
+      <node ref="U4" pin="5"/>
+    </net>
+    <net code="32" name="Net-(U4-Pad4)">
+      <node ref="U4" pin="4"/>
+      <node ref="U5" pin="3"/>
+    </net>
+    <net code="33" name="Net-(U4-Pad3)">
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="34" name="Net-(R9-Pad1)">
+      <node ref="R9" pin="1"/>
+      <node ref="U4" pin="2"/>
+    </net>
+    <net code="35" name="TRIAC_TRIG">
+      <node ref="R7" pin="1"/>
+      <node ref="P1" pin="6"/>
+      <node ref="U4" pin="1"/>
+    </net>
+  </nets>
+</export>
