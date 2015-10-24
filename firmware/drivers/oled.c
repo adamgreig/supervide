@@ -8,6 +8,8 @@
 #define OLED_RST_PIN  GPIOB_OLED_RST
 #define OLED_DC_PORT  GPIOA
 #define OLED_DC_PIN   GPIOA_OLED_DC
+#define OLED_CS_PORT  GPIOB
+#define OLED_CS_PIN   GPIOB_OLED_CS
 
 uint8_t oled_buffer[4][128];
 
@@ -80,13 +82,13 @@ static uint8_t oled_sv_logo[4][128] = {
 void oled_init() {
     /* Reset OLED */
     palClearPad(OLED_RST_PORT, OLED_RST_PIN);
-    chThdSleepMilliseconds(500);
+    chThdSleepMilliseconds(1000);
     palSetPad(OLED_RST_PORT, OLED_RST_PIN);
 
     /* SPI Config */
     const SPIConfig spi_cfg = {
-      NULL, GPIOB, GPIOB_OLED_CS,
-      SPI_CR1_BR_2 | SPI_CR1_CPOL | SPI_CR1_CPHA
+      NULL, OLED_CS_PORT, OLED_CS_PIN,
+      SPI_CR1_BR_2 | SPI_CR1_CPOL | SPI_CR1_CPHA, 0
     };
 
     spiStart(&OLED_SPID, &spi_cfg);
