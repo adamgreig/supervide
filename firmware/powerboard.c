@@ -41,7 +41,6 @@ void power_init(void)
     adcConvGrp.error_cb = NULL;
     /* STM32F072-specific convgrp settings: */
     adcConvGrp.cfgr1 = 0;
-    adcConvGrp.cfgr2 = 0;
     adcConvGrp.tr = 0; /* Don't care */
     adcConvGrp.smpr = 6; /* 71.5 ADC clocks: complete guess */
     adcConvGrp.chselr = 3; /* Current sense channel */
