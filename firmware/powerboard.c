@@ -80,7 +80,7 @@ void power_init(void)
     adcConvGrp.cfgr1 = 0;
     adcConvGrp.tr = 0; /* Don't care */
     adcConvGrp.smpr = 6; /* 71.5 ADC clocks: complete guess */
-    adcConvGrp.chselr = 3; /* Current sense channel */
+    adcConvGrp.chselr = 1<<3; /* Current sense channel */
 }
 
 /* Set master relay on or off */
@@ -108,6 +108,66 @@ void power_set_triac(uint8_t level)
     triacPwm.pwm_value = level;
 }
 
+uint32_t sqrt_int(uint32_t a_nInput)
+{
+    uint32_t op  = a_nInput;
+    uint32_t res = 0;
+    uint32_t one = 1uL << 30; // The second-to-top bit is set: use 1u << 14 for uint16_t type; use 1uL<<30 for uint32_t type
+
+
+    // "one" starts at the highest power of four <= than the argument.
+    while (one > op)
+    {
+        one >>= 2;
+    }
+
+    while (one != 0)
+    {
+        if (op >= res + one)
+        {
+            op = op - (res + one);
+            res = res +  2 * one;
+        }
+        res >>= 1;
+        one >>= 2;
+    }
+
+    /* Do arithmetic rounding to nearest integer */
+    if (op > res)
+    {
+        res++;
+    }
+
+    return res;
+}
+
+void *power_currentsense_thread(void *arg)
+{
+    uint16_t raw_buf[20];
+    uint32_t cycle_buf[255];
+    uint8_t raw_ptr, cycle_ptr;
+    uint32_t sum;
+
+    while(1)
+    {
+        /* Read 
+        result = adcConvert(&ADCD1, &adcConvGrp, raw_buf, 20);
+        if(result != MSG_OK)
+            while(1); /* TODO: HANDLE THIS! */
+
+        sum = 0;
+        for(raw_ptr=0; raw_ptr<20; raw_ptr++)
+        {
+            uint16_t current = (raw_buf[raw_ptr] & 4095) * 3300 / 4095;
+            sum += current * current;
+        }
+        
+        cycle_buf[cycle_ptr] = sqrt_int(sum/20);
+        cycle_ptr++;
+    }
+}
+
+/* Return measured current in mA */
 uint16_t power_get_current(void)
 {
     uint16_t raw; /* Value straight from ADC */
@@ -120,7 +180,7 @@ uint16_t power_get_current(void)
         while(1); /* TODO: HANDLE THIS! */
 
     /* Assume data is right-aligned. TODO: ensure this */
-
+    return raw; /* TODO FIXME DEBUG */
     raw &= 4095;
     millivolts = raw * 3300 / 4095;
     
