@@ -309,6 +309,18 @@ while(1) {
     oled_text_small(3, 0, "Fish");
     oled_draw();
     chThdSleepMilliseconds(1000);
+    oled_erase();
+    oled_icon_egg();
+    oled_text_big(0, 0, "COOK:");
+    oled_text_small(3, 0, "Eggs");
+    oled_draw();
+    chThdSleepMilliseconds(1000);
+    oled_erase();
+    oled_icon_thermo();
+    oled_text_big(0, 0, "COOK:");
+    oled_text_small(3, 0, "Custom");
+    oled_draw();
+    chThdSleepMilliseconds(1000);
 }
 
 #if 0
