@@ -33,8 +33,8 @@ static const uint8_t vcom_device_descriptor_data[18] = {
                          0x00,          /* bDeviceSubClass.                 */
                          0x00,          /* bDeviceProtocol.                 */
                          0x40,          /* bMaxPacketSize.                  */
-                         0x1d50,        /* idVendor (LeafLabs).             */
-                         0x8888,        /* idProduct.                       */
+                         0x1209,        /* idVendor                         */
+                         0x0001,        /* idProduct.                       */
                          0x0200,        /* bcdDevice.                       */
                          1,             /* iManufacturer.                   */
                          1,             /* iProduct.                        */
