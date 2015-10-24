@@ -32,13 +32,18 @@ void power_init(void)
 
     /* ADC init */
     /* halInit does adcInit and adcObjectInit */
+    /* adcInit runs adc_lld_init which does calibration, amongst other things
+     */
     adcStart(&ADCD1, NULL);
     adcConvGrp.circular = false;
     adcConvGrp.num_channels = 1;
     adcConvGrp.end_cb = NULL;
     adcConvGrp.error_cb = NULL;
-    /* TODO: Calibrate?
-     * TODO: STM32F072-specific convgrp settings? */
+    /* STM32F072-specific convgrp settings: */
+    adcConvGrp.cfgr1 = 0;
+    adcConvGrp.tr = 0; /* Don't care */
+    adcConvGrp.smpr = 6; /* 71.5 ADC clocks: complete guess */
+    adcConvGrp.chselr = 3; /* Current sense channel */
 }
 
 /* Set master relay on or off */
