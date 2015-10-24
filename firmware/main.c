@@ -20,6 +20,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
+#include "powerboard.h"
 
 #include "shell.h"
 #include "chprintf.h"
@@ -309,6 +310,7 @@ int main(void) {
    */
   halInit();
   chSysInit();
+  power_init();
 
   gptStart(&GPTD3, &gpt3cfg1);
   GPTD3.tim->SMCR  ^= STM32_TIM_SMCR_SMS(3);
@@ -418,6 +420,31 @@ int main(void) {
   }
 #endif
 
+
+    power_set_preheat(true);
+    power_set_master(true);
+    chThdSleepMilliseconds(1000);
+    power_set_master(false);
+    chThdSleepMilliseconds(1000);
+    power_set_master(true);
+    power_set_preheat(false);
+    chThdSleepMilliseconds(1000);
+
+    power_set_preheat(true);
+    chThdSleepMilliseconds(1000);
+    power_set_preheat(false);
+    chThdSleepMilliseconds(1000);
+    power_set_preheat(true);
+    chThdSleepMilliseconds(1000);
+    power_set_preheat(false);
+    chThdSleepMilliseconds(1000);
+
+    power_set_triac(127);
+    while(1)
+        chThdSleepMilliseconds(100);
+
+
+/*
   while(true) {
 #if 0
     char buf[64];
@@ -432,5 +459,5 @@ int main(void) {
         palClearPad(GPIOB, GPIOB_ENC_BLU);
 
     chThdSleepMilliseconds(50);
-  }
+  }*/
 }

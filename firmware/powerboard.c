@@ -9,26 +9,61 @@
 
 #include "powerboard.h"
 
-PWMConfig pwmConf;
 ADCConversionGroup adcConvGrp;
+struct _pwm_struct
+{
+    virtual_timer_t timer;
+    uint8_t pwm_value;
+    bool up_cycle;
+};
+struct _pwm_struct triacPwm;
+
+void *triacPwmTimer_cb(void *par)
+{
+    (void)par;
+    /* Hardcode fully on and fully off so we don't get blips */
+    if(triacPwm.pwm_value == 0 || triacPwm.pwm_value == 255)
+    {
+        if(triacPwm.pwm_value == 0)
+            palClearPad(GPIOB, GPIOB_TRIAC);
+        if(triacPwm.pwm_value == 255)
+            palSetPad(GPIOB, GPIOB_TRIAC);
+        chSysLockFromISR();
+        chVTSetI(&(triacPwm.timer), 25500, (vtfunc_t)triacPwmTimer_cb, NULL);
+        chSysUnlockFromISR();
+        return NULL;
+    }
+
+    triacPwm.up_cycle = !triacPwm.up_cycle;
+    if(triacPwm.up_cycle)
+    {
+        palSetPad(GPIOB, GPIOB_TRIAC);
+        chSysLockFromISR();
+        chVTSetI(&(triacPwm.timer), 100*triacPwm.pwm_value,
+                 (vtfunc_t)triacPwmTimer_cb, NULL);
+        chSysUnlockFromISR();
+    }
+    else
+    {
+        palClearPad(GPIOB, GPIOB_TRIAC);
+        chSysLockFromISR();
+        chVTSetI(&(triacPwm.timer), 100*(255-triacPwm.pwm_value),
+                (vtfunc_t)triacPwmTimer_cb, NULL);
+        chSysUnlockFromISR();
+    }
+    return NULL;
+}
 
 /* Setup PWM, IO, ADCs */
 void power_init(void)
 {
     /* PWM init: */
-    pwmConf.frequency = 100;
-    pwmConf.period = 255;
-    pwmConf.callback = NULL;
-    pwmConf.channels[0].mode = PWM_OUTPUT_ACTIVE_HIGH;
-    pwmConf.channels[0].callback = NULL;
-    pwmConf.channels[1].mode = PWM_OUTPUT_DISABLED;
-    pwmConf.channels[1].callback = NULL;
-    pwmConf.channels[2].mode = PWM_OUTPUT_DISABLED;
-    pwmConf.channels[2].callback = NULL;
-    pwmConf.channels[3].mode = PWM_OUTPUT_DISABLED;
-    pwmConf.channels[3].callback = NULL;
-    pwmStart(&PWMD1, &pwmConf);
-    pwmDisableChannel(&PWMD1, 0);
+    /* Start cb timer with 10ms period */
+    triacPwm.pwm_value = 0;
+    triacPwm.up_cycle = false;
+    chVTObjectInit(&(triacPwm.timer));
+    chVTSet(&(triacPwm.timer), CH_CFG_ST_FREQUENCY/100,
+            (vtfunc_t)triacPwmTimer_cb, NULL);
 
     /* ADC init */
     /* halInit does adcInit and adcObjectInit */
@@ -41,7 +76,6 @@ void power_init(void)
     adcConvGrp.error_cb = NULL;
     /* STM32F072-specific convgrp settings: */
     adcConvGrp.cfgr1 = 0;
-    adcConvGrp.cfgr2 = 0;
     adcConvGrp.tr = 0; /* Don't care */
     adcConvGrp.smpr = 6; /* 71.5 ADC clocks: complete guess */
     adcConvGrp.chselr = 3; /* Current sense channel */
@@ -69,10 +103,7 @@ void power_set_preheat(bool state)
  * This controls the number of live half cycles over a 2.55s period */
 void power_set_triac(uint8_t level)
 {
-    if(level == 0)
-        pwmDisableChannel(&PWMD1, 0);
-    else
-        pwmEnableChannel(&PWMD1, 0, level);
+    triacPwm.pwm_value = level;
 }
 
 uint16_t power_get_current(void)
