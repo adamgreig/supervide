@@ -275,7 +275,13 @@ int main(void) {
   gptStartContinuous(&GPTD3, 2);
 
     oled_init();
-    oled_draw_logo();
+    oled_logo();
+    oled_draw();
+    chThdSleepMilliseconds(1000);
+    oled_erase();
+    oled_icon_cow();
+    oled_text_big(0, 0, "COOK:");
+    oled_draw();
 
 #if 0
   dacStart(&DACD1, &dac1cfg1);
