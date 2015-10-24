@@ -332,7 +332,7 @@ void oled_text_small(uint8_t line, uint8_t x, const char* str)
             c -= ' ';
         
         for(j=0; j<6; j++) {
-            oled_buffer[line][1+(x+i)*6+j] = oled_font[c][j];
+            oled_buffer[line][1+(x+i)*6+j] = oled_font[(int)c][j];
         }
     }
 }
