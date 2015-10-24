@@ -29,7 +29,9 @@ void *triacPwmTimer_cb(void *par)
         if(triacPwm.pwm_value == 255)
             palSetPad(GPIOB, GPIOB_TRIAC);
         chSysLockFromISR();
-        chVTSetI(&(triacPwm.timer), 25500, (vtfunc_t)triacPwmTimer_cb, NULL);
+        /* Delay full period of 2.55s = 2550ms */
+        chVTSetI(&(triacPwm.timer), MS2ST(2550), (vtfunc_t)triacPwmTimer_cb,
+                 NULL);
         chSysUnlockFromISR();
         return NULL;
     }
@@ -39,7 +41,7 @@ void *triacPwmTimer_cb(void *par)
     {
         palSetPad(GPIOB, GPIOB_TRIAC);
         chSysLockFromISR();
-        chVTSetI(&(triacPwm.timer), 100*triacPwm.pwm_value,
+        chVTSetI(&(triacPwm.timer), MS2ST(10*triacPwm.pwm_value),
                  (vtfunc_t)triacPwmTimer_cb, NULL);
         chSysUnlockFromISR();
     }
@@ -47,7 +49,7 @@ void *triacPwmTimer_cb(void *par)
     {
         palClearPad(GPIOB, GPIOB_TRIAC);
         chSysLockFromISR();
-        chVTSetI(&(triacPwm.timer), 100*(255-triacPwm.pwm_value),
+        chVTSetI(&(triacPwm.timer), MS2ST(10*(255-triacPwm.pwm_value)),
                 (vtfunc_t)triacPwmTimer_cb, NULL);
         chSysUnlockFromISR();
     }
@@ -58,11 +60,11 @@ void *triacPwmTimer_cb(void *par)
 void power_init(void)
 {
     /* PWM init: */
-    /* Start cb timer with 10ms period */
+    /* Start cb timer with 2.55s period */
     triacPwm.pwm_value = 0;
     triacPwm.up_cycle = false;
     chVTObjectInit(&(triacPwm.timer));
-    chVTSet(&(triacPwm.timer), CH_CFG_ST_FREQUENCY/100,
+    chVTSet(&(triacPwm.timer), MS2ST(2550),
             (vtfunc_t)triacPwmTimer_cb, NULL);
 
     /* ADC init */
