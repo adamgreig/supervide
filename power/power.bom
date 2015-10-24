@@ -1,0 +1,81 @@
+Bill Of Materials
+=================
+
+Source file: power.xml
+Date: 2015-10-20T18:48:28.224015
+
+Parts Missing Footprints
+------------------------
+
+
+Parts Missing Order Codes
+-------------------------
+P4     +5V             Connect:1pin
+P5     GND             Connect:1pin
+P6     I_SENSE         Connect:1pin
+
+Inconsistent Order Codes
+------------------------
+  Farnell
+  ~~~~~~~
+    2325624: 
+      K2     PREHEAT         power:RZ03-1A4
+      K1     MASTER_LIVE     power:RZ03-1A4
+
+Vendor Specific BOMs
+--------------------
+  Farnell
+  ~~~~~~~
+2080426,1,1x MAINS_INLET GSP1_9103_no_pr
+1791411,1,1x ACS710 SOIC16W-chunky
+2099243,1,1x MASTER LED-0805
+2452032,2,2x MBR2H200SFT1G SOD-123FL
+2401030,1,1x VTX214 VTX214
+2331787,1,1x 300R C_0805
+2099236,1,1x PREHEAT LED-0805
+2325624,2,2x PREHEAT MASTER_LIVE RZ03-1A
+1603990,1,1x 13A BS1362_clip
+1759166,2,2x 100nF C_0805
+2331790,3,3x 390R R_0805
+1759226,1,1x 1nF C_0805
+2215303,1,1x CONTROL 2x4_100
+2138881,4,4x 300R R_0805
+1685055,1,1x TRIAC LED-0805
+SN36219,1,1x 70°C WireConnection_1mmDril
+1081223,2,2x BC817-40 SOT23
+2057310,1,1x 22nF C_1210
+2099239,1,1x POWER LED-0805
+1887414,1,1x 47R C_1206
+2080465,1,1x LOAD_OUTLET 5001_no_protrud
+1057281,1,1x BTA16-800BRG TO-220_Neutral
+1162740,1,1x 100mA 5x20_clip
+1467853,1,1x MOC3163-M DIP-6__300_ELL
+
+
+Assembly BOM
+------------
+2080426              1   MAINS_INLET     GSP1_9103_no_protrude P2
+1791411              1   ACS710          SOIC16W-chunky  U2
+2099243              1   MASTER          LED-0805        D2
+2452032              2   MBR2H200SFT1G   SOD-123FL       D5 D6
+2401030              1   VTX214          VTX214          U1
+2331787              1   300R            C_0805          R9
+2099236              1   PREHEAT         LED-0805        D3
+2325624              2   PREHEAT,MASTER_LIVE RZ03-1A4        K1 K2
+1603990              1   13A             BS1362_clip     F2
+1759166              2   100nF           C_0805          C2 C3
+2331790              3   390R            R_0805          R1 R4 R6
+1759226              1   1nF             C_0805          C1
+2215303              1   CONTROL         2x4_100         P1
+2138881              4   300R            R_0805          R2 R3 R5 R7
+1685055              1   TRIAC           LED-0805        D4
+SN36219              1   70°C            WireConnection_1mmDrill U3
+1081223              2   BC817-40        SOT23           Q1 Q2
+2057310              1   22nF            C_1210          C4
+2099239              1   POWER           LED-0805        D1
+1887414              1   47R             C_1206          R8
+2080465              1   LOAD_OUTLET     5001_no_protrude P3
+1057281              1   BTA16-800BRG    TO-220_Neutral123_Vertical_LargePads U5
+1162740              1   100mA           5x20_clip       F1
+1467853              1   MOC3163-M       DIP-6__300_ELL  U4
+
