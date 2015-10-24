@@ -278,10 +278,38 @@ int main(void) {
     oled_logo();
     oled_draw();
     chThdSleepMilliseconds(1000);
+while(1) {
     oled_erase();
     oled_icon_cow();
     oled_text_big(0, 0, "COOK:");
+    oled_text_small(3, 0, "Beef");
     oled_draw();
+    chThdSleepMilliseconds(1000);
+    oled_erase();
+    oled_icon_pig();
+    oled_text_big(0, 0, "COOK:");
+    oled_text_small(3, 0, "Pork");
+    oled_draw();
+    chThdSleepMilliseconds(1000);
+    oled_erase();
+    oled_icon_sheep();
+    oled_text_big(0, 0, "COOK:");
+    oled_text_small(3, 0, "Lamb");
+    oled_draw();
+    chThdSleepMilliseconds(1000);
+    oled_erase();
+    oled_icon_duck();
+    oled_text_big(0, 0, "COOK:");
+    oled_text_small(3, 0, "Duck");
+    oled_draw();
+    chThdSleepMilliseconds(1000);
+    oled_erase();
+    oled_icon_fish();
+    oled_text_big(0, 0, "COOK:");
+    oled_text_small(3, 0, "Fish");
+    oled_draw();
+    chThdSleepMilliseconds(1000);
+}
 
 #if 0
   dacStart(&DACD1, &dac1cfg1);
