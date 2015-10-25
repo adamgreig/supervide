@@ -4,10 +4,10 @@ event_source_t rotenc_es;
 
 static volatile systime_t rotenc_press_time;
 
-static void rotenc_encoder_cb(GPTDriver *gptp)
+void rotenc_rotate_cb(EXTDriver *extp, expchannel_t channel)
 {
     chSysLockFromISR();
-    if(gptp->tim->CR1 & STM32_TIM_CR1_DIR) {
+    if(GPTD3.tim->CR1 & STM32_TIM_CR1_DIR) {
         chEvtBroadcastFlagsI(&rotenc_es, ROTENC_LEFT_FLAG);
     } else {
         chEvtBroadcastFlagsI(&rotenc_es, ROTENC_RIGHT_FLAG);
@@ -29,7 +29,7 @@ void rotenc_push_cb(EXTDriver *extp, expchannel_t channel)
 
 static const GPTConfig gpt3cfg1 = {
     frequency: 1000U,
-    callback:  rotenc_encoder_cb,
+    callback:  NULL,
     cr2:       0U,
     dier:      0U
 };
@@ -46,7 +46,7 @@ void rotenc_init() {
     GPTD3.tim->SMCR  ^= STM32_TIM_SMCR_SMS(3);
     GPTD3.tim->CCMR1 ^= STM32_TIM_CCMR1_CC1S(1) | STM32_TIM_CCMR1_CC2S(1);
     GPTD3.tim->PSC = 2;
-    gptStartContinuous(&GPTD3, 2);
+    gptStartContinuous(&GPTD3, 128);
 }
 
 void rotenc_led(uint8_t colour)

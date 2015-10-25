@@ -14,7 +14,8 @@
 #define ROTENC_RIGHT_FLAG  (1<<2)
 extern event_source_t rotenc_es;
 
-/* Register with EXTI on the push button GPIO */
+/* Register with EXTI on the encoder GPIO */
+void rotenc_rotate_cb(EXTDriver *extp, expchannel_t channel);
 void rotenc_push_cb(EXTDriver *extp, expchannel_t channel);
 
 void rotenc_init(void);
