@@ -103,8 +103,17 @@ static const menu_item eggs_menu[4] = {
 };
 void do_eggs(void) { do_menu(eggs_menu, eggs_menu_len); }
 
-static const uint8_t root_menu_len = 11;
-static const menu_item root_menu[11] = {
+static const uint8_t config_menu_len = 4;
+static const menu_item config_menu[4] = {
+    {"CONFIG:", "Set Time", NULL, rtc_set_time},
+    {"CONFIG:", "Set WiFi SSID", NULL, NULL},
+    {"CONFIG:", "Set WiFi Key", NULL, NULL},
+    {"", "Back", NULL, NULL}
+};
+void do_config(void) { do_menu(config_menu, config_menu_len); }
+
+static const uint8_t root_menu_len = 9;
+static const menu_item root_menu[9] = {
     {"COOK:", "Beef", (const uint8_t*)oled_icon_cow, do_beef},
     {"COOK:", "Pork", (const uint8_t*)oled_icon_pig, do_pork},
     {"COOK:", "Lamb", (const uint8_t*)oled_icon_sheep, do_lamb},
@@ -112,10 +121,8 @@ static const menu_item root_menu[11] = {
     {"COOK:", "Fish", (const uint8_t*)oled_icon_fish, do_fish},
     {"COOK:", "Eggs", (const uint8_t*)oled_icon_eggs, do_eggs},
     {"COOK:", "Custom", (const uint8_t*)oled_icon_thermo, do_custom},
-    {"SETTINGS:", "Display Time", NULL, rtc_disp_time},
-    {"SETTINGS:", "Set Time", NULL, rtc_set_time},
-    {"SETTINGS:", "Set backup reg", NULL, rtc_set_bkup},
-    {"SETTINGS:", "Read backup reg", NULL, rtc_disp_bkup}
+    {"CLOCK:", "Display Time", NULL, rtc_disp_time},
+    {"CONFIG:", "Change Settings", NULL, do_config},
 };
 
 void do_menu(const menu_item *menu_items, uint8_t num_items)
