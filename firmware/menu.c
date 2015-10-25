@@ -15,8 +15,9 @@ typedef struct {
 } menu_item;
 
 uint32_t get_cook_time(void);
-void cook(uint32_t temperature, uint32_t time);
+void cook(uint8_t temperature, uint16_t time);
 void do_menu(const menu_item *menu_items, uint8_t num_items);
+void do_custom(void);
 
 void do_beef_rare(void) {cook(0, get_cook_time()); }
 void do_beef_medrare(void) {cook(0, get_cook_time()); }
@@ -110,7 +111,7 @@ static const menu_item root_menu[11] = {
     {"COOK:", "Duck", (const uint8_t*)oled_icon_duck, do_duck},
     {"COOK:", "Fish", (const uint8_t*)oled_icon_fish, do_fish},
     {"COOK:", "Eggs", (const uint8_t*)oled_icon_eggs, do_eggs},
-    {"COOK:", "Custom", (const uint8_t*)oled_icon_thermo, NULL},
+    {"COOK:", "Custom", (const uint8_t*)oled_icon_thermo, do_custom},
     {"SETTINGS:", "Display Time", NULL, rtc_disp_time},
     {"SETTINGS:", "Set Time", NULL, rtc_set_time},
     {"SETTINGS:", "Set backup reg", NULL, rtc_set_bkup},
@@ -211,15 +212,15 @@ uint32_t get_cook_time(void)
                 mins++;
                 disp_mins = true;
             }
-            if(mins >= 60)
-                mins = 0;
-            if(mins < 0)
-                mins = 59;
             else if(eflags & ROTENC_PRESS_FLAG)
             {
                 chEvtUnregister(&rotenc_es, &rotenc_el);
                 return hours*60 + mins;
             }
+            if(mins >= 60)
+                mins = 0;
+            if(mins < 0)
+                mins = 59;
         }
         else
         {
@@ -234,20 +235,21 @@ uint32_t get_cook_time(void)
                 hours++;
                 disp_hours = true;
             }
-            if(hours < 0)
-                hours = 999;
-            if(hours > 999)
-                hours = 0;
             else if(eflags & ROTENC_PRESS_FLAG)
             {
                 disp_hours = true;
                 set_mins = true;
             }
+            if(hours < 0)
+                hours = 999;
+            if(hours > 999)
+                hours = 0;
         }
     }
 }
 
-void cook(uint32_t temperature, uint32_t time)
+/* Temp is temperature in celcius*2, time is time in mins */
+void cook(uint8_t temp, uint16_t time)
 {
     char buf[25];
     eventflags_t eflags;
@@ -256,8 +258,10 @@ void cook(uint32_t temperature, uint32_t time)
 
     oled_erase();
     oled_text_big(0, 0, "Cooking:");
-    chsnprintf(buf, 20, "Temp: %d", temperature);
+    chsnprintf(buf, 20, "Temp: %2d   C", temp/2);
     oled_text_small(2, 0, buf);
+    if(temp % 2 != 0)
+        oled_text_small(2, 8, ".5");
     chsnprintf(buf, 20, "Time: %d mins", time);
     oled_text_small(3, 0, buf);
     oled_draw();
@@ -269,6 +273,52 @@ void cook(uint32_t temperature, uint32_t time)
         if(eflags & ROTENC_PRESS_FLAG)
         {
             chEvtUnregister(&rotenc_es, &rotenc_el);
+            return;
+        }
+    }
+}
+
+void do_custom(void)
+{
+    uint8_t temp=110; /* 2x temperature */
+    char str_buf[3];
+    eventflags_t eflags;
+    event_listener_t rotenc_el;
+    chEvtRegister(&rotenc_es, &rotenc_el, 0);
+
+    oled_erase();
+    oled_text_small(1, 0, "Temperature:");
+    oled_icon((const uint8_t*)oled_icon_thermo);
+
+    while(1)
+    {
+        chsnprintf(str_buf, 3, "%2d", temp/2);
+        oled_text_big(1, 0, str_buf);
+        if(temp % 2 != 0)
+            oled_text_big(1, 2, ".5");
+        else
+            oled_text_big(1, 2, "  ");
+        oled_text_big(1, 5, "C");
+        oled_draw();
+
+        chEvtWaitOne(ALL_EVENTS);
+        eflags = chEvtGetAndClearFlags(&rotenc_el);
+        if(eflags & ROTENC_LEFT_FLAG)
+        {
+            temp--;
+            if(temp < 30*2)
+                temp = 30*2;
+        }
+        else if(eflags & ROTENC_RIGHT_FLAG)
+        {
+            temp++;
+            if(temp > 99*2)
+                temp = 99*2;
+        }
+        else if(eflags & ROTENC_PRESS_FLAG)
+        {
+            chEvtUnregister(&rotenc_es, &rotenc_el);
+            cook(temp, get_cook_time());
             return;
         }
     }
