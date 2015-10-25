@@ -87,12 +87,12 @@ void piezo_init()
 {
 }
 
-void piezo_beep()
+void piezo_beep(uint32_t msec)
 {
     piezo_start();
     dacStartConversion(&DACD1, &dacgrpcfg1, dac_buffer, DAC_BUFFER_SIZE / 2);
     gptStartContinuous(&GPTD2, 2U);
-    chThdSleepMilliseconds(20);
+    chThdSleepMilliseconds(msec);
     gptStopTimer(&GPTD2);
     dacStopConversion(&DACD1);
     piezo_stop();

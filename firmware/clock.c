@@ -4,6 +4,7 @@
 #include "chprintf.h"
 #include "drivers/oled.h"
 #include "drivers/rotenc.h"
+#include "drivers/piezo.h"
 #include "rtc.h"
 #include "clock.h"
 
@@ -23,6 +24,7 @@ void rtc_disp_time(void)
         eflags = chEvtGetAndClearFlags(&rotenc_el);
         if(eflags & ROTENC_PRESS_FLAG)
         {
+            piezo_beep(50);
             chEvtUnregister(&rotenc_es, &rotenc_el);
             return;
         }
@@ -82,11 +84,13 @@ void rtc_set_time(void)
             disp_hour = !disp_hour;
             if(eflags & ROTENC_LEFT_FLAG)
             {
+                piezo_beep(1);
                 hour--;
                 disp_hour = true;
             }
             if(eflags & ROTENC_RIGHT_FLAG)
             {
+                piezo_beep(1);
                 hour++;
                 disp_hour = true;
             }
@@ -96,6 +100,7 @@ void rtc_set_time(void)
                 hour = 23;
             if(eflags & ROTENC_PRESS_FLAG)
             {
+                piezo_beep(50);
                 disp_hour = true;
                 which_set++;
                 continue;
@@ -106,11 +111,13 @@ void rtc_set_time(void)
             disp_min = !disp_min;
             if(eflags & ROTENC_LEFT_FLAG)
             {
+                piezo_beep(1);
                 min--;
                 disp_min = true;
             }
             if(eflags & ROTENC_RIGHT_FLAG)
             {
+                piezo_beep(1);
                 min++;
                 disp_min = true;
             }
@@ -120,6 +127,7 @@ void rtc_set_time(void)
                 min = 59;
             if(eflags & ROTENC_PRESS_FLAG)
             {
+                piezo_beep(50);
                 disp_min = true;
                 which_set++;
                 continue;
@@ -130,11 +138,13 @@ void rtc_set_time(void)
             disp_sec = !disp_sec;
             if(eflags & ROTENC_LEFT_FLAG)
             {
+                piezo_beep(1);
                 sec--;
                 disp_sec = true;
             }
             if(eflags & ROTENC_RIGHT_FLAG)
             {
+                piezo_beep(1);
                 sec++;
                 disp_sec = true;
             }
@@ -143,7 +153,10 @@ void rtc_set_time(void)
             if(sec < 0)
                 sec = 59;
             if(eflags & ROTENC_PRESS_FLAG)
+            {
+                piezo_beep(50);
                 break;
+            }
         }
     }
     newtime.millisecond = (60*60*1000*hour +
@@ -172,11 +185,18 @@ void rtc_set_bkup(void)
         chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(200));
         eflags = chEvtGetAndClearFlags(&rotenc_el);
         if(eflags & ROTENC_LEFT_FLAG)
+        {
+            piezo_beep(1);
             value--;
+        }
         if(eflags & ROTENC_RIGHT_FLAG)
+        {
+            piezo_beep(1);
             value++;
+        }
         if(eflags & ROTENC_PRESS_FLAG)
         {
+            piezo_beep(50);
             RTC->BKP0R = value;
             chEvtUnregister(&rotenc_es, &rotenc_el);
             return;
@@ -204,6 +224,7 @@ void rtc_disp_bkup(void)
         eflags = chEvtGetAndClearFlags(&rotenc_el);
         if(eflags & ROTENC_PRESS_FLAG)
         {
+            piezo_beep(50);
             chEvtUnregister(&rotenc_es, &rotenc_el);
             return;
         }

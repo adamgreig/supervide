@@ -143,21 +143,23 @@ void do_menu(const menu_item *menu_items, uint8_t num_items)
 
         chEvtWaitOne(ALL_EVENTS);
         eflags = chEvtGetAndClearFlags(&rotenc_el);
-        piezo_beep();
         if(eflags & ROTENC_LEFT_FLAG)
         {
+            piezo_beep(1);
             menu_idx -= 1;
             if(menu_idx < 0)
                 menu_idx = num_items - 1;
         }
         else if(eflags & ROTENC_RIGHT_FLAG)
         {
+            piezo_beep(1);
             menu_idx += 1;
             if(menu_idx >= num_items)
                 menu_idx = 0;
         }
         else if(eflags & ROTENC_PRESS_FLAG)
         {
+            piezo_beep(50);
             rotenc_led(ROTENC_CYAN);
             chThdSleepMilliseconds(200);
             rotenc_led(ROTENC_BLANK);
@@ -214,19 +216,19 @@ uint32_t get_cook_time(void)
             disp_mins = !disp_mins;
             if(eflags & ROTENC_LEFT_FLAG)
             {
-                piezo_beep();
+                piezo_beep(1);
                 mins--;
                 disp_mins = true;
             }
             else if(eflags & ROTENC_RIGHT_FLAG)
             {
-                piezo_beep();
+                piezo_beep(1);
                 mins++;
                 disp_mins = true;
             }
             else if(eflags & ROTENC_PRESS_FLAG)
             {
-                piezo_beep();
+                piezo_beep(50);
                 chEvtUnregister(&rotenc_es, &rotenc_el);
                 return hours*60 + mins;
             }
@@ -240,19 +242,19 @@ uint32_t get_cook_time(void)
             disp_hours = !disp_hours;
             if(eflags & ROTENC_LEFT_FLAG)
             {
-                piezo_beep();
+                piezo_beep(1);
                 hours--;
                 disp_hours = true;
             }
             else if(eflags & ROTENC_RIGHT_FLAG)
             {
-                piezo_beep();
+                piezo_beep(1);
                 hours++;
                 disp_hours = true;
             }
             else if(eflags & ROTENC_PRESS_FLAG)
             {
-                piezo_beep();
+                piezo_beep(50);
                 disp_hours = true;
                 set_mins = true;
             }
@@ -286,9 +288,9 @@ void cook(uint8_t temp, uint16_t time)
     {
         chEvtWaitOne(ALL_EVENTS);
         eflags = chEvtGetAndClearFlags(&rotenc_el);
-        piezo_beep();
         if(eflags & ROTENC_PRESS_FLAG)
         {
+            piezo_beep(50);
             chEvtUnregister(&rotenc_es, &rotenc_el);
             return;
         }
@@ -320,21 +322,23 @@ void do_custom(void)
 
         chEvtWaitOne(ALL_EVENTS);
         eflags = chEvtGetAndClearFlags(&rotenc_el);
-        piezo_beep();
         if(eflags & ROTENC_LEFT_FLAG)
         {
+            piezo_beep(1);
             temp--;
             if(temp < 30*2)
                 temp = 30*2;
         }
         else if(eflags & ROTENC_RIGHT_FLAG)
         {
+            piezo_beep(1);
             temp++;
             if(temp > 99*2)
                 temp = 99*2;
         }
         else if(eflags & ROTENC_PRESS_FLAG)
         {
+            piezo_beep(50);
             chEvtUnregister(&rotenc_es, &rotenc_el);
             cook(temp, get_cook_time());
             return;
