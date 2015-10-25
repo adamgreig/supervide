@@ -36,7 +36,7 @@ SerialUSBDriver SDU1;
 #define SHELL_WA_SIZE   THD_WORKING_AREA_SIZE(2048)
 #define TEST_WA_SIZE    THD_WORKING_AREA_SIZE(256)
 
-static THD_WORKING_AREA(waMenuThread, 256);
+static THD_WORKING_AREA(waMenuThread, 512);
 
 static void cmd_mem(BaseSequentialStream *chp, int argc, char *argv[]) {
   size_t n, size;
