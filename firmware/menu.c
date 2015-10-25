@@ -223,8 +223,7 @@ void MenuThread(void* arg)
     while(true) {
         oled_erase();
         oled_text_big(0, 0, "COOK:");
-        if(menu_items[menu_idx].icon != NULL)
-            oled_icon(menu_items[menu_idx].icon);
+        oled_icon(menu_items[menu_idx].icon);
         oled_text_small(3, 0, menu_items[menu_idx].name);
         oled_draw();
 
