@@ -232,12 +232,13 @@ void MenuThread(void* arg)
 
         chEvtWaitOne(ALL_EVENTS);
         eflags = chEvtGetAndClearFlags(&rotenc_el);
-        piezo_beep();
         if(eflags & ROTENC_LEFT_FLAG) {
+            piezo_beep(5);
             menu_idx -= 1;
             if(menu_idx < 0)
                 menu_idx = MENU_LEN - 1;
         } else if(eflags & ROTENC_RIGHT_FLAG) {
+            piezo_beep(5);
             menu_idx += 1;
             if(menu_idx >= MENU_LEN)
                 menu_idx = 0;
@@ -245,7 +246,8 @@ void MenuThread(void* arg)
             oled_erase();
             oled_draw();
             rotenc_led(ROTENC_WHITE);
-            chThdSleepMilliseconds(200);
+            piezo_beep(100);
+            chThdSleepMilliseconds(100);
             rotenc_led(ROTENC_BLANK);
             if(menu_idx == 7)
                 disp_time();
