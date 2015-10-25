@@ -8,6 +8,7 @@
 #include "drivers/piezo.h"
 #include "rtc.h"
 #include "clock.h"
+#include "wifi.h"
 
 typedef struct {
     const char big_text[16];
@@ -108,8 +109,8 @@ void do_eggs(void) { do_menu(eggs_menu, eggs_menu_len); }
 static const uint8_t config_menu_len = 4;
 static const menu_item config_menu[4] = {
     {"CONFIG:", "Set Time", NULL, rtc_set_time},
-    {"CONFIG:", "Set WiFi SSID", NULL, NULL},
-    {"CONFIG:", "Set WiFi Key", NULL, NULL},
+    {"CONFIG:", "Set WiFi SSID", NULL, set_wifi_ssid},
+    {"CONFIG:", "Set WiFi Key", NULL, set_wifi_key},
     {"", "Back", NULL, NULL}
 };
 void do_config(void) { do_menu(config_menu, config_menu_len); }
