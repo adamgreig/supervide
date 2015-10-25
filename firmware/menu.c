@@ -13,7 +13,7 @@ typedef struct {
     const uint8_t* icon;
 } menu_item;
 
-#define MENU_LEN (9)
+#define MENU_LEN (11)
 static const menu_item menu_items[MENU_LEN] = {
     {"Beef", (const uint8_t*)oled_icon_cow},
     {"Pork", (const uint8_t*)oled_icon_pig},
@@ -22,8 +22,10 @@ static const menu_item menu_items[MENU_LEN] = {
     {"Fish", (const uint8_t*)oled_icon_fish},
     {"Eggs", (const uint8_t*)oled_icon_eggs},
     {"Custom", (const uint8_t*)oled_icon_thermo},
-    {"Disp Time", NULL},
-    {"Set Time", NULL}
+    {"Display Time", NULL},
+    {"Set Time", NULL},
+    {"Set backup reg", NULL},
+    {"Read backup reg", NULL}
 };
 
 void disp_time(void)
@@ -162,6 +164,53 @@ void set_time(void)
     rtcSetTime(&RTCD1, &newtime);
 }
 
+void set_bkup(void)
+{
+    eventflags_t eflags;
+    uint8_t value = 0;
+    char buf[4];
+
+    while(1)
+    {
+        chsnprintf(buf, 4, "%03d", value);
+        oled_erase();
+        oled_text_big(0, 1, buf);
+        oled_draw();
+
+        chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(200));
+        eflags = chEvtGetAndClearFlags(&rotenc_el);
+        if(eflags & ROTENC_LEFT_FLAG)
+            value--;
+        if(eflags & ROTENC_RIGHT_FLAG)
+            value++;
+        if(eflags & ROTENC_PRESS_FLAG)
+        {
+            RTC->BKP0R = value;
+            return;
+        }
+    }
+}
+
+void disp_bkup(void)
+{
+    eventflags_t eflags;
+    uint8_t value = RTC->BKP0R;
+    char buf[4];
+
+    chsnprintf(buf, 4, "%03d", value);
+    oled_erase();
+    oled_text_big(0, 1, buf);
+    oled_draw();
+
+    while(1)
+    {
+        chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(200));
+        eflags = chEvtGetAndClearFlags(&rotenc_el);
+        if(eflags & ROTENC_PRESS_FLAG)
+            return;
+    }
+}
+
 void MenuThread(void* arg)
 {
     (void)arg;
@@ -199,6 +248,10 @@ void MenuThread(void* arg)
                 disp_time();
             if(menu_idx == 8)
                 set_time();
+            if(menu_idx == 9)
+                set_bkup();
+            if(menu_idx == 10)
+                disp_bkup();
         }
     }
 }
