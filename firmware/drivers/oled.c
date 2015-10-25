@@ -1,7 +1,8 @@
-#include "oled.h"
+#include "drivers/oled.h"
 #include <ch.h>
 #include <hal.h>
 #include <string.h>
+#include "drivers/dma_mutexes.h"
 
 #define OLED_SPID     SPID1
 #define OLED_RST_PORT GPIOB
@@ -12,6 +13,9 @@
 #define OLED_CS_PIN   GPIOB_OLED_CS
 
 uint8_t oled_buffer[4][128];
+
+static void oled_start(void);
+static void oled_stop(void);
 
 static uint8_t oled_init_cmds[] = {
     0xAE,       /* OLED panel off */
@@ -234,14 +238,26 @@ static const uint8_t oled_font[96][6] = {
 	{0x00,0x00,0x00,0x00,0x00,0x00}
 };
 
-static const uint8_t oled_nibble_stretch[16] = {
-    0x00, 0x03, 0x0c, 0x0f, 0x30, 0x33, 0x3c, 0x3f,
-    0xc0, 0xc3, 0xcc, 0xcf, 0xf0, 0xf3, 0xfc, 0xff
-};
-
 static const SPIConfig oled_spi_cfg = {
   NULL, OLED_CS_PORT, OLED_CS_PIN,
   SPI_CR1_BR_2 | SPI_CR1_CPOL | SPI_CR1_CPHA, 0
+};
+
+static void oled_start(void)
+{
+    chMtxLock(&dma_mutexes_ch3);
+    spiStart(&OLED_SPID, &oled_spi_cfg);
+}
+
+static void oled_stop(void)
+{
+    spiStop(&OLED_SPID);
+    chMtxUnlock(&dma_mutexes_ch3);
+}
+
+static const uint8_t oled_nibble_stretch[16] = {
+    0x00, 0x03, 0x0c, 0x0f, 0x30, 0x33, 0x3c, 0x3f,
+    0xc0, 0xc3, 0xcc, 0xcf, 0xf0, 0xf3, 0xfc, 0xff
 };
 
 void oled_init() {
@@ -250,14 +266,15 @@ void oled_init() {
     chThdSleepMilliseconds(1000);
     palSetPad(OLED_RST_PORT, OLED_RST_PIN);
 
-    /* SPI Config */
-    spiStart(&OLED_SPID, &oled_spi_cfg);
+    oled_start();
 
     /* Send initialisation commands */
     palClearPad(OLED_DC_PORT, OLED_DC_PIN);
     spiSelect(&OLED_SPID);
     spiSend(&OLED_SPID, sizeof(oled_init_cmds), (void*)oled_init_cmds);
     spiUnselect(&OLED_SPID);
+
+    oled_stop();
 }
 
 void oled_logo() {
@@ -333,10 +350,14 @@ void oled_text_big(uint8_t line, uint8_t x, const char* str)
 
 void oled_draw()
 {
+    oled_start();
+
     /* Write the buffer to the OLED */
     palClearPad(OLED_DC_PORT, OLED_DC_PIN);
     palSetPad(OLED_DC_PORT, OLED_DC_PIN);
     spiSelect(&OLED_SPID);
     spiSend(&OLED_SPID, sizeof(oled_buffer), (void*)oled_buffer);
     spiUnselect(&OLED_SPID);
+
+    oled_stop();
 }

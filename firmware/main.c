@@ -28,6 +28,8 @@
 
 #include "drivers/oled.h"
 #include "drivers/rotenc.h"
+#include "drivers/piezo.h"
+#include "drivers/dma_mutexes.h"
 
 #include "menu.h"
 
@@ -153,88 +155,6 @@ static THD_FUNCTION(Thread1, arg) {
   }
 }
 
-#define DAC_BUFFER_SIZE 256
-
-/*
- * DAC test buffer
- */
-
-static const dacsample_t dac_buffer[DAC_BUFFER_SIZE] = {
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-    4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0,
-    0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095, 0, 4095,
-};
-
-/*
- * DAC streaming callback.
- */
-size_t nx = 0, ny = 0, nz = 0;
-static void end_cb1(DACDriver *dacp, const dacsample_t *buffer, size_t n) {
-
-  (void)dacp;
-
-  nz++;
-  if (dac_buffer == buffer) {
-    nx += n;
-  }
-  else {
-    ny += n;
-  }
-
-  if ((nz % 1000) == 0) {
-    /*palTogglePad(GPIOB, GPIOB_ENC_BLU);*/
-  }
-}
-
-/*
- * DAC error callback.
- */
-static void error_cb1(DACDriver *dacp, dacerror_t err) {
-
-  (void)dacp;
-  (void)err;
-
-  chSysHalt("DAC failure");
-}
-
-static const DACConversionGroup dacgrpcfg1 = {
-  num_channels: 2U,
-  end_cb:       end_cb1,
-  error_cb:     error_cb1,
-  trigger:      DAC_TRG(4)
-};
-
-/*
- * GPT2 configuration.
- */
-static const GPTConfig gpt2cfg1 = {
-  frequency:    100000U,
-  callback:     NULL,
-  cr2:          TIM_CR2_MMS_1,  /* MMS = 010 = TRGO on Update Event.        */
-  dier:         0U
-};
-
-static const DACConfig dac1cfg1 = {
-  init:         2047U,
-  datamode:     DAC_DHRM_12BIT_RIGHT_DUAL
-};
-
 static const EXTConfig extcfg = {{
     {EXT_CH_MODE_DISABLED, NULL},
     {EXT_CH_MODE_DISABLED, NULL},
@@ -272,6 +192,7 @@ int main(void) {
   halInit();
   chSysInit();
 
+  dma_mutexes_init();
   rotenc_init();
   extStart(&EXTD1, &extcfg);
 
@@ -281,70 +202,9 @@ int main(void) {
     chThdSleepMilliseconds(1000);
     chThdCreateStatic(waMenuThread, sizeof(waMenuThread), NORMALPRIO,
                       MenuThread, NULL);
-#if 0
-while(1) {
-    oled_erase();
-    oled_icon_cow();
-    oled_text_big(0, 0, "COOK:");
-    oled_text_small(3, 0, "Beef");
-    oled_draw();
-    chThdSleepMilliseconds(1000);
-    oled_erase();
-    oled_icon_pig();
-    oled_text_big(0, 0, "COOK:");
-    oled_text_small(3, 0, "Pork");
-    oled_draw();
-    chThdSleepMilliseconds(1000);
-    oled_erase();
-    oled_icon_sheep();
-    oled_text_big(0, 0, "COOK:");
-    oled_text_small(3, 0, "Lamb");
-    oled_draw();
-    chThdSleepMilliseconds(1000);
-    oled_erase();
-    oled_icon_duck();
-    oled_text_big(0, 0, "COOK:");
-    oled_text_small(3, 0, "Duck");
-    oled_draw();
-    chThdSleepMilliseconds(1000);
-    oled_erase();
-    oled_icon_fish();
-    oled_text_big(0, 0, "COOK:");
-    oled_text_small(3, 0, "Fish");
-    oled_draw();
-    chThdSleepMilliseconds(1000);
-    oled_erase();
-    oled_icon_egg();
-    oled_text_big(0, 0, "COOK:");
-    oled_text_small(3, 0, "Eggs");
-    oled_draw();
-    chThdSleepMilliseconds(1000);
-    oled_erase();
-    oled_icon_thermo();
-    oled_text_big(0, 0, "COOK:");
-    oled_text_small(3, 0, "Custom");
-    oled_draw();
-    chThdSleepMilliseconds(1000);
-}
-#endif
+
+    piezo_init();
 while(1) chThdSleepMilliseconds(100);
-
-#if 0
-  dacStart(&DACD1, &dac1cfg1);
-
-  /*
-   * Starting GPT2 driver, it is used for triggering the DAC.
-   */
-  gptStart(&GPTD2, &gpt2cfg1);
-
-  /*
-   * Starting a continuous conversion.
-   * Note, the buffer size is divided by two because two elements are fetched
-   * for each transfer.
-   */
-  dacStartConversion(&DACD1, &dacgrpcfg1, dac_buffer, DAC_BUFFER_SIZE / 2U);
-  gptStartContinuous(&GPTD2, 2U);
-#endif
 
 #if 0
   sduObjectInit(&SDU1);

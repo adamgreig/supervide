@@ -1,4 +1,4 @@
-#include "rotenc.h"
+#include "drivers/rotenc.h"
 
 event_source_t rotenc_es;
 
@@ -6,6 +6,8 @@ static volatile systime_t rotenc_press_time;
 
 void rotenc_rotate_cb(EXTDriver *extp, expchannel_t channel)
 {
+    (void)extp;
+    (void)channel;
     chSysLockFromISR();
     if(GPTD3.tim->CR1 & STM32_TIM_CR1_DIR) {
         chEvtBroadcastFlagsI(&rotenc_es, ROTENC_LEFT_FLAG);
