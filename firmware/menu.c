@@ -258,7 +258,7 @@ void cook(uint8_t temp, uint16_t time)
 
     oled_erase();
     oled_text_big(0, 0, "Cooking:");
-    chsnprintf(buf, 20, "Temp: %2d   C", temp/2);
+    chsnprintf(buf, 20, "Temp: %2d  `C", temp/2);
     oled_text_small(2, 0, buf);
     if(temp % 2 != 0)
         oled_text_small(2, 8, ".5");
@@ -298,7 +298,7 @@ void do_custom(void)
             oled_text_big(1, 2, ".5");
         else
             oled_text_big(1, 2, "  ");
-        oled_text_big(1, 5, "C");
+        oled_text_big(1, 4, "`C");
         oled_draw();
 
         chEvtWaitOne(ALL_EVENTS);
