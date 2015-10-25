@@ -1,4 +1,4 @@
-#include "rotenc.h"
+#include "drivers/rotenc.h"
 
 event_source_t rotenc_es;
 

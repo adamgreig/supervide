@@ -3,6 +3,7 @@
 #include "ch.h"
 #include "drivers/oled.h"
 #include "drivers/rotenc.h"
+#include "drivers/piezo.h"
 
 static event_listener_t rotenc_el;
 
@@ -41,6 +42,7 @@ void MenuThread(void* arg)
 
         chEvtWaitOne(ALL_EVENTS);
         eflags = chEvtGetAndClearFlags(&rotenc_el);
+        piezo_beep();
         if(eflags & ROTENC_LEFT_FLAG) {
             menu_idx -= 1;
             if(menu_idx < 0)

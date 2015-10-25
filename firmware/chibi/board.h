@@ -228,8 +228,8 @@
                                      PIN_PUPDR_PULLUP(GPIOA_NC1) |          \
                                      PIN_PUPDR_PULLUP(GPIOA_NC2) |          \
                                      PIN_PUPDR_FLOATING(GPIOA_CURRENT) |    \
-                                     PIN_PUPDR_PULLUP(GPIOA_PIEZO_A) |      \
-                                     PIN_PUPDR_PULLUP(GPIOA_PIEZO_B) |      \
+                                     PIN_PUPDR_FLOATING(GPIOA_PIEZO_A) |      \
+                                     PIN_PUPDR_FLOATING(GPIOA_PIEZO_B) |      \
                                      PIN_PUPDR_PULLUP(GPIOA_ENC_A) |        \
                                      PIN_PUPDR_PULLUP(GPIOA_ENC_B) |        \
                                      PIN_PUPDR_PULLUP(GPIOA_WIFI_GP0) |     \
