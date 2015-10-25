@@ -30,6 +30,7 @@
 #include "drivers/rotenc.h"
 #include "drivers/piezo.h"
 #include "drivers/dma_mutexes.h"
+#include "drivers/thermo.h"
 
 #include "menu.h"
 
@@ -200,10 +201,30 @@ int main(void) {
     oled_logo();
     oled_draw();
     chThdSleepMilliseconds(1000);
+    /*
     chThdCreateStatic(waMenuThread, sizeof(waMenuThread), NORMALPRIO,
                       MenuThread, NULL);
-
+    */
     piezo_init();
+
+while(1)
+{
+    int32_t t;
+    char buf[16];
+    thermo_read(&t);
+    piezo_beep(5);
+    if(t > 4000) {
+        chsnprintf(buf, 16, "NO THERMO");
+    } else {
+        t = (660*t)>>12;
+        chsnprintf(buf, 16, "%d", t);
+    }
+    oled_erase();
+    oled_text_small(0, 0, buf);
+    oled_draw();
+    chThdSleepMilliseconds(500);
+}
+
 while(1) chThdSleepMilliseconds(100);
 
 #if 0
