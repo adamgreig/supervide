@@ -1,3 +1,3 @@
 [submodule "firmware/chibi/ChibiOS"]
 	path = firmware/chibi/ChibiOS
-	url = git@github.com:ChibiOS/ChibiOS.git
+	url = https://github.com/ChibiOS/ChibiOS.git
