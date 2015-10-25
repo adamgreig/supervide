@@ -284,9 +284,14 @@ void oled_logo() {
 void oled_icon(const uint8_t* icon)
 {
     int x, y;
-    for(y=0; y<4; y++)
-        for(x=0; x<40; x++)
-            oled_buffer[3-y][x+88] = *(icon + y*40 + x);
+    if(icon == NULL)
+        for(y=0; y<4; y++)
+            for(x=0; x<40; x++)
+                oled_buffer[3-y][x+88] = 0;
+    else
+        for(y=0; y<4; y++)
+            for(x=0; x<40; x++)
+                oled_buffer[3-y][x+88] = *(icon + y*40 + x);
 }
 
 void oled_erase() {

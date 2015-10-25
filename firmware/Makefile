@@ -107,8 +107,8 @@ CSRC = $(STARTUPSRC) \
 	   $(CHIBIOS)/os/hal/lib/streams/memstreams.c \
 	   $(CHIBIOS)/os/hal/lib/streams/chprintf.c \
        chibi/usbcfg.c main.c menu.c powerboard.c \
-	   drivers/oled.c drivers/rotenc.c drivers/piezo.c \
-	   drivers/dma_mutexes.c
+       drivers/oled.c drivers/rotenc.c drivers/piezo.c \
+       drivers/dma_mutexes.c clock.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
 # setting.
