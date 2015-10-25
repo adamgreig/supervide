@@ -289,7 +289,7 @@
                                      PIN_MODE_INPUT(GPIOB_NC10) |           \
                                      PIN_MODE_OUTPUT(GPIOB_WIFI_RST) |      \
                                      PIN_MODE_INPUT(GPIOB_ENC_SW) |         \
-                                     PIN_MODE_ALTERNATE(GPIOB_ENC_RED) |    \
+                                     PIN_MODE_OUTPUT(GPIOB_ENC_RED) |    \
                                      PIN_MODE_OUTPUT(GPIOB_ENC_GRN) |    \
                                      PIN_MODE_OUTPUT(GPIOB_ENC_BLU))
 #define VAL_GPIOB_OTYPER            (PIN_OTYPE_PUSHPULL(GPIOB_RELAY_M) |    \

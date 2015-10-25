@@ -27,11 +27,16 @@
 #include "usbcfg.h"
 
 #include "drivers/oled.h"
+#include "drivers/rotenc.h"
+
+#include "menu.h"
 
 SerialUSBDriver SDU1;
 
 #define SHELL_WA_SIZE   THD_WORKING_AREA_SIZE(2048)
 #define TEST_WA_SIZE    THD_WORKING_AREA_SIZE(256)
+
+static THD_WORKING_AREA(waMenuThread, 256);
 
 static void cmd_mem(BaseSequentialStream *chp, int argc, char *argv[]) {
   size_t n, size;
@@ -230,27 +235,25 @@ static const DACConfig dac1cfg1 = {
   datamode:     DAC_DHRM_12BIT_RIGHT_DUAL
 };
 
-/*
- * Encoder stuff.
- */
-static void encoder_cb(GPTDriver *gptp)
-{
-    if(gptp->tim->CR1 & STM32_TIM_CR1_DIR) {
-        palSetPad(GPIOB, GPIOB_ENC_BLU);
-        palClearPad(GPIOB, GPIOB_ENC_GRN);
-    } else {
-        palClearPad(GPIOB, GPIOB_ENC_BLU);
-        palSetPad(GPIOB, GPIOB_ENC_GRN);
-    }
-    /*palTogglePad(GPIOB, GPIOB_ENC_GRN);*/
-}
-
-static const GPTConfig gpt3cfg1 = {
-    frequency: 1000U,
-    callback:  encoder_cb,
-    cr2:       0U,
-    dier:      0U
-};
+static const EXTConfig extcfg = {{
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_AUTOSTART | EXT_CH_MODE_RISING_EDGE | EXT_MODE_GPIOB,
+        rotenc_push_cb},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+    {EXT_CH_MODE_DISABLED, NULL},
+}};
 
 /*
  * Application entry point.
@@ -268,16 +271,16 @@ int main(void) {
   halInit();
   chSysInit();
 
-  gptStart(&GPTD3, &gpt3cfg1);
-  GPTD3.tim->SMCR  ^= STM32_TIM_SMCR_SMS(3);
-  GPTD3.tim->CCMR1 ^= STM32_TIM_CCMR1_CC1S(1) | STM32_TIM_CCMR1_CC2S(1);
-  GPTD3.tim->PSC = 2;
-  gptStartContinuous(&GPTD3, 2);
+  rotenc_init();
+  extStart(&EXTD1, &extcfg);
 
     oled_init();
     oled_logo();
     oled_draw();
     chThdSleepMilliseconds(1000);
+    chThdCreateStatic(waMenuThread, sizeof(waMenuThread), NORMALPRIO,
+                      MenuThread, NULL);
+#if 0
 while(1) {
     oled_erase();
     oled_icon_cow();
@@ -322,6 +325,8 @@ while(1) {
     oled_draw();
     chThdSleepMilliseconds(1000);
 }
+#endif
+while(1) chThdSleepMilliseconds(100);
 
 #if 0
   dacStart(&DACD1, &dac1cfg1);
