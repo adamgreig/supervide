@@ -346,7 +346,7 @@ void cook(int32_t temp, uint16_t time, const char* label)
 void do_custom(void)
 {
     uint32_t temp=550; /* 10x temperature */
-    char str_buf[3];
+    char str_buf[16];
     eventflags_t eflags;
     event_listener_t rotenc_el;
     chEvtRegister(&rotenc_es, &rotenc_el, 0);
@@ -357,7 +357,7 @@ void do_custom(void)
 
     while(1)
     {
-        chsnprintf(str_buf, 3, "%d.%d", temp/10, temp%10);
+        chsnprintf(str_buf, 16, "%d.%d", temp/10, temp%10);
         oled_text_big(1, 0, str_buf);
         oled_text_big(1, 4, "`C");
         oled_draw();
