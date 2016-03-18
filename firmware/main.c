@@ -34,6 +34,7 @@
 #include "drivers/thermo.h"
 
 #include "menu.h"
+#include "cook.h"
 
 SerialUSBDriver SDU1;
 
@@ -41,6 +42,7 @@ SerialUSBDriver SDU1;
 #define TEST_WA_SIZE    THD_WORKING_AREA_SIZE(256)
 
 static THD_WORKING_AREA(waMenuThread, 512);
+static THD_WORKING_AREA(waCookThread, 512);
 
 static void cmd_mem(BaseSequentialStream *chp, int argc, char *argv[]) {
   size_t n, size;
@@ -205,6 +207,8 @@ int main(void) {
     chThdSleepMilliseconds(1000);
     chThdCreateStatic(waMenuThread, sizeof(waMenuThread), NORMALPRIO,
                       MenuThread, NULL);
+    chThdCreateStatic(waCookThread, sizeof(waCookThread), HIGHPRIO,
+                      cook_thread, NULL);
     piezo_init();
 
 while(1) chThdSleepMilliseconds(100);
