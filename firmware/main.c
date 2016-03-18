@@ -240,25 +240,6 @@ while(1) chThdSleepMilliseconds(100);
 #endif
 
 
-    power_set_preheat(true);
-    power_set_master(true);
-    chThdSleepMilliseconds(1000);
-    power_set_master(false);
-    chThdSleepMilliseconds(1000);
-    power_set_master(true);
-    power_set_preheat(false);
-    chThdSleepMilliseconds(1000);
-
-    power_set_preheat(true);
-    chThdSleepMilliseconds(1000);
-    power_set_preheat(false);
-    chThdSleepMilliseconds(1000);
-    power_set_preheat(true);
-    chThdSleepMilliseconds(1000);
-    power_set_preheat(false);
-    chThdSleepMilliseconds(1000);
-
-    power_set_triac(127);
     while(1)
         chThdSleepMilliseconds(100);
 
