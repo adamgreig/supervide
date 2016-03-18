@@ -295,13 +295,11 @@ void cook(uint8_t temp, uint16_t time, const char* label)
     oled_text_small(2, 0, buf);
     if(temp % 2 != 0)
         oled_text_small(2, 8, ".5");
-    chsnprintf(buf, 20, "Time: %d mins", time);
-    oled_text_small(3, 0, buf);
     oled_draw();
 
     while(1)
     {
-        chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(1000));
+        chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(200));
         eflags = chEvtGetAndClearFlags(&rotenc_el);
         if(eflags & ROTENC_PRESS_FLAG)
         {
