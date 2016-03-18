@@ -4,7 +4,7 @@
 
 static void cook_all_off(void);
 static void cook_run(uint32_t setpoint);
-static void cook_pid(int32_t temperature, int32_t setpoint);
+static void cook_pid(int32_t difference);
 
 volatile struct cook_control cook_control;
 
@@ -15,22 +15,22 @@ static void cook_all_off()
     power_set_master(false);
 }
 
-static void cook_pid(int32_t temperature, int32_t setpoint)
+static void cook_pid(int32_t difference)
 {
-    int32_t error = setpoint - temperature;
-    int32_t power = (error * 255) / 100;
+    int32_t power = (difference * 255) / 100;
     if(power < 0)
         power = 0;
     else if(power > 255)
         power = 255;
-    power_set_triac(power);
+    power_set_triac((uint8_t)power);
 }
 
 static void cook_run(uint32_t setpoint)
 {
-    int32_t temperature;
+    int32_t temperature, difference;
     thermo_read(&temperature);
     cook_control.temperature = temperature;
+    difference = setpoint - temperature;
 
     if(temperature > 6000) {
         cook_control.error = true;
@@ -40,14 +40,19 @@ static void cook_run(uint32_t setpoint)
 
     power_set_master(true);
 
-    if(setpoint - temperature > 100)
-    {
-        /* If more than 10C from set, turn on preheat */
-        power_set_preheat(true);
-    } else {
-        /* Otherwise use the PID loop */
+    if(difference < 0) {
         power_set_preheat(false);
-        cook_pid(temperature, setpoint);
+        power_set_triac(0);
+        cook_control.preheating = false;
+    } else if(difference > 100 && !cook_control.preheating) {
+        power_set_preheat(true);
+        power_set_triac(0);
+        cook_control.preheating = true;
+    } else if((difference < 80  &&  cook_control.preheating) ||
+              (difference < 100 && !cook_control.preheating)) {
+        power_set_preheat(false);
+        cook_pid(difference);
+        cook_control.preheating = false;
     }
 }
 
@@ -57,6 +62,7 @@ void cook_thread(void* arg)
 
     cook_control.cooking = false;
     cook_control.error = false;
+    cook_control.preheating = false;
     cook_control.setpoint = 0;
     cook_control.temperature = 0;
 

@@ -8,6 +8,7 @@
 extern volatile struct cook_control {
     bool cooking;
     bool error;
+    bool preheating;
     int32_t temperature;
     int32_t setpoint;
 } cook_control;

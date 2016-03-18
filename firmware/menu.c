@@ -20,7 +20,7 @@ typedef struct {
 } menu_item;
 
 uint32_t get_cook_time(void);
-void cook(uint32_t temperature, uint16_t time, const char* label);
+void cook(int32_t temperature, uint16_t time, const char* label);
 void do_menu(const menu_item *menu_items, uint8_t num_items);
 void do_custom(void);
 
@@ -271,12 +271,13 @@ uint32_t get_cook_time(void)
 }
 
 /* Temp is temperature in celcius*2, time is time in mins */
-void cook(uint32_t temp, uint16_t time, const char* label)
+void cook(int32_t temp, uint16_t time, const char* label)
 {
     char buf[32];
     eventflags_t eflags;
     event_listener_t rotenc_el;
-    time_t now, start_time, secs_remain;
+    time_t now, start_time;
+    int32_t secs_remain, mins_remain, hrs_remain;
     RTCDateTime now_rtc; /* Used when interacting with RTC driver */
     struct tm now_tm;
 
@@ -287,6 +288,8 @@ void cook(uint32_t temp, uint16_t time, const char* label)
     rtcGetTime(&RTCD1, &now_rtc);
     rtcConvertDateTimeToStructTm(&now_rtc, &now_tm, NULL);
     start_time = maketime(&now_tm); 
+
+    cook_control.setpoint = temp;
 
     while(1)
     {
@@ -303,12 +306,17 @@ void cook(uint32_t temp, uint16_t time, const char* label)
         oled_erase();
         oled_text_small(0, 0, "Cooking:");
         oled_text_small(1, 0, label);
-        chsnprintf(buf, 32, "Temp: Set %d.%d, Act %d.%d", temp/10, temp%10,
-                   cook_control.temperature/10, cook_control.temperature%10);
-        oled_text_small(1, 0, buf);
+        if(cook_control.temperature < 6000) {
+            chsnprintf(buf, 32, "Set %d.%d Act %d.%d", temp/10, temp%10,
+                       cook_control.temperature/10,
+                       cook_control.temperature%10);
+            cook_control.cooking = true;
+        } else {
+            chsnprintf(buf, 32, "No Thermocouple");
+            cook_control.cooking = false;
+        }
+        oled_text_small(2, 0, buf);
         oled_draw();
-
-        cook_control.cooking = true;
 
         /* Draw remaining countdown: */
         rtcGetTime(&RTCD1, &now_rtc);
@@ -316,16 +324,22 @@ void cook(uint32_t temp, uint16_t time, const char* label)
         now = maketime(&now_tm); 
 
         secs_remain = start_time + time*60 - now;
-        chsnprintf(buf, 20, "%u secs remain", secs_remain);
-        oled_text_small(3, 0, buf);
-        oled_draw();
-
         if(secs_remain <= 0) {
             int i;
             for(i=0; i<10; i++) {
                 piezo_beep(200);
             }
+            chsnprintf(buf, 20, "No time remains!");
+        } else {
+            hrs_remain = secs_remain / 3600;
+            secs_remain -= hrs_remain * 3600;
+            mins_remain = secs_remain / 60;
+            secs_remain -= mins_remain * 60;
+            chsnprintf(buf, 20, "Time left: %02d:%02d:%02d",
+                       hrs_remain, mins_remain, secs_remain);
         }
+        oled_text_small(3, 0, buf);
+        oled_draw();
     }
 }
 
