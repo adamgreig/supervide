@@ -228,8 +228,8 @@
                                      PIN_PUPDR_PULLUP(GPIOA_NC1) |          \
                                      PIN_PUPDR_PULLUP(GPIOA_NC2) |          \
                                      PIN_PUPDR_FLOATING(GPIOA_CURRENT) |    \
-                                     PIN_PUPDR_PULLUP(GPIOA_PIEZO_A) |      \
-                                     PIN_PUPDR_PULLUP(GPIOA_PIEZO_B) |      \
+                                     PIN_PUPDR_FLOATING(GPIOA_PIEZO_A) |      \
+                                     PIN_PUPDR_FLOATING(GPIOA_PIEZO_B) |      \
                                      PIN_PUPDR_PULLUP(GPIOA_ENC_A) |        \
                                      PIN_PUPDR_PULLUP(GPIOA_ENC_B) |        \
                                      PIN_PUPDR_PULLUP(GPIOA_WIFI_GP0) |     \
@@ -289,7 +289,7 @@
                                      PIN_MODE_INPUT(GPIOB_NC10) |           \
                                      PIN_MODE_OUTPUT(GPIOB_WIFI_RST) |      \
                                      PIN_MODE_INPUT(GPIOB_ENC_SW) |         \
-                                     PIN_MODE_ALTERNATE(GPIOB_ENC_RED) |    \
+                                     PIN_MODE_OUTPUT(GPIOB_ENC_RED) |    \
                                      PIN_MODE_OUTPUT(GPIOB_ENC_GRN) |    \
                                      PIN_MODE_OUTPUT(GPIOB_ENC_BLU))
 #define VAL_GPIOB_OTYPER            (PIN_OTYPE_PUSHPULL(GPIOB_RELAY_M) |    \

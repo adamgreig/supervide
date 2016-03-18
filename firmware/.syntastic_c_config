@@ -22,6 +22,7 @@
 -I chibi/ChibiOS/os/hal/ports/STM32/LLD/DMAv1
 -I chibi/ChibiOS/os/hal/ports/STM32/LLD/ADCv1
 -I chibi/ChibiOS/os/hal/ports/STM32/LLD/DACv1
+-I chibi/ChibiOS/os/hal/ports/STM32/LLD/EXTIv1
 -I chibi/ChibiOS/test/rt
 -I chibi/ChibiOS/os/various
 -I chibi/ChibiOS/os/hal/lib/streams
