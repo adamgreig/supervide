@@ -14,7 +14,7 @@
 
 typedef struct {
     const char big_text[16];
-    const char small_text[24];
+    const char small_text[16];
     const uint8_t* icon;
     void (*func)(void);
 } menu_item;
@@ -126,8 +126,8 @@ static const menu_item root_menu[10] = {
     {"COOK:", "Fish", (const uint8_t*)oled_icon_fish, do_fish},
     {"COOK:", "Eggs", (const uint8_t*)oled_icon_eggs, do_eggs},
     {"COOK:", "Custom", (const uint8_t*)oled_icon_thermo, do_custom},
-    {"CLOCK:", "Display Time", NULL, rtc_disp_time},
-    {"TEMPERATURE:", "Display Temperature", NULL, thermo_disp_temp},
+    {"DISPLAY:", "Clock", NULL, rtc_disp_time},
+    {"DISPLAY:", "Temperature", NULL, thermo_disp_temp},
     {"CONFIG:", "Change Settings", NULL, do_config},
 };
 
