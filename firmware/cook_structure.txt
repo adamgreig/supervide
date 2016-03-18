@@ -1,0 +1,37 @@
+Menu thread continues to handle all screen/rotenc/beep interface things
+
+Cook thread handles cooking - reads thermocouple, runs PID loop, controls
+master relay and preheat relay and triac
+
+Menu communicates with cook via a shared data structure containing:
+    * Cook enable bit
+    * Temperature setpoint
+Cook applies preheat intelligently where necessary.
+
+Menu stuff passes a temperature and duration and text label into the cook UI
+function.
+
+Cooking UI:
+Rotary encoder to select between:
+* Cook duration and time remain (+ text label)
+* Current temperature vs setpoint + text label)
+* Graph of temperature against time
+Press encoder button to bring up stop cooking are you sure menu
+If you press again it stops, if you rotate then press it resumes
+
+Something writes to backup registers:
+* Cook setpoint (1 byte)
+* Cook text label pointer (4 bytes)
+* Start time (4 bytes chibi timestamp)
+* duration (2 bytes as minutes)
+* accumulated power loss time (2 bytes as minutes)
+* live time update register (2 bytes as minutes offset from start time)
+* first power outage time (2 bytes as minutes offset from start time)
+* lowest temperature (1 byte)
+
+Cook thread keeps writing current time to another word of backup register
+
+On boot, if there is stuff in backup registers we tell the cook thread to get
+back to work, display a screen "WARNING, power lost XX:XX to YY:YY, max loss
+duration FOO lowest temperature BAR
+

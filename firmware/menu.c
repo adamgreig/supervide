@@ -6,9 +6,11 @@
 #include "drivers/oled.h"
 #include "drivers/rotenc.h"
 #include "drivers/piezo.h"
-#include "rtc.h"
+#include "drivers/thermo.h"
 #include "clock.h"
 #include "wifi.h"
+#include <time.h>
+#include "maketime.h"
 
 typedef struct {
     const char big_text[16];
@@ -18,15 +20,15 @@ typedef struct {
 } menu_item;
 
 uint32_t get_cook_time(void);
-void cook(uint8_t temperature, uint16_t time);
+void cook(uint8_t temperature, uint16_t time, const char* label);
 void do_menu(const menu_item *menu_items, uint8_t num_items);
 void do_custom(void);
 
-void do_beef_rare(void) {cook(0, get_cook_time()); }
-void do_beef_medrare(void) {cook(0, get_cook_time()); }
-void do_beef_med(void) {cook(0, get_cook_time()); }
-void do_beef_meddone(void) {cook(0, get_cook_time()); }
-void do_beef_done(void) {cook(0, get_cook_time()); }
+void do_beef_rare(void) {cook(0, get_cook_time(), "Beef: rare"); }
+void do_beef_medrare(void) {cook(0, get_cook_time(), "Beef: med rare"); }
+void do_beef_med(void) {cook(0, get_cook_time(), "Beef: medium"); }
+void do_beef_meddone(void) {cook(0, get_cook_time(), "Beef: med done"); }
+void do_beef_done(void) {cook(0, get_cook_time(), "Beef: done"); }
 static const uint8_t beef_menu_len = 6;
 static const menu_item beef_menu[6] = {
     {"BEEF:", "Rare", (const uint8_t*)oled_icon_cow, do_beef_rare},
@@ -38,11 +40,11 @@ static const menu_item beef_menu[6] = {
 };
 void do_beef(void) { do_menu(beef_menu, beef_menu_len); }
 
-void do_pork_rare(void) {cook(0, get_cook_time()); }
-void do_pork_medrare(void) {cook(0, get_cook_time()); }
-void do_pork_med(void) {cook(0, get_cook_time()); }
-void do_pork_meddone(void) {cook(0, get_cook_time()); }
-void do_pork_done(void) {cook(0, get_cook_time()); }
+void do_pork_rare(void) {cook(0, get_cook_time(), "Pork: rare"); }
+void do_pork_medrare(void) {cook(0, get_cook_time(), "Pork: med rare"); }
+void do_pork_med(void) {cook(0, get_cook_time(), "Pork: medium"); }
+void do_pork_meddone(void) {cook(0, get_cook_time(), "Pork: med done"); }
+void do_pork_done(void) {cook(0, get_cook_time(), "Pork: done"); }
 static const uint8_t pork_menu_len = 6;
 static const menu_item pork_menu[6] = {
     {"PORK:", "Rare", (const uint8_t*)oled_icon_pig, do_pork_rare},
@@ -54,11 +56,11 @@ static const menu_item pork_menu[6] = {
 };
 void do_pork(void) { do_menu(pork_menu, pork_menu_len); }
 
-void do_lamb_rare(void) {cook(0, get_cook_time()); }
-void do_lamb_medrare(void) {cook(0, get_cook_time()); }
-void do_lamb_med(void) {cook(0, get_cook_time()); }
-void do_lamb_meddone(void) {cook(0, get_cook_time()); }
-void do_lamb_done(void) {cook(0, get_cook_time()); }
+void do_lamb_rare(void) {cook(0, get_cook_time(), "Lamb; rare"); }
+void do_lamb_medrare(void) {cook(0, get_cook_time(), "Lamb: med rare"); }
+void do_lamb_med(void) {cook(0, get_cook_time(), "Lamb: medium"); }
+void do_lamb_meddone(void) {cook(0, get_cook_time(), "Lamb: med done"); }
+void do_lamb_done(void) {cook(0, get_cook_time(), "Lamb: done"); }
 static const uint8_t lamb_menu_len = 6;
 static const menu_item lamb_menu[6] = {
     {"LAMB:", "Rare", (const uint8_t*)oled_icon_sheep, do_beef_rare},
@@ -70,9 +72,9 @@ static const menu_item lamb_menu[6] = {
 };
 void do_lamb(void) { do_menu(lamb_menu, lamb_menu_len); }
 
-void do_duck_med(void) {cook(0, get_cook_time()); }
-void do_duck_meddone(void) {cook(0, get_cook_time()); }
-void do_duck_done(void) {cook(0, get_cook_time()); }
+void do_duck_med(void) {cook(0, get_cook_time(), "Duck: medium"); }
+void do_duck_meddone(void) {cook(0, get_cook_time(), "Duck: med done"); }
+void do_duck_done(void) {cook(0, get_cook_time(), "Done: done"); }
 static const uint8_t duck_menu_len = 4;
 static const menu_item duck_menu[4] = {
     {"DUCK:", "Medium", (const uint8_t*)oled_icon_duck, do_duck_med},
@@ -82,9 +84,9 @@ static const menu_item duck_menu[4] = {
 };
 void do_duck(void) { do_menu(duck_menu, duck_menu_len); }
 
-void do_fish_oily(void) {cook(0, get_cook_time()); }
-void do_fish_white(void) {cook(0, get_cook_time()); }
-void do_fish_shell(void) {cook(0, get_cook_time()); }
+void do_fish_oily(void) {cook(0, get_cook_time(), "Oily fish"); }
+void do_fish_white(void) {cook(0, get_cook_time(), "White fish"); }
+void do_fish_shell(void) {cook(0, get_cook_time(), "Shellfish"); }
 static const uint8_t fish_menu_len = 4;
 static const menu_item fish_menu[4] = {
     {"FISH:", "Oily fish", (const uint8_t*)oled_icon_fish, do_fish_oily},
@@ -94,9 +96,9 @@ static const menu_item fish_menu[4] = {
 };
 void do_fish(void) { do_menu(fish_menu, fish_menu_len); }
 
-void do_eggs_runny(void) {cook(0, get_cook_time()); }
-void do_eggs_jellied(void) {cook(0, get_cook_time()); }
-void do_eggs_firm(void) {cook(0, get_cook_time()); }
+void do_eggs_runny(void) {cook(0, get_cook_time(), "Runny eggs"); }
+void do_eggs_jellied(void) {cook(0, get_cook_time(), "Jellied eggs"); }
+void do_eggs_firm(void) {cook(0, get_cook_time(), "Firm eggs"); }
 static const uint8_t eggs_menu_len = 4;
 static const menu_item eggs_menu[4] = {
     {"EGGS:", "Runny", (const uint8_t*)oled_icon_eggs, do_eggs_runny},
@@ -115,8 +117,8 @@ static const menu_item config_menu[4] = {
 };
 void do_config(void) { do_menu(config_menu, config_menu_len); }
 
-static const uint8_t root_menu_len = 9;
-static const menu_item root_menu[9] = {
+static const uint8_t root_menu_len = 10;
+static const menu_item root_menu[10] = {
     {"COOK:", "Beef", (const uint8_t*)oled_icon_cow, do_beef},
     {"COOK:", "Pork", (const uint8_t*)oled_icon_pig, do_pork},
     {"COOK:", "Lamb", (const uint8_t*)oled_icon_sheep, do_lamb},
@@ -124,7 +126,8 @@ static const menu_item root_menu[9] = {
     {"COOK:", "Fish", (const uint8_t*)oled_icon_fish, do_fish},
     {"COOK:", "Eggs", (const uint8_t*)oled_icon_eggs, do_eggs},
     {"COOK:", "Custom", (const uint8_t*)oled_icon_thermo, do_custom},
-    {"CLOCK:", "Display Time", NULL, rtc_disp_time},
+    {"DISPLAY:", "Clock", NULL, rtc_disp_time},
+    {"DISPLAY:", "Temperature", NULL, thermo_disp_temp},
     {"CONFIG:", "Change Settings", NULL, do_config},
 };
 
@@ -268,26 +271,36 @@ uint32_t get_cook_time(void)
 }
 
 /* Temp is temperature in celcius*2, time is time in mins */
-void cook(uint8_t temp, uint16_t time)
+void cook(uint8_t temp, uint16_t time, const char* label)
 {
     char buf[25];
     eventflags_t eflags;
     event_listener_t rotenc_el;
+    time_t now, start_time, secs_remain;
+    RTCDateTime now_rtc; /* Used when interacting with RTC driver */
+    struct tm now_tm;
+
+    /* Set us up to receive rotary encoder events */
     chEvtRegister(&rotenc_es, &rotenc_el, 0);
 
+    /* Store cooking start-time */
+    rtcGetTime(&RTCD1, &now_rtc);
+    rtcConvertDateTimeToStructTm(&now_rtc, &now_tm, NULL);
+    start_time = maketime(&now_tm); 
+
+    /* Draw basic cook screen */
     oled_erase();
-    oled_text_big(0, 0, "Cooking:");
+    oled_text_small(0, 0, "Cooking:");
+    oled_text_small(1, 0, label);
     chsnprintf(buf, 20, "Temp: %2d  `C", temp/2);
     oled_text_small(2, 0, buf);
     if(temp % 2 != 0)
         oled_text_small(2, 8, ".5");
-    chsnprintf(buf, 20, "Time: %d mins", time);
-    oled_text_small(3, 0, buf);
     oled_draw();
 
     while(1)
     {
-        chEvtWaitOne(ALL_EVENTS);
+        chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(200));
         eflags = chEvtGetAndClearFlags(&rotenc_el);
         if(eflags & ROTENC_PRESS_FLAG)
         {
@@ -295,6 +308,16 @@ void cook(uint8_t temp, uint16_t time)
             chEvtUnregister(&rotenc_es, &rotenc_el);
             return;
         }
+
+        /* Draw remaining countdown: */
+        rtcGetTime(&RTCD1, &now_rtc);
+        rtcConvertDateTimeToStructTm(&now_rtc, &now_tm, NULL);
+        now = maketime(&now_tm); 
+
+        secs_remain = start_time + time*60 - now;
+        chsnprintf(buf, 20, "%u secs remain", secs_remain);
+        oled_text_small(3, 0, buf);
+        oled_draw();
     }
 }
 
@@ -341,7 +364,7 @@ void do_custom(void)
         {
             piezo_beep(50);
             chEvtUnregister(&rotenc_es, &rotenc_el);
-            cook(temp, get_cook_time());
+            cook(temp, get_cook_time(), "Custom");
             return;
         }
     }

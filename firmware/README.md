@@ -16,7 +16,7 @@ Add the PPA for latest `gcc-arm-embedded`:
 
     sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded
     sudo apt-get update
-    sudo apt-get install gcc-arm-none-eabi
+    sudo apt-get install gcc-arm-none-eabi gdb-arm-none-eabi
 
 ### Build
 

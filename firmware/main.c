@@ -20,6 +20,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
+#include "powerboard.h"
 
 #include "shell.h"
 #include "chprintf.h"
@@ -30,6 +31,7 @@
 #include "drivers/rotenc.h"
 #include "drivers/piezo.h"
 #include "drivers/dma_mutexes.h"
+#include "drivers/thermo.h"
 
 #include "menu.h"
 
@@ -191,6 +193,7 @@ int main(void) {
    */
   halInit();
   chSysInit();
+  power_init();
 
   dma_mutexes_init();
   rotenc_init();
@@ -202,8 +205,8 @@ int main(void) {
     chThdSleepMilliseconds(1000);
     chThdCreateStatic(waMenuThread, sizeof(waMenuThread), NORMALPRIO,
                       MenuThread, NULL);
-
     piezo_init();
+
 while(1) chThdSleepMilliseconds(100);
 
 #if 0
@@ -236,6 +239,12 @@ while(1) chThdSleepMilliseconds(100);
   }
 #endif
 
+
+    while(1)
+        chThdSleepMilliseconds(100);
+
+
+/*
   while(true) {
 #if 0
     char buf[64];
@@ -250,5 +259,5 @@ while(1) chThdSleepMilliseconds(100);
         palClearPad(GPIOB, GPIOB_ENC_BLU);
 
     chThdSleepMilliseconds(50);
-  }
+  }*/
 }
