@@ -34,7 +34,7 @@ void rtc_disp_time(void)
         min = (thetime.millisecond % 3600000)/60000;
         sec = (thetime.millisecond % 60000) / 1000;
 
-        chsnprintf(time_buf, 9, "%02d:%02d:%02d", hour, min, sec);              
+        chsnprintf(time_buf, 9, "%02d:%02d:%02d", hour, min, sec);
         oled_erase();
         oled_text_big(0, 1, time_buf);
         oled_draw();
@@ -72,7 +72,7 @@ void rtc_set_time(void)
             chsnprintf(time_buf+6, 3, "%02d", sec);
         else
             chsnprintf(time_buf+6, 3, "  ");
-        
+
         oled_erase();
         oled_text_big(0, 1, time_buf);
         oled_draw();

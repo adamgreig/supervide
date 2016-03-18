@@ -2,6 +2,7 @@
 #include "hal.h"
 #include "drivers/oled.h"
 #include "drivers/rotenc.h"
+#include "drivers/piezo.h"
 #include "chprintf.h"
 
 static const ADCConversionGroup adcgrp = {
@@ -53,7 +54,11 @@ void thermo_disp_temp(void)
         chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(200));
         eflags = chEvtGetAndClearFlags(&rotenc_el);
         if(eflags & ROTENC_PRESS_FLAG)
+        {
+            piezo_beep(50);
+            chEvtUnregister(&rotenc_es, &rotenc_el);
             return;
+        }
 
         /* Read and display the temperature */
         thermo_read(&temperature);

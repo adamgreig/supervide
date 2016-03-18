@@ -7,7 +7,6 @@
 #include "drivers/rotenc.h"
 #include "drivers/piezo.h"
 #include "drivers/thermo.h"
-#include "rtc.h"
 #include "clock.h"
 #include <time.h>
 #include "maketime.h"
