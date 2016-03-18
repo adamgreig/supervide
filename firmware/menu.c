@@ -6,16 +6,17 @@
 #include "drivers/oled.h"
 #include "drivers/rotenc.h"
 #include "drivers/piezo.h"
+#include "drivers/thermo.h"
 #include "rtc.h"
 
 static event_listener_t rotenc_el;
 
 typedef struct {
-    const char name[16];
+    const char name[24];
     const uint8_t* icon;
 } menu_item;
 
-#define MENU_LEN (11)
+#define MENU_LEN (12)
 static const menu_item menu_items[MENU_LEN] = {
     {"Beef", (const uint8_t*)oled_icon_cow},
     {"Pork", (const uint8_t*)oled_icon_pig},
@@ -24,11 +25,39 @@ static const menu_item menu_items[MENU_LEN] = {
     {"Fish", (const uint8_t*)oled_icon_fish},
     {"Eggs", (const uint8_t*)oled_icon_eggs},
     {"Custom", (const uint8_t*)oled_icon_thermo},
+    {"Display Temperature", NULL},
     {"Display Time", NULL},
     {"Set Time", NULL},
     {"Set backup reg", NULL},
     {"Read backup reg", NULL}
 };
+
+void disp_temp(void)
+{
+    int32_t temperature;
+    char buf[16];
+    eventflags_t eflags;
+
+    while(1)
+    {
+        /* Wait 200ms and check the button wasn't pressed to return */
+        chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(200));
+        eflags = chEvtGetAndClearFlags(&rotenc_el);
+        if(eflags & ROTENC_PRESS_FLAG)
+            return;
+
+        /* Read and display the temperature */
+        thermo_read(&temperature);
+        if(temperature > 6000) {
+            chsnprintf(buf, 16, "No Thermocouple");
+        } else {
+            chsnprintf(buf, 16, "%d.%d C", temperature/10, temperature%10);
+        }
+        oled_erase();
+        oled_text_big(0, 1, buf);
+        oled_draw();
+    }
+}
 
 void disp_time(void)
 {
@@ -84,7 +113,7 @@ void set_time(void)
             chsnprintf(time_buf+6, 3, "%02d", sec);
         else
             chsnprintf(time_buf+6, 3, "  ");
-        
+
         oled_erase();
         oled_text_big(0, 1, time_buf);
         oled_draw();
@@ -250,12 +279,14 @@ void MenuThread(void* arg)
             chThdSleepMilliseconds(100);
             rotenc_led(ROTENC_BLANK);
             if(menu_idx == 7)
+                disp_temp();
+            else if(menu_idx == 8)
                 disp_time();
-            if(menu_idx == 8)
+            else if(menu_idx == 9)
                 set_time();
-            if(menu_idx == 9)
+            else if(menu_idx == 10)
                 set_bkup();
-            if(menu_idx == 10)
+            else if(menu_idx == 11)
                 disp_bkup();
         }
     }

@@ -12,6 +12,12 @@ static const ADCConversionGroup adcgrp = {
     chselr: (1<<0)
 };
 
+/*
+ * Read thermocouple.
+ * Thermocouple amp attached to ADC1_IN0 outputs 5mV/'C
+ * Full scale is 3.3V
+ * Scale by ((3.3 / 4096) / 0.005) * 10 to get output in 0.1'C
+ */
 msg_t thermo_read(int32_t *result)
 {
     adcsample_t samp;
@@ -20,7 +26,7 @@ msg_t thermo_read(int32_t *result)
     adcStart(&ADCD1, NULL);
     rv = adcConvert(&ADCD1, &adcgrp, &samp, 1);
     if(rv == MSG_OK) {
-        *result = (int32_t)samp;
+        *result = ((int32_t)samp * 440) / 273;
     }
     adcStop(&ADCD1);
 
