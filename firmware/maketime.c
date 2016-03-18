@@ -43,6 +43,7 @@ uint8_t days_in_month(uint8_t month, uint16_t year)
         case 9: return 31;
         case 10: return 30;
         case 11: return 31;
+        default: return 0; /* TODO: panic? */
     }
 }
 

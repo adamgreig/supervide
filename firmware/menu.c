@@ -10,6 +10,7 @@
 #include "rtc.h"
 #include "clock.h"
 #include <time.h>
+#include "maketime.h"
 
 typedef struct {
     const char big_text[16];
@@ -285,7 +286,7 @@ void cook(uint8_t temp, uint16_t time, const char* label)
     /* Store cooking start-time */
     rtcGetTime(&RTCD1, &now_rtc);
     rtcConvertDateTimeToStructTm(&now_rtc, &now_tm, NULL);
-    start_time = mktime(&now_tm); 
+    start_time = maketime(&now_tm); 
 
     /* Draw basic cook screen */
     oled_erase();
@@ -311,7 +312,7 @@ void cook(uint8_t temp, uint16_t time, const char* label)
         /* Draw remaining countdown: */
         rtcGetTime(&RTCD1, &now_rtc);
         rtcConvertDateTimeToStructTm(&now_rtc, &now_tm, NULL);
-        now = mktime(&now_tm); 
+        now = maketime(&now_tm); 
 
         secs_remain = start_time + time*60 - now;
         chsnprintf(buf, 20, "%u secs remain", secs_remain);
