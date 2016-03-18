@@ -30,6 +30,7 @@
 #include "drivers/rotenc.h"
 #include "drivers/piezo.h"
 #include "drivers/dma_mutexes.h"
+#include "drivers/thermo.h"
 
 #include "menu.h"
 
@@ -202,8 +203,8 @@ int main(void) {
     chThdSleepMilliseconds(1000);
     chThdCreateStatic(waMenuThread, sizeof(waMenuThread), NORMALPRIO,
                       MenuThread, NULL);
-
     piezo_init();
+
 while(1) chThdSleepMilliseconds(100);
 
 #if 0

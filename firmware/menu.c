@@ -6,12 +6,13 @@
 #include "drivers/oled.h"
 #include "drivers/rotenc.h"
 #include "drivers/piezo.h"
+#include "drivers/thermo.h"
 #include "rtc.h"
 #include "clock.h"
 
 typedef struct {
     const char big_text[16];
-    const char small_text[16];
+    const char small_text[24];
     const uint8_t* icon;
     void (*func)(void);
 } menu_item;
@@ -114,8 +115,8 @@ static const menu_item config_menu[4] = {
 };
 void do_config(void) { do_menu(config_menu, config_menu_len); }
 
-static const uint8_t root_menu_len = 9;
-static const menu_item root_menu[9] = {
+static const uint8_t root_menu_len = 10;
+static const menu_item root_menu[10] = {
     {"COOK:", "Beef", (const uint8_t*)oled_icon_cow, do_beef},
     {"COOK:", "Pork", (const uint8_t*)oled_icon_pig, do_pork},
     {"COOK:", "Lamb", (const uint8_t*)oled_icon_sheep, do_lamb},
@@ -124,6 +125,7 @@ static const menu_item root_menu[9] = {
     {"COOK:", "Eggs", (const uint8_t*)oled_icon_eggs, do_eggs},
     {"COOK:", "Custom", (const uint8_t*)oled_icon_thermo, do_custom},
     {"CLOCK:", "Display Time", NULL, rtc_disp_time},
+    {"TEMPERATURE:", "Display Temperature", NULL, thermo_disp_temp},
     {"CONFIG:", "Change Settings", NULL, do_config},
 };
 
