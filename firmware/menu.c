@@ -9,6 +9,7 @@
 #include "drivers/thermo.h"
 #include "rtc.h"
 #include "clock.h"
+#include <time.h>
 
 typedef struct {
     const char big_text[16];
@@ -274,26 +275,33 @@ void cook(uint8_t temp, uint16_t time, const char* label)
     char buf[25];
     eventflags_t eflags;
     event_listener_t rotenc_el;
-    RTCDateTime thetime;
+    time_t now, start_time, secs_remain;
+    RTCDateTime now_rtc; /* Used when interacting with RTC driver */
+    struct tm now_tm;
 
+    /* Set us up to receive rotary encoder events */
     chEvtRegister(&rotenc_es, &rotenc_el, 0);
 
+    /* Store cooking start-time */
+    rtcGetTime(&RTCD1, &now_rtc);
+    rtcConvertDateTimeToStructTm(&now_rtc, &now_tm, NULL);
+    start_time = mktime(&now_tm); 
+
+    /* Draw basic cook screen */
     oled_erase();
     oled_text_small(0, 0, "Cooking:");
     oled_text_small(1, 0, label);
-
     chsnprintf(buf, 20, "Temp: %2d  `C", temp/2);
     oled_text_small(2, 0, buf);
     if(temp % 2 != 0)
         oled_text_small(2, 8, ".5");
-
     chsnprintf(buf, 20, "Time: %d mins", time);
     oled_text_small(3, 0, buf);
     oled_draw();
 
     while(1)
     {
-        chEvtWaitOne(ALL_EVENTS);
+        chEvtWaitOneTimeout(ALL_EVENTS, MS2ST(1000));
         eflags = chEvtGetAndClearFlags(&rotenc_el);
         if(eflags & ROTENC_PRESS_FLAG)
         {
@@ -301,6 +309,16 @@ void cook(uint8_t temp, uint16_t time, const char* label)
             chEvtUnregister(&rotenc_es, &rotenc_el);
             return;
         }
+
+        /* Draw remaining countdown: */
+        rtcGetTime(&RTCD1, &now_rtc);
+        rtcConvertDateTimeToStructTm(&now_rtc, &now_tm, NULL);
+        now = mktime(&now_tm); 
+
+        secs_remain = start_time + time*60 - now;
+        chsnprintf(buf, 20, "%u secs remain", secs_remain);
+        oled_text_small(3, 0, buf);
+        oled_draw();
     }
 }
 
