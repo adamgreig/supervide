@@ -20,6 +20,7 @@
 #include "ch.h"
 #include "hal.h"
 #include "test.h"
+#include "powerboard.h"
 
 #include "shell.h"
 #include "chprintf.h"
@@ -192,6 +193,7 @@ int main(void) {
    */
   halInit();
   chSysInit();
+  power_init();
 
   dma_mutexes_init();
   rotenc_init();
@@ -237,6 +239,31 @@ while(1) chThdSleepMilliseconds(100);
   }
 #endif
 
+
+    power_set_preheat(true);
+    power_set_master(true);
+    chThdSleepMilliseconds(1000);
+    power_set_master(false);
+    chThdSleepMilliseconds(1000);
+    power_set_master(true);
+    power_set_preheat(false);
+    chThdSleepMilliseconds(1000);
+
+    power_set_preheat(true);
+    chThdSleepMilliseconds(1000);
+    power_set_preheat(false);
+    chThdSleepMilliseconds(1000);
+    power_set_preheat(true);
+    chThdSleepMilliseconds(1000);
+    power_set_preheat(false);
+    chThdSleepMilliseconds(1000);
+
+    power_set_triac(127);
+    while(1)
+        chThdSleepMilliseconds(100);
+
+
+/*
   while(true) {
 #if 0
     char buf[64];
@@ -251,5 +278,5 @@ while(1) chThdSleepMilliseconds(100);
         palClearPad(GPIOB, GPIOB_ENC_BLU);
 
     chThdSleepMilliseconds(50);
-  }
+  }*/
 }
