@@ -17,7 +17,7 @@ static void cook_all_off()
 
 static void cook_pid(int32_t difference)
 {
-    int32_t power = (difference * 255) / 100;
+    int32_t power = (difference * 255) / 50;
     if(power < 0)
         power = 0;
     else if(power > 255)
@@ -44,12 +44,12 @@ static void cook_run(uint32_t setpoint)
         power_set_preheat(false);
         power_set_triac(0);
         cook_control.preheating = false;
-    } else if(difference > 100 && !cook_control.preheating) {
+    } else if(difference > 70 && !cook_control.preheating) {
         power_set_preheat(true);
         power_set_triac(0);
         cook_control.preheating = true;
-    } else if((difference < 80  &&  cook_control.preheating) ||
-              (difference < 100 && !cook_control.preheating)) {
+    } else if((difference < 50 &&  cook_control.preheating) ||
+              (difference < 70 && !cook_control.preheating)) {
         power_set_preheat(false);
         cook_pid(difference);
         cook_control.preheating = false;
