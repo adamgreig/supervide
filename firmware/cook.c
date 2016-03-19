@@ -12,6 +12,10 @@ static void cook_pid(int32_t difference);
 
 volatile struct cook_control cook_control;
 
+#define MA_LEN (50)
+static int32_t ma_buf[MA_LEN] = {0};
+static int32_t ma_idx = 0;
+
 static void cook_all_off()
 {
     power_set_triac(0);
@@ -31,13 +35,21 @@ static void cook_pid(int32_t difference)
 
 static void cook_run(uint32_t setpoint)
 {
-    int32_t temperature, difference;
-    thermo_read(&temperature);
-    cook_control.temperature = temperature;
-    difference = setpoint - temperature;
-    chprintf((BaseSequentialStream*)&SDU1, "%d\r\n", temperature);
+    int32_t raw_temperature, ma_temperature, difference, i;
+    thermo_read(&raw_temperature);
+    ma_buf[ma_idx++] = raw_temperature;
+    if(ma_idx >= MA_LEN)
+        ma_idx = 0;
+    ma_temperature = 0;
+    for(i=0; i<MA_LEN; i++)
+        ma_temperature += ma_buf[i];
+    ma_temperature /= MA_LEN;
+    cook_control.temperature = ma_temperature;
+    difference = setpoint - ma_temperature;
+    chprintf((BaseSequentialStream*)&SDU1, "%d %d\r\n",
+             raw_temperature, ma_temperature);
 
-    if(temperature > 6000) {
+    if(ma_temperature > 6000) {
         cook_control.error = true;
         cook_all_off();
         return;
