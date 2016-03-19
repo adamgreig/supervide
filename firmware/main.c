@@ -141,24 +141,6 @@ static const ShellConfig shell_cfg1 = {
   commands
 };
 
-
-/*
- * Blue LED blinker thread, times are in milliseconds.
- */
-static THD_WORKING_AREA(waThread1, 128);
-static THD_FUNCTION(Thread1, arg) {
-
-  (void)arg;
-  chRegSetThreadName("blinker1");
-  while (true) {
-    systime_t time = serusbcfg.usbp->state == USB_ACTIVE ? 250 : 500;
-    /*palClearPad(GPIOB, GPIOB_ENC_GRN);*/
-    chThdSleepMilliseconds(time);
-    /*palSetPad(GPIOB, GPIOB_ENC_GRN);*/
-    chThdSleepMilliseconds(time);
-  }
-}
-
 static const EXTConfig extcfg = {{
     {EXT_CH_MODE_DISABLED, NULL},
     {EXT_CH_MODE_DISABLED, NULL},
@@ -184,84 +166,32 @@ static const EXTConfig extcfg = {{
  * Application entry point.
  */
 int main(void) {
-  thread_t *shelltp = NULL;
+    halInit();
+    chSysInit();
 
-  /*
-   * System initializations.
-   * - HAL initialization, this also initializes the configured device drivers
-   *   and performs the board-specific initializations.
-   * - Kernel initialization, the main() function becomes a thread and the
-   *   RTOS is active.
-   */
-  halInit();
-  chSysInit();
-  power_init();
-
-  dma_mutexes_init();
-  rotenc_init();
-  extStart(&EXTD1, &extcfg);
+    dma_mutexes_init();
+    power_init();
+    piezo_init();
+    rotenc_init();
+    extStart(&EXTD1, &extcfg);
 
     oled_init();
     oled_logo();
     oled_draw();
+
+    sduObjectInit(&SDU1);
+    sduStart(&SDU1, &serusbcfg);
+
+    usbDisconnectBus(serusbcfg.usbp);
     chThdSleepMilliseconds(1000);
+    usbStart(serusbcfg.usbp, &usbcfg);
+    usbConnectBus(serusbcfg.usbp);
+
     chThdCreateStatic(waMenuThread, sizeof(waMenuThread), NORMALPRIO,
                       MenuThread, NULL);
     chThdCreateStatic(waCookThread, sizeof(waCookThread), HIGHPRIO,
                       cook_thread, NULL);
-    piezo_init();
-
-while(1) chThdSleepMilliseconds(100);
-
-#if 0
-  sduObjectInit(&SDU1);
-  sduStart(&SDU1, &serusbcfg);
-
-  usbDisconnectBus(serusbcfg.usbp);
-  chThdSleepMilliseconds(500);
-  usbStart(serusbcfg.usbp, &usbcfg);
-  usbConnectBus(serusbcfg.usbp);
-#endif
-
-#if 0
-  shellInit();
-
-  /*
-   * Creates the blinker threads.
-   */
-  chThdCreateStatic(waThread1, sizeof(waThread1), NORMALPRIO, Thread1, NULL);
-
-
-  while (true) {
-      if(!shelltp && (SDU1.config->usbp->state == USB_ACTIVE))
-          shelltp = shellCreate(&shell_cfg1, SHELL_WA_SIZE, NORMALPRIO);
-      else if(chThdTerminatedX(shelltp)) {
-          chThdRelease(shelltp);
-          shelltp = NULL;
-      }
-      chThdSleepMilliseconds(1000);
-  }
-#endif
-
 
     while(1)
-        chThdSleepMilliseconds(100);
-
-
-/*
-  while(true) {
-#if 0
-    char buf[64];
-    int n;
-    n = chsnprintf(buf, 64, "%04lu\r", GPTD3.tim->CNT);
-    streamWrite((BaseSequentialStream*)&SDU1, (uint8_t*)buf, n);
-#endif
-
-    if(palReadPad(GPIOB, GPIOB_ENC_SW) == PAL_LOW)
-        palSetPad(GPIOB, GPIOB_ENC_BLU);
-    else
-        palClearPad(GPIOB, GPIOB_ENC_BLU);
-
-    chThdSleepMilliseconds(50);
-  }*/
+        chThdSleep(TIME_INFINITE);
 }
