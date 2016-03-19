@@ -1,6 +1,10 @@
+#include "hal.h"
+#include "chprintf.h"
 #include "cook.h"
 #include "powerboard.h"
 #include "drivers/thermo.h"
+
+extern SerialUSBDriver SDU1;
 
 static void cook_all_off(void);
 static void cook_run(uint32_t setpoint);
@@ -31,6 +35,7 @@ static void cook_run(uint32_t setpoint)
     thermo_read(&temperature);
     cook_control.temperature = temperature;
     difference = setpoint - temperature;
+    chprintf((BaseSequentialStream*)&SDU1, "%d\r\n", temperature);
 
     if(temperature > 6000) {
         cook_control.error = true;
@@ -72,7 +77,6 @@ void cook_thread(void* arg)
         } else {
             cook_run(cook_control.setpoint);
         }
-
         chThdSleepMilliseconds(100);
     }
 }
