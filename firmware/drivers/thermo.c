@@ -5,7 +5,7 @@
 #include "drivers/piezo.h"
 #include "chprintf.h"
 
-static const ADCConversionGroup adcgrp = {
+static const ADCConversionGroup adcgrpthermo = {
     circular: false,
     num_channels: 1,
     end_cb: NULL,
@@ -16,25 +16,42 @@ static const ADCConversionGroup adcgrp = {
     chselr: (1<<0)
 };
 
+static const ADCConversionGroup adcgrpvintref = {
+    circular: false,
+    num_channels: 1,
+    end_cb: NULL,
+    error_cb: NULL,
+    cfgr1: 0,
+    tr: 0,
+    smpr: ADC_SMPR_SMP_239P5,
+    chselr: (1<<17)
+};
+
 /*
  * Read thermocouple.
  * Thermocouple amp attached to ADC1_IN0 outputs 5mV/'C
  * Full scale is 3.3V
- * Scale by ((3.3 / 4096) / 0.005) * 10 to get output in 0.1'C
+ * Scale by ((3.3 / 4095) / 0.005) * 10 to get output in 0.1'C
  */
 msg_t thermo_read(int32_t *result)
 {
-    adcsample_t samp;
-    msg_t rv;
+    adcsample_t samp, vrefint;
+    uint16_t vrefcal = *(int16_t*)0x1FFFF7BA;
+    msg_t rv1, rv2;
 
     adcStart(&ADCD1, NULL);
-    rv = adcConvert(&ADCD1, &adcgrp, &samp, 1);
-    if(rv == MSG_OK) {
-        *result = ((int32_t)samp * 440) / 273;
-    }
+    adcSTM32SetCCR(ADC_CCR_VREFEN);
+    rv1 = adcConvert(&ADCD1, &adcgrpvintref, &vrefint, 1);
+    adcSTM32SetCCR(0);
+    rv2 = adcConvert(&ADCD1, &adcgrpthermo, &samp, 1);
     adcStop(&ADCD1);
 
-    return rv;
+    if(rv1 == MSG_OK && rv2 == MSG_OK) {
+        *result = ((((int32_t)samp * 440) / 273) * vrefcal) / vrefint;
+        return MSG_OK;
+    } else {
+        return -1;
+    }
 }
 
 /*
